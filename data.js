@@ -223,6 +223,21 @@ const PROJECTS = [
     "favorite": false
   },
   {
+    "name": "Abjad Strategies",
+    "category": "",
+    "url": "",
+    "external": false,
+    "cover": null,
+    "images": [],
+    "year": "2026",
+    "externalLink": null,
+    "paragraphs": [],
+    "slug": "abjad-strategies",
+    "hasFullDocs": false,
+    "tags": [],
+    "favorite": false
+  },
+  {
     "name": "Governing Together",
     "category": "",
     "url": "https://www.governing-together.org",

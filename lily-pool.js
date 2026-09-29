@@ -358,10 +358,45 @@
       const flowerNow = lerpPairs(instClosedPairs, instOpenPairs, openness);
       flowerPath.setAttribute('d', buildPathFromPairs(flowerNow));
 
-      const baseEyeX = lerp(instEyeClosed.x, instEyeOpen.x, openness);
-      const baseEyeY = lerp(instEyeClosed.y, instEyeOpen.y, openness);
-      const basePupilX = lerp(instPupilClosed.x, instPupilOpen.x, openness);
-      const basePupilY = lerp(instPupilClosed.y, instPupilOpen.y, openness);
+      let baseEyeX = lerp(instEyeClosed.x, instEyeOpen.x, openness);
+      let baseEyeY = lerp(instEyeClosed.y, instEyeOpen.y, openness);
+      let basePupilX = lerp(instPupilClosed.x, instPupilOpen.x, openness);
+      let basePupilY = lerp(instPupilClosed.y, instPupilOpen.y, openness);
+
+      // Mobile only: the closed-state eye position (interpolated from the
+      // shared master coords) can land past the mobile flower's own petal
+      // outline at low openness, so the eyeball visibly pokes out the
+      // bottom of the shut lily. Clamp it back inside this instance's own
+      // current petal bounding box, nudging the pupil by the same delta so
+      // it stays centered in the (clamped) eye white.
+      if (pool.idSuffix === 'M') {
+        const eyeR = 17.5 * rScale * 2.5; // eyeCutout is the largest circle to contain
+        let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+        for (const p of flowerNow) {
+          if (p.x < minX) minX = p.x;
+          if (p.x > maxX) maxX = p.x;
+          if (p.y < minY) minY = p.y;
+          if (p.y > maxY) maxY = p.y;
+        }
+        // A plain bbox clamp isn't enough on its own: this flower tapers to
+        // a point at the bottom (where the stem attaches), so a fixed-radius
+        // circle sitting near that tip still pokes out its sides even while
+        // technically inside the box. Inset proportionally to the shape's
+        // own size instead of just by the eye's radius — biased harder on
+        // the bottom, since that's the tapering edge — so the eye is pulled
+        // back into the flower's wider, rounder upper region.
+        const w = maxX - minX, h = maxY - minY;
+        const marginX = Math.max(eyeR, w * 0.3);
+        const topMargin = Math.max(eyeR, h * 0.15);
+        const bottomMargin = Math.max(eyeR, h * 0.4);
+        const clampedX = clamp(baseEyeX, minX + marginX, maxX - marginX);
+        const clampedY = clamp(baseEyeY, minY + topMargin, maxY - bottomMargin);
+        basePupilX += clampedX - baseEyeX;
+        basePupilY += clampedY - baseEyeY;
+        baseEyeX = clampedX;
+        baseEyeY = clampedY;
+      }
+
       eyeCutout.setAttribute('cx', baseEyeX);
       eyeCutout.setAttribute('cy', baseEyeY);
       eyeWhite.setAttribute('cx', baseEyeX);
