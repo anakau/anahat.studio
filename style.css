@@ -628,4 +628,5 @@ a.practice-card:hover .practice-card-thumb {
   #practice-grid { gap: 20px; }
   .practice-row { gap: 12px; }
   .practice-card-title { font-size: 11px; }
+  .practice-card-tags { display: none; }
 }

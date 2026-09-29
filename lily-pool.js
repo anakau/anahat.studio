@@ -3,6 +3,12 @@
   if (!svg) return;
   const MAX_DIST = 380;
   const EYE_TRAVEL = 9;
+  // Mobile lilies are shorter/narrower than desktop, and the eye (a plain
+  // circle) doesn't fit inside the petal shape at low openness without
+  // poking out the bottom. Rather than clamp its position (tried before —
+  // looked wrong, position no longer matched the flower's actual shape),
+  // just flatten the eye itself vertically so it needs less room.
+  const MOBILE_EYE_SQUASH = 0.55;
 
   // --- touch devices: tilt drives open/close instead of touch height ---
   // DeviceOrientationEvent's `beta` is front-to-back tilt in degrees: ~0
@@ -358,44 +364,10 @@
       const flowerNow = lerpPairs(instClosedPairs, instOpenPairs, openness);
       flowerPath.setAttribute('d', buildPathFromPairs(flowerNow));
 
-      let baseEyeX = lerp(instEyeClosed.x, instEyeOpen.x, openness);
-      let baseEyeY = lerp(instEyeClosed.y, instEyeOpen.y, openness);
-      let basePupilX = lerp(instPupilClosed.x, instPupilOpen.x, openness);
-      let basePupilY = lerp(instPupilClosed.y, instPupilOpen.y, openness);
-
-      // Mobile only: the closed-state eye position (interpolated from the
-      // shared master coords) can land past the mobile flower's own petal
-      // outline at low openness, so the eyeball visibly pokes out the
-      // bottom of the shut lily. Clamp it back inside this instance's own
-      // current petal bounding box, nudging the pupil by the same delta so
-      // it stays centered in the (clamped) eye white.
-      if (pool.idSuffix === 'M') {
-        const eyeR = 17.5 * rScale * 2.5; // eyeCutout is the largest circle to contain
-        let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-        for (const p of flowerNow) {
-          if (p.x < minX) minX = p.x;
-          if (p.x > maxX) maxX = p.x;
-          if (p.y < minY) minY = p.y;
-          if (p.y > maxY) maxY = p.y;
-        }
-        // A plain bbox clamp isn't enough on its own: this flower tapers to
-        // a point at the bottom (where the stem attaches), so a fixed-radius
-        // circle sitting near that tip still pokes out its sides even while
-        // technically inside the box. Inset proportionally to the shape's
-        // own size instead of just by the eye's radius — biased harder on
-        // the bottom, since that's the tapering edge — so the eye is pulled
-        // back into the flower's wider, rounder upper region.
-        const w = maxX - minX, h = maxY - minY;
-        const marginX = Math.max(eyeR, w * 0.3);
-        const topMargin = Math.max(eyeR, h * 0.15);
-        const bottomMargin = Math.max(eyeR, h * 0.4);
-        const clampedX = clamp(baseEyeX, minX + marginX, maxX - marginX);
-        const clampedY = clamp(baseEyeY, minY + topMargin, maxY - bottomMargin);
-        basePupilX += clampedX - baseEyeX;
-        basePupilY += clampedY - baseEyeY;
-        baseEyeX = clampedX;
-        baseEyeY = clampedY;
-      }
+      const baseEyeX = lerp(instEyeClosed.x, instEyeOpen.x, openness);
+      const baseEyeY = lerp(instEyeClosed.y, instEyeOpen.y, openness);
+      const basePupilX = lerp(instPupilClosed.x, instPupilOpen.x, openness);
+      const basePupilY = lerp(instPupilClosed.y, instPupilOpen.y, openness);
 
       eyeCutout.setAttribute('cx', baseEyeX);
       eyeCutout.setAttribute('cy', baseEyeY);
@@ -408,7 +380,17 @@
       const edy = mouse.y - baseEyeY;
       const eAngle = Math.atan2(edy, edx);
       const eMag = mouse.active ? Math.min(EYE_TRAVEL, Math.sqrt(edx * edx + edy * edy) / 20) : 0;
-      eyeGroup.style.transform = `translate(${Math.cos(eAngle) * eMag}px, ${Math.sin(eAngle) * eMag}px)`;
+      const tx = Math.cos(eAngle) * eMag, ty = Math.sin(eAngle) * eMag;
+      if (pool.idSuffix === 'M') {
+        // transform-origin must be set explicitly in SVG user-space units —
+        // it does NOT default to the element's own bounding-box center the
+        // way it does for HTML elements, so without this the scale would
+        // squash the eye toward the SVG's (0,0) instead of in place.
+        eyeGroup.style.transformOrigin = `${baseEyeX}px ${baseEyeY}px`;
+        eyeGroup.style.transform = `translate(${tx}px, ${ty}px) scaleY(${MOBILE_EYE_SQUASH})`;
+      } else {
+        eyeGroup.style.transform = `translate(${tx}px, ${ty}px)`;
+      }
 
       const idleAmp = 4;
       const reactiveAmp = proximity * 34;
