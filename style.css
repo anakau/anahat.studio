@@ -486,7 +486,7 @@ a.practice-card:hover .practice-card-thumb {
   padding: 8px 0; border-top: 1px solid var(--line);
 }
 .archive-row:last-child { border-bottom: 1px solid var(--line); }
-.archive-name { font-size: 16px; font-weight: 600; flex: 0 0 auto; white-space: nowrap; }
+.archive-name { font-size: 16px; font-weight: 400; flex: 0 0 auto; white-space: nowrap; }
 .archive-tags {
   font-size: 13px; color: var(--muted); flex: 1 1 auto;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
@@ -580,12 +580,11 @@ a.practice-card:hover .practice-card-thumb {
 
   /* Archive: the single-line name/tags/year layout only works with room to
      truncate the tags — on narrow screens it either overflows or squeezes
-     tags to nothing. Stack the name on its own line, tags+year wrapping
-     freely underneath instead. */
+     tags to nothing. Stack the name on its own line, dropping the tags
+     entirely rather than let rows wrap to irregular heights; year still
+     shows alongside the name. */
   #archive-page { margin-top: 24px; padding: 0 20px 60px; }
   .archive-row { flex-wrap: wrap; row-gap: 2px; }
-  .archive-name { flex: 1 1 100%; white-space: normal; font-size: 15px; }
-  .archive-tags {
-    flex: 1 1 auto; white-space: normal; overflow: visible; text-overflow: clip;
-  }
+  .archive-name { flex: 1 1 auto; white-space: normal; font-size: 15px; }
+  .archive-tags { display: none; }
 }
