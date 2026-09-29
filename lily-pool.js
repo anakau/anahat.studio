@@ -2,13 +2,12 @@
   const svg = document.getElementById('scene');
   if (!svg) return;
   const MAX_DIST = 380;
-  const EYE_TRAVEL = 9;
-  // Mobile lilies are shorter/narrower than desktop, and the eye (a plain
-  // circle) doesn't fit inside the petal shape at low openness without
-  // poking out the bottom. Rather than clamp its position (tried before —
-  // looked wrong, position no longer matched the flower's actual shape),
-  // just flatten the eye itself vertically so it needs less room.
-  const MOBILE_EYE_SQUASH = 0.55;
+  // The eye white/cutout sit at a single fixed spot (the "open" master
+  // position — safely inside the petals at every bloom state, unlike the
+  // old closed position that could poke out on mobile). Only the pupil
+  // moves, tracking the pointer within a radius small enough to stay
+  // inside the white circle.
+  const PUPIL_TRAVEL_FACTOR = 5; // × rScale
 
   // --- touch devices: tilt drives open/close instead of touch height ---
   // DeviceOrientationEvent's `beta` is front-to-back tilt in degrees: ~0
@@ -113,9 +112,7 @@
   const MASTER_OPEN_D = "M461.5 401L517 193L510 410L607.5 212.5C607.5 212.5 556 432.056 548.5 453.5C541 474.944 509.2 516.765 442 512.5C407.5 523.333 330.9 524 300.5 440C270.1 356 237.167 267.333 224.5 233.5L346.5 410L328.5 201.5L411.5 401L430 187L461.5 401ZM437.33 439.042C414.091 437.992 404.761 456.971 403 466.592C410.262 470.309 428.351 477.349 442.611 475.774C456.872 474.2 467.479 462.873 471 457.407C469.459 451.722 460.568 440.091 437.33 439.042Z";
   const MASTER_CLOSED_D = "M453.5 341L442 197L487 336.5L456 207C456.079 207.099 581.994 364.021 565.499 429C548.999 494 509.2 516.765 442 512.5C407.5 523.333 330.9 524 300.5 440C270.1 356 396.127 245 404 207L377.5 336.5L415.501 197V341L430 187L453.5 341ZM471 457.407C459 464.999 451.5 468.776 440 469.999C428.5 471.222 418 469.999 403 466.592C410.262 470.309 428.351 477.349 442.611 475.774C456.872 474.2 467.479 462.873 471 457.407Z";
   const EYE_OPEN = { x: 435.5, y: 449.5 };
-  const EYE_CLOSED = { x: 438.5, y: 457.5 };
   const PUPIL_OPEN = { x: 436, y: 450 };
-  const PUPIL_CLOSED = { x: 439, y: 458 };
   const FLOWER_CENTER_LOCAL = { x: 415, y: 340 }; // proximity anchor, in master's local frame
 
   function tokenize(d) { return d.match(/[a-zA-Z]|-?\d*\.?\d+(?:e-?\d+)?/g); }
@@ -281,7 +278,6 @@
     const stemIdx = pool.stemToFlower.indexOf(flowerIdx);
     const suffix = pool.idSuffix + flowerIdx;
 
-    const eyeGroup = document.getElementById('eyeGroup' + suffix);
     const eyeCutout = document.getElementById('eyeCutout' + suffix);
     const eyeWhite = document.getElementById('eyeWhite' + suffix);
     const eyePupil = document.getElementById('eyePupil' + suffix);
@@ -308,10 +304,15 @@
     const instOpenPairs = applyAffineArr(M, MASTER_PAIRS_OPEN);
     const instClosedPairs = applyAffineArr(M, MASTER_PAIRS_CLOSED);
     const instEyeOpen = applyAffine(M, EYE_OPEN);
-    const instEyeClosed = applyAffine(M, EYE_CLOSED);
     const instPupilOpen = applyAffine(M, PUPIL_OPEN);
-    const instPupilClosed = applyAffine(M, PUPIL_CLOSED);
     const instFlowerCenter = applyAffine(M, FLOWER_CENTER_LOCAL);
+    const pupilTravel = PUPIL_TRAVEL_FACTOR * rScale;
+
+    // Fixed for this lily's lifetime — set once, not per frame.
+    eyeCutout.setAttribute('cx', instEyeOpen.x);
+    eyeCutout.setAttribute('cy', instEyeOpen.y);
+    eyeWhite.setAttribute('cx', instEyeOpen.x);
+    eyeWhite.setAttribute('cy', instEyeOpen.y);
 
     stemPath.setAttribute('d', pool.stemD[stemIdx]);
     const SAMPLE_COUNT = 42;
@@ -364,33 +365,15 @@
       const flowerNow = lerpPairs(instClosedPairs, instOpenPairs, openness);
       flowerPath.setAttribute('d', buildPathFromPairs(flowerNow));
 
-      const baseEyeX = lerp(instEyeClosed.x, instEyeOpen.x, openness);
-      const baseEyeY = lerp(instEyeClosed.y, instEyeOpen.y, openness);
-      const basePupilX = lerp(instPupilClosed.x, instPupilOpen.x, openness);
-      const basePupilY = lerp(instPupilClosed.y, instPupilOpen.y, openness);
-
-      eyeCutout.setAttribute('cx', baseEyeX);
-      eyeCutout.setAttribute('cy', baseEyeY);
-      eyeWhite.setAttribute('cx', baseEyeX);
-      eyeWhite.setAttribute('cy', baseEyeY);
-      eyePupil.setAttribute('cx', basePupilX);
-      eyePupil.setAttribute('cy', basePupilY);
-
-      const edx = mouse.x - baseEyeX;
-      const edy = mouse.y - baseEyeY;
+      // Eye white/cutout stay put (set once in initLily). Only the pupil
+      // moves, tracking the pointer but capped at pupilTravel so it never
+      // steps outside the fixed white circle.
+      const edx = mouse.x - instEyeOpen.x;
+      const edy = mouse.y - instEyeOpen.y;
       const eAngle = Math.atan2(edy, edx);
-      const eMag = mouse.active ? Math.min(EYE_TRAVEL, Math.sqrt(edx * edx + edy * edy) / 20) : 0;
-      const tx = Math.cos(eAngle) * eMag, ty = Math.sin(eAngle) * eMag;
-      if (pool.idSuffix === 'M') {
-        // transform-origin must be set explicitly in SVG user-space units —
-        // it does NOT default to the element's own bounding-box center the
-        // way it does for HTML elements, so without this the scale would
-        // squash the eye toward the SVG's (0,0) instead of in place.
-        eyeGroup.style.transformOrigin = `${baseEyeX}px ${baseEyeY}px`;
-        eyeGroup.style.transform = `translate(${tx}px, ${ty}px) scaleY(${MOBILE_EYE_SQUASH})`;
-      } else {
-        eyeGroup.style.transform = `translate(${tx}px, ${ty}px)`;
-      }
+      const eMag = mouse.active ? Math.min(pupilTravel, Math.sqrt(edx * edx + edy * edy) / 20) : 0;
+      eyePupil.setAttribute('cx', instPupilOpen.x + Math.cos(eAngle) * eMag);
+      eyePupil.setAttribute('cy', instPupilOpen.y + Math.sin(eAngle) * eMag);
 
       const idleAmp = 4;
       const reactiveAmp = proximity * 34;
