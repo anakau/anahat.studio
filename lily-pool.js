@@ -285,7 +285,6 @@
     const stemIdx = pool.stemToFlower.indexOf(flowerIdx);
     const suffix = pool.idSuffix + flowerIdx;
 
-    const eyeGroup = document.getElementById('eyeGroup' + suffix);
     const eyeCutout = document.getElementById('eyeCutout' + suffix);
     const eyeWhite = document.getElementById('eyeWhite' + suffix);
     const eyePupil = document.getElementById('eyePupil' + suffix);
@@ -317,23 +316,32 @@
     const pupilTravel = PUPIL_TRAVEL_FACTOR * rScale;
 
     // Blink is a clip, not a resize: white/colored/black circles never
-    // change size ("the eyeball" itself is untouched). A clipPath rect
-    // covering the whole eyeCutout shrinks vertically from both edges
-    // toward the center and back — like eyelids closing over the eye —
-    // masking eyeGroup rather than scaling anything inside it.
-    const eyeR = 17.5 * rScale * 2.5; // matches eyeCutout's radius below
+    // change size — eyeCutout (the white base) is completely excluded and
+    // never touched. Only eyeWhite (iris) and eyePupil get their own
+    // clipPath, each a rect sized to their own radius and centered on
+    // their own resting position, shrinking vertically from top and
+    // bottom toward the center and back — closing eyelids over just the
+    // iris/pupil, leaving the white base fully visible throughout.
     const svgNS = 'http://www.w3.org/2000/svg';
-    const clipId = 'eyeClip' + suffix;
-    const clipRect = document.createElementNS(svgNS, 'rect');
-    clipRect.setAttribute('x', instEyeOpen.x - eyeR);
-    clipRect.setAttribute('width', eyeR * 2);
-    clipRect.setAttribute('y', instEyeOpen.y - eyeR);
-    clipRect.setAttribute('height', eyeR * 2);
-    const clipPath = document.createElementNS(svgNS, 'clipPath');
-    clipPath.setAttribute('id', clipId);
-    clipPath.appendChild(clipRect);
-    eyeCutout.ownerSVGElement.appendChild(clipPath);
-    eyeGroup.setAttribute('clip-path', `url(#${clipId})`);
+    const ownerSvg = eyeCutout.ownerSVGElement;
+    function makeEyelidClip(id, cx, cy, r) {
+      const rect = document.createElementNS(svgNS, 'rect');
+      rect.setAttribute('x', cx - r);
+      rect.setAttribute('width', r * 2);
+      rect.setAttribute('y', cy - r);
+      rect.setAttribute('height', r * 2);
+      const clipPath = document.createElementNS(svgNS, 'clipPath');
+      clipPath.setAttribute('id', id);
+      clipPath.appendChild(rect);
+      ownerSvg.appendChild(clipPath);
+      return rect;
+    }
+    const irisR = 17.5 * rScale;
+    const pupilR = 10 * rScale;
+    const irisClipRect = makeEyelidClip('eyeClipIris' + suffix, instEyeOpen.x, instEyeOpen.y, irisR);
+    const pupilClipRect = makeEyelidClip('eyeClipPupil' + suffix, instPupilOpen.x, instPupilOpen.y, pupilR);
+    eyeWhite.setAttribute('clip-path', `url(#eyeClipIris${suffix})`);
+    eyePupil.setAttribute('clip-path', `url(#eyeClipPupil${suffix})`);
 
     // The outer white base is fixed for this lily's lifetime — set once,
     // not per frame. The colored iris (eyeWhite) and pupil move together
@@ -412,24 +420,29 @@
       eyePupil.setAttribute('cx', instPupilOpen.x + ox);
       eyePupil.setAttribute('cy', instPupilOpen.y + oy);
 
-      // Async blink, entirely independent of mouse/openness: none of the
-      // three circles change size — the clipPath rect set up in initLily
-      // shrinks vertically from both top and bottom toward the center and
-      // back, masking eyeGroup like closing eyelids, on this lily's own
-      // random schedule.
-      if (blinkStart === null && t >= nextBlinkAt) blinkStart = t;
+      // Async blink, independent of the pointer — but only starts while
+      // this lily is actually open (mouse up / high openness); no point
+      // blinking a bud that's already shut. eyeCutout (white base) is
+      // never touched. Iris + pupil each shrink vertically toward their
+      // own center and back via their own clipPath rect from initLily.
+      if (blinkStart === null && t >= nextBlinkAt && openness > 0.6) blinkStart = t;
       if (blinkStart !== null) {
         const bp = (t - blinkStart) / BLINK_DURATION;
         if (bp >= 1) {
           blinkStart = null;
           nextBlinkAt = t + BLINK_MIN_GAP + Math.random() * (BLINK_MAX_GAP - BLINK_MIN_GAP);
-          clipRect.setAttribute('y', instEyeOpen.y - eyeR);
-          clipRect.setAttribute('height', eyeR * 2);
+          irisClipRect.setAttribute('y', instEyeOpen.y - irisR);
+          irisClipRect.setAttribute('height', irisR * 2);
+          pupilClipRect.setAttribute('y', instPupilOpen.y - pupilR);
+          pupilClipRect.setAttribute('height', pupilR * 2);
         } else {
           const openFrac = Math.abs(Math.cos(bp * Math.PI)); // 1 open -> 0 shut -> 1 open
-          const halfHeight = eyeR * openFrac;
-          clipRect.setAttribute('y', instEyeOpen.y - halfHeight);
-          clipRect.setAttribute('height', halfHeight * 2);
+          const irisHalf = irisR * openFrac;
+          irisClipRect.setAttribute('y', instEyeOpen.y - irisHalf);
+          irisClipRect.setAttribute('height', irisHalf * 2);
+          const pupilHalf = pupilR * openFrac;
+          pupilClipRect.setAttribute('y', instPupilOpen.y - pupilHalf);
+          pupilClipRect.setAttribute('height', pupilHalf * 2);
         }
       }
 
