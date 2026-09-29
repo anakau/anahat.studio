@@ -85,7 +85,7 @@ a { color: inherit; text-decoration: none; }
 .logo-mark { display: block; height: 62.4px; width: auto; color: var(--ink); }
 .site-nav { display: flex; gap: 28px; }
 .site-nav a {
-  font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
   color: var(--ink); text-decoration: none;
   transition: color 0.15s ease;
 }
@@ -485,7 +485,7 @@ a { color: inherit; text-decoration: none; }
   transition: box-shadow 0.2s ease;
 }
 .practice-card-thumb--empty {
-  background: #000; color: #fff; font-size: 13px;
+  background: #2E2E2E; color: #fff; font-size: 13px;
   display: flex; align-items: center; justify-content: center;
 }
 a.practice-card:hover .practice-card-thumb {
@@ -508,8 +508,8 @@ a.practice-card:hover .practice-card-thumb {
 }
 .practice-card--placeholder {
   aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
-  border: 1px dashed var(--line); border-radius: 4px;
-  color: var(--muted); font-size: 13px;
+  background: #2E2E2E; border-radius: 4px;
+  color: #fff; font-size: 13px;
 }
 
 /* ── ARCHIVE ── */
@@ -625,8 +625,9 @@ a.practice-card:hover .practice-card-thumb {
   .archive-tags { display: none; }
 
   #practice-page { padding: 24px 16px 60px; }
-  #practice-grid { gap: 20px; }
+  #practice-grid { gap: 12px; }
   .practice-row { gap: 12px; }
+  .practice-card-thumb { margin-bottom: 6px; }
   .practice-card-title { font-size: 11px; }
   .practice-card-tags { display: none; }
 }
