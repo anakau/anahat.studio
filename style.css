@@ -379,14 +379,10 @@ a { color: inherit; text-decoration: none; }
 #about-page { max-width: 1320px; margin: 0 auto; padding: 40px 40px 100px; }
 .about-columns { display: flex; gap: 56px; align-items: flex-start; margin-bottom: 48px; }
 .about-photo {
-  display: block; flex: 1 1 42%; width: 42%; margin: 0;
+  display: block; flex: 1 1 50%; width: 50%; margin: 0;
   border-radius: 2px; object-fit: cover;
 }
-.about-text { flex: 1 1 58%; min-width: 0; }
-.about-eyebrow {
-  font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 18px;
-}
+.about-text { flex: 1 1 50%; min-width: 0; }
 .about-intro {
   font-weight: 400;
   font-size: clamp(18px, 2vw, 24px);
