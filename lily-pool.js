@@ -318,28 +318,30 @@
     // Blink is a clip, not a resize: white/colored/black circles never
     // change size — eyeCutout (the white base) is completely excluded and
     // never touched. Only eyeWhite (iris) and eyePupil get their own
-    // clipPath, each a rect sized to their own radius and centered on
-    // their own resting position, shrinking vertically from top and
-    // bottom toward the center and back — closing eyelids over just the
-    // iris/pupil, leaving the white base fully visible throughout.
+    // clipPath, each an ELLIPSE (not a rect — a rect's flat top/bottom
+    // edge stayed full-width as it shrank, reading as a square window
+    // rather than a closing eyelid) centered on their own resting
+    // position. Its ry shrinks toward 0 and back while rx stays fixed at
+    // the circle's own radius, tapering smoothly to a point at each side
+    // like a real eyelid instead of a flat-edged bar.
     const svgNS = 'http://www.w3.org/2000/svg';
     const ownerSvg = eyeCutout.ownerSVGElement;
     function makeEyelidClip(id, cx, cy, r) {
-      const rect = document.createElementNS(svgNS, 'rect');
-      rect.setAttribute('x', cx - r);
-      rect.setAttribute('width', r * 2);
-      rect.setAttribute('y', cy - r);
-      rect.setAttribute('height', r * 2);
+      const ellipse = document.createElementNS(svgNS, 'ellipse');
+      ellipse.setAttribute('cx', cx);
+      ellipse.setAttribute('cy', cy);
+      ellipse.setAttribute('rx', r);
+      ellipse.setAttribute('ry', r);
       const clipPath = document.createElementNS(svgNS, 'clipPath');
       clipPath.setAttribute('id', id);
-      clipPath.appendChild(rect);
+      clipPath.appendChild(ellipse);
       ownerSvg.appendChild(clipPath);
-      return rect;
+      return ellipse;
     }
     const irisR = 17.5 * rScale;
     const pupilR = 10 * rScale;
-    const irisClipRect = makeEyelidClip('eyeClipIris' + suffix, instEyeOpen.x, instEyeOpen.y, irisR);
-    const pupilClipRect = makeEyelidClip('eyeClipPupil' + suffix, instPupilOpen.x, instPupilOpen.y, pupilR);
+    const irisClipEllipse = makeEyelidClip('eyeClipIris' + suffix, instEyeOpen.x, instEyeOpen.y, irisR);
+    const pupilClipEllipse = makeEyelidClip('eyeClipPupil' + suffix, instPupilOpen.x, instPupilOpen.y, pupilR);
     eyeWhite.setAttribute('clip-path', `url(#eyeClipIris${suffix})`);
     eyePupil.setAttribute('clip-path', `url(#eyeClipPupil${suffix})`);
 
@@ -431,18 +433,12 @@
         if (bp >= 1) {
           blinkStart = null;
           nextBlinkAt = t + BLINK_MIN_GAP + Math.random() * (BLINK_MAX_GAP - BLINK_MIN_GAP);
-          irisClipRect.setAttribute('y', instEyeOpen.y - irisR);
-          irisClipRect.setAttribute('height', irisR * 2);
-          pupilClipRect.setAttribute('y', instPupilOpen.y - pupilR);
-          pupilClipRect.setAttribute('height', pupilR * 2);
+          irisClipEllipse.setAttribute('ry', irisR);
+          pupilClipEllipse.setAttribute('ry', pupilR);
         } else {
           const openFrac = Math.abs(Math.cos(bp * Math.PI)); // 1 open -> 0 shut -> 1 open
-          const irisHalf = irisR * openFrac;
-          irisClipRect.setAttribute('y', instEyeOpen.y - irisHalf);
-          irisClipRect.setAttribute('height', irisHalf * 2);
-          const pupilHalf = pupilR * openFrac;
-          pupilClipRect.setAttribute('y', instPupilOpen.y - pupilHalf);
-          pupilClipRect.setAttribute('height', pupilHalf * 2);
+          irisClipEllipse.setAttribute('ry', irisR * openFrac);
+          pupilClipEllipse.setAttribute('ry', pupilR * openFrac);
         }
       }
 
