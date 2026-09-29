@@ -1,5 +1,20 @@
 const PROJECTS = [
   {
+    "name": "Agreements for Regenerative Futures",
+    "category": "",
+    "url": "",
+    "external": false,
+    "cover": null,
+    "images": [],
+    "year": "2026",
+    "externalLink": null,
+    "paragraphs": [],
+    "slug": "agreements-for-regenerative-futures",
+    "hasFullDocs": false,
+    "tags": [],
+    "favorite": false
+  },
+  {
     "name": "RiskSense",
     "category": "",
     "url": "https://risk.darkmatterlabs.org/mumbai-risk-clinic",
@@ -64,16 +79,85 @@ const PROJECTS = [
   },
   {
     "name": "The Planetary Compendium",
-    "category": "",
+    "category": "A living archive and civic tool for planetary governance, co-developed with the Berggruen Institute",
     "url": "https://governtheplanet.org",
     "external": true,
-    "cover": null,
-    "images": [],
-    "year": "2025",
+    "cover": "images/projects/the-planetary-compendium/hero.png",
+    "images": [
+      "images/projects/the-planetary-compendium/hero.png",
+      "images/projects/the-planetary-compendium/gtlogo.svg",
+      "images/projects/the-planetary-compendium/Extractive.png",
+      "images/projects/the-planetary-compendium/Generative.png",
+      "images/projects/the-planetary-compendium/soil-illustration.png",
+      "images/projects/the-planetary-compendium/rela.png",
+      "images/projects/the-planetary-compendium/dolls-new.png"
+    ],
+    "year": "2026",
     "externalLink": null,
     "paragraphs": [],
+    "sections": [
+      {
+        "heading": "Role",
+        "paragraphs": [
+          "Visual concepts, creative direction, and experience design led by Anahat Kaur, together with Arianna Smaron, on a project conceptualised, curated, and edited by Alexandra Bekker and Prateek Shankar."
+        ]
+      },
+      {
+        "heading": "What is the Compendium",
+        "paragraphs": [
+          "The Planetary Compendium is an evolving wunderkammer of planetary governance. This living archive maps the shifting architectures, imaginaries, and experiments shaping how life on Earth may be organized, sustained, and represented.",
+          "Co-developed by Berggruen Institute and Dark Matter Labs, the Compendium brings together historic precedents, emerging experiments, and speculative futures to trace pathways that include the planetary. New and existing entanglements — legal, ecological, technological, spiritual, and beyond — describe our shared condition.",
+          "The notion of planetarity as a post-global imaginary has found new life in recent times, perhaps in response to the precarity of the international order today. The Compendium was designed precisely to give form and texture to the promise of planetary thinking.",
+          "Designed as a civic and pedagogical tool, the Compendium highlights and diagnoses planetary conditions with ways to solve them — from lunar governance and rights of nature to the ethics of geoengineering, transboundary risk mitigation, and interspecies communication."
+        ]
+      },
+      {
+        "heading": "Brand System",
+        "paragraphs": [
+          "[PLACEHOLDER: brand rationale — why this palette (purple #D4B6FF, green #E1ED63, blue #D2F5FF), why this mark, what the system was meant to evoke.]"
+        ],
+        "image": "images/projects/the-planetary-compendium/gtlogo.svg"
+      },
+      {
+        "heading": "Interface & Interaction Design",
+        "paragraphs": [
+          "[PLACEHOLDER: key concepts behind the interface system and how the case studies/entries are structured for the reader.]",
+          "Custom interface pieces built for the Compendium include a soil-condition slider contrasting extractive and generative governance models, fluid learning-circle diagrams, an embedded Miro board for collaborative mapping, and a multi-level approach visualization."
+        ],
+        "image": "images/projects/the-planetary-compendium/soil-illustration.png"
+      },
+      {
+        "heading": "Stakeholder Management",
+        "paragraphs": [
+          "[PLACEHOLDER: a specific stakeholder-management story — a tension or decision navigated across the Berggruen Institute and Dark Matter Labs teams.]"
+        ]
+      },
+      {
+        "heading": "Outcome",
+        "paragraphs": [
+          "The Planetary Compendium is live at governtheplanet.org, funded by the Berggruen Institute and co-developed with Dark Matter Labs. [PLACEHOLDER: reception/impact since launch.]"
+        ]
+      },
+      {
+        "heading": "Credits",
+        "credits": [
+          "Conceptualised, curated, and edited by Alexandra Bekker and Prateek Shankar.",
+          "Visual concepts, creative direction, and experience design by Anahat Kaur and Arianna Smaron.",
+          "Platform development by Andrea Zaccuri, Francesco Castrovilli and Alessandro Miracapillo with additional support from Gurden Batra and the DM Civic Tech Studio.",
+          "Curatorial assistance and operational management by Liam Cohen.",
+          "Operational support by Katherine Miller.",
+          "Sound design by Nithin Shamsudhin and Meera Shenoy.",
+          "Animation by Studio Kokaachi.",
+          "Illustrations and visual storytelling by Blain van Rooyen, Hyojeong Lee, Sana Bansal, Shehzil Malik, and Zainab Zulfiqar, as well as Ben Pollock and John Cook at Climate Cartographics.",
+          "Copyediting by Irina Wang.",
+          "Typeset in ABC Diatype, Geist Mono, and Ivar Italics.",
+          "Informed by conversations with Jonathan Blake, Emily Knapp, and Nils Gilman at the Berggruen Institute; Zehra Zaidi, Indy Johar, and Vlad Afanasiev at Dark Matter Labs; among other colleagues, practitioners, and thought partners in our extended ecosystems.",
+          "Funded by the Berggruen Institute."
+        ]
+      }
+    ],
     "slug": "the-planetary-compendium",
-    "hasFullDocs": false,
+    "hasFullDocs": true,
     "tags": [
       "Planetary",
       "Governance",
