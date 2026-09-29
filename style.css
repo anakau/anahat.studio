@@ -391,12 +391,8 @@ a { color: inherit; text-decoration: none; }
 .about-columns {
   display: flex; gap: 56px; align-items: stretch; margin-bottom: 48px;
 }
-.about-photo-col {
-  flex: 1 1 50%; width: 50%;
-  display: flex; flex-direction: column;
-}
 .about-photo-wrap {
-  position: relative; flex: 1 1 auto; width: 100%;
+  position: relative; flex: 1 1 50%; width: 50%;
   overflow: hidden;
 }
 .about-photo {
@@ -407,7 +403,7 @@ a { color: inherit; text-decoration: none; }
 .about-photo--hover { opacity: 0; transition: opacity 0.35s ease; }
 .about-photo-wrap:hover .about-photo--hover { opacity: 1; }
 .about-photo-credit {
-  text-align: left; margin-top: 12px;
+  margin-top: 12px;
   font-size: 10px; line-height: 1.4; color: var(--muted);
 }
 .about-text { flex: 1 1 50%; min-width: 0; }
@@ -584,8 +580,7 @@ a.practice-card:hover .practice-card-thumb {
   .card-title { font-size: clamp(28px, 11vw, 56px); }
   #about-page { padding: 24px 20px 80px; }
   .about-columns { flex-direction: column; gap: 24px; }
-  .about-photo-col { width: 100%; flex: none; }
-  .about-photo-wrap { width: 100%; height: 60vh; }
+  .about-photo-wrap { width: 100%; height: 60vh; flex: none; }
 
   /* Archive: the single-line name/tags/year layout only works with room to
      truncate the tags — on narrow screens it either overflows or squeezes
