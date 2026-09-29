@@ -392,19 +392,13 @@ a { color: inherit; text-decoration: none; }
   display: flex; gap: 56px; align-items: stretch; margin-bottom: 48px;
 }
 .about-photo-wrap {
-  /* Sized by the actual photo's own ratio (2955:4168) rather than a fixed
-     50% column, so there's never a letterbox gap between the box and the
-     image — object-fit: contain would otherwise leave empty space on one
-     side whenever the stretched height doesn't exactly match a 50%-wide
-     box, throwing off the left-edge alignment with the credit line below. */
-  position: relative; flex: 0 1 auto; width: auto;
-  aspect-ratio: 2955 / 4168;
+  position: relative; flex: 1 1 50%; width: 50%;
   overflow: hidden;
 }
 .about-photo {
   display: block; position: absolute; inset: 0;
   width: 100%; height: 100%; margin: 0;
-  object-fit: cover;
+  object-fit: contain; object-position: center center;
 }
 .about-photo--hover { opacity: 0; transition: opacity 0.35s ease; }
 .about-photo-wrap:hover .about-photo--hover { opacity: 1; }
@@ -412,7 +406,7 @@ a { color: inherit; text-decoration: none; }
   margin-top: 12px;
   font-size: 10px; line-height: 1.4; color: var(--muted);
 }
-.about-text { flex: 1 1 auto; min-width: 0; }
+.about-text { flex: 1 1 50%; min-width: 0; }
 .about-intro {
   font-weight: 400;
   font-size: clamp(18px, 2vw, 24px);
@@ -421,15 +415,15 @@ a { color: inherit; text-decoration: none; }
 }
 .glossary-term {
   position: relative; cursor: help;
-  border-bottom: 1px dotted var(--ink);
+  border-bottom: 1px dotted #4ADE80;
 }
 .glossary-popup {
-  position: absolute; left: 0; bottom: calc(100% + 10px);
-  width: 280px; background: #000; color: #fff;
-  font-size: 13px; font-weight: 400; line-height: 1.5; letter-spacing: normal;
+  position: absolute; left: 0; top: calc(100% + 10px);
+  width: 280px; background: #4ADE80; color: #000;
+  font-size: 13px; font-weight: 400; line-height: 20px; letter-spacing: normal;
   padding: 16px 18px; border-radius: 10px;
   opacity: 0; visibility: hidden; pointer-events: none;
-  transform: translateY(6px);
+  transform: translateY(-6px);
   transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
   z-index: 20;
 }
@@ -440,8 +434,8 @@ a { color: inherit; text-decoration: none; }
 }
 .glossary-popup a {
   display: inline-block; margin-top: 10px;
-  color: #fff; font-size: 12px; font-weight: 600;
-  border-bottom: 1px solid #fff; padding-bottom: 1px;
+  color: #000; font-size: 13px; font-weight: 600; line-height: 20px;
+  border-bottom: 1px solid #000; padding-bottom: 1px;
 }
 .about-body p { font-size: 16px; line-height: 1.75; margin-bottom: 20px; max-width: 680px; }
 .about-links {
@@ -610,7 +604,7 @@ a.practice-card:hover .practice-card-thumb {
   .card-title { font-size: clamp(28px, 11vw, 56px); }
   #about-page { padding: 24px 20px 80px; }
   .about-columns { flex-direction: column; gap: 24px; }
-  .about-photo-wrap { width: 100%; height: auto; flex: none; }
+  .about-photo-wrap { width: 100%; height: 60vh; flex: none; }
 
   /* Archive: the single-line name/tags/year layout only works with room to
      truncate the tags — on narrow screens it either overflows or squeezes
