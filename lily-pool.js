@@ -8,6 +8,9 @@
   // moves, tracking the pointer within a radius small enough to stay
   // inside the white circle.
   const PUPIL_TRAVEL_FACTOR = 5; // × rScale
+  const BLINK_DURATION = 0.18; // seconds, close+reopen
+  const BLINK_MIN_GAP = 2.5; // seconds between blinks, per lily
+  const BLINK_MAX_GAP = 8;
 
   // --- touch devices: tilt drives open/close instead of touch height ---
   // DeviceOrientationEvent's `beta` is front-to-back tilt in degrees: ~0
@@ -279,6 +282,7 @@
     const stemIdx = pool.stemToFlower.indexOf(flowerIdx);
     const suffix = pool.idSuffix + flowerIdx;
 
+    const eyeGroup = document.getElementById('eyeGroup' + suffix);
     const eyeCutout = document.getElementById('eyeCutout' + suffix);
     const eyeWhite = document.getElementById('eyeWhite' + suffix);
     const eyePupil = document.getElementById('eyePupil' + suffix);
@@ -344,6 +348,12 @@
     let openness = 0;
     const phase = flowerIdx * 1.3;
 
+    // Async blink: each lily keeps its own independent random schedule
+    // (offset at init so they don't all start in sync), so blinks read as
+    // scattered across the bunch rather than everyone blinking together.
+    let blinkStart = null;
+    let nextBlinkAt = BLINK_MIN_GAP + Math.random() * (BLINK_MAX_GAP - BLINK_MIN_GAP);
+
     function update(mouse, t) {
       const dx = mouse.x - instFlowerCenter.x;
       const dy = mouse.y - instFlowerCenter.y;
@@ -379,6 +389,22 @@
       eyeWhite.setAttribute('cy', instEyeOpen.y + oy);
       eyePupil.setAttribute('cx', instPupilOpen.x + ox);
       eyePupil.setAttribute('cy', instPupilOpen.y + oy);
+
+      // Async blink: scales the whole eye assembly (base + iris + pupil)
+      // down to near-flat and back, on this lily's own random schedule.
+      if (blinkStart === null && t >= nextBlinkAt) blinkStart = t;
+      if (blinkStart !== null) {
+        const bp = (t - blinkStart) / BLINK_DURATION;
+        if (bp >= 1) {
+          blinkStart = null;
+          nextBlinkAt = t + BLINK_MIN_GAP + Math.random() * (BLINK_MAX_GAP - BLINK_MIN_GAP);
+          eyeGroup.style.transform = '';
+        } else {
+          const squash = 1 - 0.92 * Math.sin(bp * Math.PI);
+          eyeGroup.style.transformOrigin = `${instEyeOpen.x}px ${instEyeOpen.y}px`;
+          eyeGroup.style.transform = `scaleY(${squash})`;
+        }
+      }
 
       const idleAmp = 4;
       const reactiveAmp = proximity * 34;
