@@ -282,7 +282,6 @@
     const stemIdx = pool.stemToFlower.indexOf(flowerIdx);
     const suffix = pool.idSuffix + flowerIdx;
 
-    const eyeGroup = document.getElementById('eyeGroup' + suffix);
     const eyeCutout = document.getElementById('eyeCutout' + suffix);
     const eyeWhite = document.getElementById('eyeWhite' + suffix);
     const eyePupil = document.getElementById('eyePupil' + suffix);
@@ -390,19 +389,26 @@
       eyePupil.setAttribute('cx', instPupilOpen.x + ox);
       eyePupil.setAttribute('cy', instPupilOpen.y + oy);
 
-      // Async blink: scales the whole eye assembly (base + iris + pupil)
-      // down to near-flat and back, on this lily's own random schedule.
+      // Async blink, entirely independent of mouse/openness: the outer
+      // white socket (eyeCutout) stays visible and untouched the whole
+      // time — only the iris + pupil squash shut like an eyelid closing
+      // over them, on this lily's own random schedule. Squashing the
+      // socket too (tried before) made the whole eye vanish instead of
+      // reading as a blink.
       if (blinkStart === null && t >= nextBlinkAt) blinkStart = t;
       if (blinkStart !== null) {
         const bp = (t - blinkStart) / BLINK_DURATION;
         if (bp >= 1) {
           blinkStart = null;
           nextBlinkAt = t + BLINK_MIN_GAP + Math.random() * (BLINK_MAX_GAP - BLINK_MIN_GAP);
-          eyeGroup.style.transform = '';
+          eyeWhite.style.transform = '';
+          eyePupil.style.transform = '';
         } else {
-          const squash = 1 - 0.92 * Math.sin(bp * Math.PI);
-          eyeGroup.style.transformOrigin = `${instEyeOpen.x}px ${instEyeOpen.y}px`;
-          eyeGroup.style.transform = `scaleY(${squash})`;
+          const squash = 1 - 0.96 * Math.sin(bp * Math.PI);
+          eyeWhite.style.transformOrigin = `${instEyeOpen.x + ox}px ${instEyeOpen.y + oy}px`;
+          eyeWhite.style.transform = `scaleY(${squash})`;
+          eyePupil.style.transformOrigin = `${instPupilOpen.x + ox}px ${instPupilOpen.y + oy}px`;
+          eyePupil.style.transform = `scaleY(${squash})`;
         }
       }
 
