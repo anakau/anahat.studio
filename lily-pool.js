@@ -408,6 +408,30 @@
   const lilies = [];
   for (let i = 0; i < activePool.flowerD.length; i++) lilies.push(initLily(activePool, i));
 
+  // Hover tag pills: desktop only (mobile is touch, no real hover). One
+  // shared tooltip element that follows the pointer, shown per-lily rather
+  // than per-lily DOM nodes since only one can be hovered at a time.
+  if (!isMobileScene) {
+    const LILY_TAGS_DESKTOP = ['more-than-human', 'planetary thinking', 'migration', 'regenerative futures', 'culture revival', 'feminist futures', 'tech for good', 'climate justice', 'live drawing the other', 'collective care'];
+    const tagTooltip = document.createElement('div');
+    tagTooltip.className = 'lily-tag-tooltip';
+    document.body.appendChild(tagTooltip);
+    Array.from(activeScene.querySelectorAll(':scope > .lily')).forEach((g, i) => {
+      const tag = LILY_TAGS_DESKTOP[i % LILY_TAGS_DESKTOP.length];
+      g.addEventListener('pointerenter', () => {
+        tagTooltip.textContent = tag;
+        tagTooltip.classList.add('on');
+      });
+      g.addEventListener('pointermove', (e) => {
+        tagTooltip.style.left = (e.clientX + 14) + 'px';
+        tagTooltip.style.top = (e.clientY - 14) + 'px';
+      });
+      g.addEventListener('pointerleave', () => {
+        tagTooltip.classList.remove('on');
+      });
+    });
+  }
+
   // Coordinates returned here are in the SAME absolute space as the pool's
   // own path data (e.g. mobile flower/stem `d` values run ~6-819, not
   // 0-675) — the viewBox's origin offset has to be added back in, not just
