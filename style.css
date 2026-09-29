@@ -266,7 +266,7 @@ a { color: inherit; text-decoration: none; }
 .card-main { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
 .card-title-wrap { display: flex; align-items: flex-start; gap: 16px; min-width: 0; }
 .card-num {
-  font-family: ui-monospace, monospace; font-size: 14px; color: var(--muted); flex-shrink: 0;
+  font-size: 14px; color: var(--muted); flex-shrink: 0;
   line-height: 1; padding-top: 4px; /* nudge to sit flush with the title's cap-height, not its baseline */
 }
 .project-card:hover .card-num,
@@ -286,7 +286,6 @@ a { color: inherit; text-decoration: none; }
 }
 .project-card:hover .card-meta,
 .project-card.expanded .card-meta { color: rgba(238,221,138,0.75); }
-.card-year { font-family: ui-monospace, monospace; }
 .card-keywords { text-transform: uppercase; letter-spacing: 0.02em; }
 
 .card-reveal {
@@ -377,10 +376,16 @@ a { color: inherit; text-decoration: none; }
   color: var(--muted); margin-bottom: 24px;
 }
 #about-page { max-width: 1320px; margin: 0 auto; padding: 40px 40px 100px; }
-.about-columns { display: flex; gap: 56px; align-items: flex-start; margin-bottom: 48px; }
+.about-columns {
+  display: flex; gap: 56px; align-items: flex-start; margin-bottom: 48px;
+  /* Pull the row out to the left edge of #about-page's own box (undoing
+     its 40px padding, not the viewport) so the photo can bleed flush
+     against it — width compensates so the right edge stays put. */
+  margin-left: -40px; width: calc(100% + 40px);
+}
 .about-photo {
   display: block; flex: 1 1 50%; width: 50%; margin: 0;
-  border-radius: 2px; object-fit: cover;
+  object-fit: cover;
 }
 .about-text { flex: 1 1 50%; min-width: 0; }
 .about-intro {
@@ -399,13 +404,16 @@ a { color: inherit; text-decoration: none; }
   color: var(--ink); border-bottom: 1px solid var(--line);
   padding-bottom: 2px;
 }
+/* Same solid-pill treatment as .lily-tag-tooltip/.practice-tag, inverted
+   (black fill/white text) since this page's background is white — a white
+   pill would disappear here the way it doesn't on their dark backgrounds. */
 .about-cv-btn {
-  font-size: 12px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase;
-  padding: 9px 18px; border: 2px solid var(--ink); border-radius: 999px;
-  color: var(--ink); background: var(--bg);
-  transition: background 0.15s;
+  font-size: 7pt; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase;
+  padding: 9px 18px; border-radius: 999px;
+  color: #fff; background: #000;
+  transition: background 0.15s, color 0.15s;
 }
-.about-cv-btn:hover { background: #EE8AB2; }
+.about-cv-btn:hover { background: #fff; color: #000; box-shadow: inset 0 0 0 1.5px #000; }
 
 /* ── PRACTICE ── */
 /* Curated single/double-column grid — distinct from the ledger's overlapping
@@ -472,7 +480,7 @@ a.practice-card:hover .practice-card-thumb {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
 }
 .archive-year {
-  font-family: ui-monospace, monospace; font-size: 13px; color: var(--muted);
+  font-size: 13px; color: var(--muted);
   flex: 0 0 auto;
 }
 
@@ -552,6 +560,9 @@ a.practice-card:hover .practice-card-thumb {
   .card-meta { justify-content: flex-start; text-align: left; padding-top: 0; max-width: 100%; }
   .card-title { font-size: clamp(28px, 11vw, 56px); }
   #about-page { padding: 24px 20px 80px; }
-  .about-columns { flex-direction: column; gap: 24px; }
+  /* Reset the desktop left-bleed breakout — on mobile the row already
+     spans the full stacked width, so the extra margin/width would just
+     push the photo past the right edge instead of bleeding it. */
+  .about-columns { flex-direction: column; gap: 24px; margin-left: 0; width: 100%; }
   .about-photo { width: 100%; flex: none; margin-bottom: 12px; }
 }
