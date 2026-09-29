@@ -387,7 +387,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--muted); margin-bottom: 24px;
 }
-#about-page { max-width: 1320px; margin: 0 auto; padding: 40px 40px 100px; }
+#about-page { padding: 40px 40px 100px; }
 .about-columns {
   display: flex; gap: 56px; align-items: flex-start; margin-bottom: 48px;
   /* Pull the row out to the left edge of #about-page's own box (undoing
