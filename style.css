@@ -392,13 +392,19 @@ a { color: inherit; text-decoration: none; }
   display: flex; gap: 56px; align-items: stretch; margin-bottom: 48px;
 }
 .about-photo-wrap {
-  position: relative; flex: 1 1 50%; width: 50%;
+  /* Sized by the actual photo's own ratio (2955:4168) rather than a fixed
+     50% column, so there's never a letterbox gap between the box and the
+     image — object-fit: contain would otherwise leave empty space on one
+     side whenever the stretched height doesn't exactly match a 50%-wide
+     box, throwing off the left-edge alignment with the credit line below. */
+  position: relative; flex: 0 1 auto; width: auto;
+  aspect-ratio: 2955 / 4168;
   overflow: hidden;
 }
 .about-photo {
   display: block; position: absolute; inset: 0;
   width: 100%; height: 100%; margin: 0;
-  object-fit: contain; object-position: right center;
+  object-fit: cover;
 }
 .about-photo--hover { opacity: 0; transition: opacity 0.35s ease; }
 .about-photo-wrap:hover .about-photo--hover { opacity: 1; }
@@ -406,7 +412,7 @@ a { color: inherit; text-decoration: none; }
   margin-top: 12px;
   font-size: 10px; line-height: 1.4; color: var(--muted);
 }
-.about-text { flex: 1 1 50%; min-width: 0; }
+.about-text { flex: 1 1 auto; min-width: 0; }
 .about-intro {
   font-weight: 400;
   font-size: clamp(18px, 2vw, 24px);
@@ -604,7 +610,7 @@ a.practice-card:hover .practice-card-thumb {
   .card-title { font-size: clamp(28px, 11vw, 56px); }
   #about-page { padding: 24px 20px 80px; }
   .about-columns { flex-direction: column; gap: 24px; }
-  .about-photo-wrap { width: 100%; height: 60vh; flex: none; }
+  .about-photo-wrap { width: 100%; height: auto; flex: none; }
 
   /* Archive: the single-line name/tags/year layout only works with room to
      truncate the tags — on narrow screens it either overflows or squeezes
