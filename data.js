@@ -15,6 +15,21 @@ const PROJECTS = [
     "favorite": false
   },
   {
+    "name": "Public Vitality Camp",
+    "category": "",
+    "url": "",
+    "external": false,
+    "cover": null,
+    "images": [],
+    "year": "2026",
+    "externalLink": null,
+    "paragraphs": [],
+    "slug": "public-vitality-camp",
+    "hasFullDocs": false,
+    "tags": [],
+    "favorite": false
+  },
+  {
     "name": "Agreements for Regenerative Futures",
     "category": "",
     "url": "",
