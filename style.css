@@ -408,7 +408,12 @@ a { color: inherit; text-decoration: none; }
   max-width: calc(50% - 28px);
   margin-top: 4px; text-align: center;
   font-size: 10px; line-height: 1.4; color: var(--muted);
+  transition: opacity 0.35s ease;
 }
+/* Credit is specific to the self-portrait, not the hover (about.jpg) photo
+   — fade it out while that swap is showing. :has() lets this reach the
+   caption even though it's a sibling of .about-columns, not a descendant. */
+.about-columns:has(.about-photo-wrap:hover) + .about-photo-credit { opacity: 0; }
 .about-text { flex: 1 1 50%; min-width: 0; }
 .about-intro {
   font-weight: 400;
