@@ -308,11 +308,11 @@
     const instFlowerCenter = applyAffine(M, FLOWER_CENTER_LOCAL);
     const pupilTravel = PUPIL_TRAVEL_FACTOR * rScale;
 
-    // Fixed for this lily's lifetime — set once, not per frame.
+    // The outer white base is fixed for this lily's lifetime — set once,
+    // not per frame. The colored iris (eyeWhite) and pupil move together
+    // inside it, handled in update() below.
     eyeCutout.setAttribute('cx', instEyeOpen.x);
     eyeCutout.setAttribute('cy', instEyeOpen.y);
-    eyeWhite.setAttribute('cx', instEyeOpen.x);
-    eyeWhite.setAttribute('cy', instEyeOpen.y);
 
     stemPath.setAttribute('d', pool.stemD[stemIdx]);
     const SAMPLE_COUNT = 42;
@@ -365,15 +365,19 @@
       const flowerNow = lerpPairs(instClosedPairs, instOpenPairs, openness);
       flowerPath.setAttribute('d', buildPathFromPairs(flowerNow));
 
-      // Eye white/cutout stay put (set once in initLily). Only the pupil
-      // moves, tracking the pointer but capped at pupilTravel so it never
+      // Outer white base (eyeCutout) stays put (set once in initLily). The
+      // colored iris (eyeWhite) and pupil move together as a pair inside
+      // it, tracking the pointer but capped at pupilTravel so neither ever
       // steps outside the fixed white circle.
       const edx = mouse.x - instEyeOpen.x;
       const edy = mouse.y - instEyeOpen.y;
       const eAngle = Math.atan2(edy, edx);
       const eMag = mouse.active ? Math.min(pupilTravel, Math.sqrt(edx * edx + edy * edy) / 20) : 0;
-      eyePupil.setAttribute('cx', instPupilOpen.x + Math.cos(eAngle) * eMag);
-      eyePupil.setAttribute('cy', instPupilOpen.y + Math.sin(eAngle) * eMag);
+      const ox = Math.cos(eAngle) * eMag, oy = Math.sin(eAngle) * eMag;
+      eyeWhite.setAttribute('cx', instEyeOpen.x + ox);
+      eyeWhite.setAttribute('cy', instEyeOpen.y + oy);
+      eyePupil.setAttribute('cx', instPupilOpen.x + ox);
+      eyePupil.setAttribute('cy', instPupilOpen.y + oy);
 
       const idleAmp = 4;
       const reactiveAmp = proximity * 34;
