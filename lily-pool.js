@@ -219,7 +219,10 @@
     'M2065.91 511.15C2065.91 511.648 2065.91 569.323 2065.56 658.17C2065.42 693.313 2059.32 711.415 2043.2 751.484C2017.24 816.017 1987.37 868.586 1975.46 908.376C1946.6 1004.79 1957.96 1050.32 1968.75 1070.26C1979.52 1090.16 2031.1 1102.24 2092.51 1113.85C2142.58 1123.32 2182.29 1103.77 2227.9 1099.62C2253.02 1097.34 2290.51 1150.18 2314.75 1185.4C2324.84 1200.07 2326.3 1214.75 2324.9 1224.28C2323.04 1236.93 2294.45 1264.16 2257.8 1300.14C2219.62 1337.62 2181.01 1341.1 2148.91 1345.64C2119.37 1349.82 2097.23 1344 2088.38 1336.77C2065.99 1318.47 2057.7 1295.29 2028.9 1244.28C2019.5 1227.64 2017.21 1216.32 2014.55 1192.73C2008.84 1141.97 2005.91 1091.59 2006.9 1063.18C2007.46 1047.07 2031.01 1005.7 2065.45 944.767C2079.32 920.232 2087.91 909.84 2093.28 903.09C2098.64 896.34 2101.05 893.849 2092.79 887.339C2047.01 851.261 2021.18 851.84 1946.34 840.41C1885.39 831.103 1776.99 820.541 1710.98 814.454C1624.57 806.488 1595.86 810.216 1577.56 815.534C1551.44 823.125 1533.69 834.681 1526.55 839.967C1519.94 844.854 1517.12 876.498 1516.03 919.301C1515.63 934.957 1518.76 938.3 1532.7 943.061C1571.41 956.274 1601.95 960.547 1614.72 961.132C1638.72 962.232 1665.44 959.698 1704.45 957.202C1732.03 956.341 1775.38 956.301 1799.74 955.592C1824.1 954.883 1828.16 953.507 1834.39 952.022',
     'M2281.24 622.701C2278.77 626.501 2261.94 680.355 2242.04 766.959C2225.38 839.449 2234.89 894.644 2240.99 927.828C2244.95 949.397 2251.69 961.145 2257.34 968.922C2262.11 975.491 2302.12 1010.38 2362.04 1065.8C2396.46 1097.63 2406.49 1114.21 2413.01 1135.55C2440.93 1226.91 2428.25 1256.5 2411.49 1289.87C2395.59 1321.53 2339.9 1354.68 2304.03 1374.13C2288.82 1382.38 2255.23 1352.21 2238.88 1334.28C2233.69 1328.6 2235.27 1301.74 2238.64 1248.05C2243.37 1172.71 2255.32 1119.41 2255.19 1102.16C2254.85 1056.76 2231.5 998.269 2223.93 997.474C2219.74 997.034 2214.72 998.474 2172.67 1004.27C2130.62 1010.06 2051.67 1020.67 1979.12 1033.22C1906.57 1045.76 1842.82 1059.93 1785 1068.12C1727.19 1076.31 1677.23 1078.09 1625.37 1075.47C1573.5 1072.85 1521.22 1065.76 1491.96 1061.21C1457.85 1055.91 1450.09 1051.23 1442.57 1046.39C1432.23 1039.74 1389.6 998.212 1329.13 937.565C1296.37 904.715 1274.59 864.045 1249.44 819.077C1237.26 797.32 1227.65 788.902 1217.65 781.862C1202.69 775.392 1118 772.573 1057.5 768.178C1049.38 766.157 1039.63 762.978 1020.01 760.618'
   ];
-  const FLOWER_FILL = ['#FF1EAC', '#FF56C1', '#FF56C1', '#FF56C1', '#FF56C1', '#FF1EAC', '#FF1EAC', '#FF9EDC', '#FF9EDC', '#FF9EDC'];
+  // Index 6 ("tech for good" in the hover tags) is slightly darkened from
+  // the base #FF1EAC — it sat directly behind index 5, same exact color,
+  // with no way to tell them apart.
+  const FLOWER_FILL = ['#FF1EAC', '#FF56C1', '#FF56C1', '#FF56C1', '#FF56C1', '#FF1EAC', '#D91A92', '#FF9EDC', '#FF9EDC', '#FF9EDC'];
   // light blue, light green, light brown, dark brown, dark green, deep blue, orange
   const EYE_COLOR = ['#7FD4F0', '#8ED9A0', '#C9A876', '#6B4423', '#1F5C3D', '#1B4F8C', '#E8873E', '#7FD4F0', '#8ED9A0', '#C9A876'];
   const EYE_R = [17.5, 17.5, 17.5, 17.5, 17.5, 17.5, 17.5, 12.9765, 12.9765, 12.9765];
@@ -282,6 +285,7 @@
     const stemIdx = pool.stemToFlower.indexOf(flowerIdx);
     const suffix = pool.idSuffix + flowerIdx;
 
+    const eyeGroup = document.getElementById('eyeGroup' + suffix);
     const eyeCutout = document.getElementById('eyeCutout' + suffix);
     const eyeWhite = document.getElementById('eyeWhite' + suffix);
     const eyePupil = document.getElementById('eyePupil' + suffix);
@@ -311,6 +315,25 @@
     const instPupilOpen = applyAffine(M, PUPIL_OPEN);
     const instFlowerCenter = applyAffine(M, FLOWER_CENTER_LOCAL);
     const pupilTravel = PUPIL_TRAVEL_FACTOR * rScale;
+
+    // Blink is a clip, not a resize: white/colored/black circles never
+    // change size ("the eyeball" itself is untouched). A clipPath rect
+    // covering the whole eyeCutout shrinks vertically from both edges
+    // toward the center and back — like eyelids closing over the eye —
+    // masking eyeGroup rather than scaling anything inside it.
+    const eyeR = 17.5 * rScale * 2.5; // matches eyeCutout's radius below
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const clipId = 'eyeClip' + suffix;
+    const clipRect = document.createElementNS(svgNS, 'rect');
+    clipRect.setAttribute('x', instEyeOpen.x - eyeR);
+    clipRect.setAttribute('width', eyeR * 2);
+    clipRect.setAttribute('y', instEyeOpen.y - eyeR);
+    clipRect.setAttribute('height', eyeR * 2);
+    const clipPath = document.createElementNS(svgNS, 'clipPath');
+    clipPath.setAttribute('id', clipId);
+    clipPath.appendChild(clipRect);
+    eyeCutout.ownerSVGElement.appendChild(clipPath);
+    eyeGroup.setAttribute('clip-path', `url(#${clipId})`);
 
     // The outer white base is fixed for this lily's lifetime — set once,
     // not per frame. The colored iris (eyeWhite) and pupil move together
@@ -389,26 +412,24 @@
       eyePupil.setAttribute('cx', instPupilOpen.x + ox);
       eyePupil.setAttribute('cy', instPupilOpen.y + oy);
 
-      // Async blink, entirely independent of mouse/openness: the outer
-      // white socket (eyeCutout) stays visible and untouched the whole
-      // time — only the iris + pupil squash shut like an eyelid closing
-      // over them, on this lily's own random schedule. Squashing the
-      // socket too (tried before) made the whole eye vanish instead of
-      // reading as a blink.
+      // Async blink, entirely independent of mouse/openness: none of the
+      // three circles change size — the clipPath rect set up in initLily
+      // shrinks vertically from both top and bottom toward the center and
+      // back, masking eyeGroup like closing eyelids, on this lily's own
+      // random schedule.
       if (blinkStart === null && t >= nextBlinkAt) blinkStart = t;
       if (blinkStart !== null) {
         const bp = (t - blinkStart) / BLINK_DURATION;
         if (bp >= 1) {
           blinkStart = null;
           nextBlinkAt = t + BLINK_MIN_GAP + Math.random() * (BLINK_MAX_GAP - BLINK_MIN_GAP);
-          eyeWhite.style.transform = '';
-          eyePupil.style.transform = '';
+          clipRect.setAttribute('y', instEyeOpen.y - eyeR);
+          clipRect.setAttribute('height', eyeR * 2);
         } else {
-          const squash = 1 - 0.96 * Math.sin(bp * Math.PI);
-          eyeWhite.style.transformOrigin = `${instEyeOpen.x + ox}px ${instEyeOpen.y + oy}px`;
-          eyeWhite.style.transform = `scaleY(${squash})`;
-          eyePupil.style.transformOrigin = `${instPupilOpen.x + ox}px ${instPupilOpen.y + oy}px`;
-          eyePupil.style.transform = `scaleY(${squash})`;
+          const openFrac = Math.abs(Math.cos(bp * Math.PI)); // 1 open -> 0 shut -> 1 open
+          const halfHeight = eyeR * openFrac;
+          clipRect.setAttribute('y', instEyeOpen.y - halfHeight);
+          clipRect.setAttribute('height', halfHeight * 2);
         }
       }
 
