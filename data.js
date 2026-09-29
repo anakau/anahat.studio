@@ -1,5 +1,20 @@
 const PROJECTS = [
   {
+    "name": "Madrid2050°",
+    "category": "",
+    "url": "",
+    "external": false,
+    "cover": null,
+    "images": [],
+    "year": "2026",
+    "externalLink": null,
+    "paragraphs": [],
+    "slug": "madrid2050",
+    "hasFullDocs": false,
+    "tags": [],
+    "favorite": false
+  },
+  {
     "name": "Agreements for Regenerative Futures",
     "category": "",
     "url": "",
