@@ -4,7 +4,7 @@
 // homepage includes this — index.html has its own full-viewport hero
 // layout with nothing to scroll past. Runs on mobile too: full size is
 // computed to match style.css's own rules at each breakpoint (desktop:
-// fixed 62.4px height; mobile: min(260px, 68vw) width) rather than
+// fixed 90px height; mobile: min(260px, 68vw) width) rather than
 // measured from the DOM, so it stays correct even mid-scroll when an
 // inline style is already overriding the logo's natural size.
 (function () {
@@ -20,7 +20,7 @@
     if (window.innerWidth <= MOBILE_BREAKPOINT) {
       return Math.min(260, window.innerWidth * 0.68);
     }
-    return 62.4 * ASPECT;
+    return 90 * ASPECT;
   }
 
   let navWidth = nav.getBoundingClientRect().width;

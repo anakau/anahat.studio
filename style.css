@@ -87,7 +87,12 @@ a { color: inherit; text-decoration: none; }
    tricks). .logo-mark is a fixed-size box; the two <img>s stack and
    crossfade on hover, same pattern as .about-photo-wrap. */
 .logo-mark {
-  display: block; position: relative; height: 62.4px; width: 238.2px; /* matches the new SVGs' 3783:991 ratio at the old 62.4px height */
+  /* The new SVGs are proportionally taller/narrower than the old inline
+     one (3783:991 vs 3039:432) — at the old 62.4px height it rendered
+     much narrower overall (238px vs the old ~438px) and read as tiny.
+     90px height gets back to a similar visual footprint. */
+  display: block; position: relative; height: 90px; width: auto;
+  aspect-ratio: 3783 / 991;
 }
 .logo-img {
   display: block; position: absolute; inset: 0;
