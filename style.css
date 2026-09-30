@@ -95,13 +95,23 @@ html.theme-green .logo-mark { color: #4ADE80; }
    on light ones, via currentColor). Only on hover does the stroke reveal
    the brand pink; the wordmark itself stays put. */
 .logo-mark #logo-accent {
-  fill: none; stroke: currentColor; stroke-width: 14;
+  fill: none; stroke: currentColor; stroke-width: 30;
   transition: stroke 0.15s ease;
   /* fill:none means browsers only hit-test the stroke line by default —
      the transparent interior wouldn't register hover at all, silently
      breaking the pink reveal whenever the pointer is over the middle of
      the oval rather than exactly on its outline. */
   pointer-events: visible;
+}
+/* The botanical linework is a raster image (pattern-filled rect), not a
+   vector path, so it can't take currentColor directly — an SVG filter
+   (feFlood + feComposite, defined per-page right before </defs>) recolors
+   its opaque pixels to a flat color while keeping its own alpha shape,
+   same green/grey split as the rest of the logo. Without this it stayed
+   baked-in black, invisible against a dark page background. */
+.logo-mark rect[fill^="url(#pattern"] { filter: url(#logoTintGreen); }
+html:not(.theme-dark):not(.theme-green) .logo-mark rect[fill^="url(#pattern"] {
+  filter: url(#logoTintGrey);
 }
 html.theme-dark .logo-mark:hover #logo-accent,
 html.theme-green .logo-mark:hover #logo-accent { stroke: #EE8AB2; }
