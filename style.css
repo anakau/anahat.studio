@@ -97,6 +97,11 @@ html.theme-green .logo-mark { color: #4ADE80; }
 .logo-mark #logo-accent {
   fill: none; stroke: currentColor; stroke-width: 14;
   transition: stroke 0.15s ease;
+  /* fill:none means browsers only hit-test the stroke line by default —
+     the transparent interior wouldn't register hover at all, silently
+     breaking the pink reveal whenever the pointer is over the middle of
+     the oval rather than exactly on its outline. */
+  pointer-events: visible;
 }
 html.theme-dark .logo-mark:hover #logo-accent,
 html.theme-green .logo-mark:hover #logo-accent { stroke: #EE8AB2; }
