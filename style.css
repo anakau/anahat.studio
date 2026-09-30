@@ -78,21 +78,20 @@ a { color: inherit; text-decoration: none; }
 /* ── HEADER ── */
 #site-header {
   display: flex; flex-direction: column; align-items: center;
-  gap: 14px;
+  gap: 6px;
   padding: 4px 40px 24px;
   position: sticky; top: 0; z-index: 50;
 }
 /* Pre-made SVG files now (images/logo-{black,green}-{default,hover}.svg —
    own colors/hover state baked in by design, not CSS-driven currentColor
    tricks). .logo-mark is a fixed-size box; the two <img>s stack and
-   crossfade on hover, same pattern as .about-photo-wrap. */
+   crossfade on hover, same pattern as .about-photo-wrap.
+   The SVGs' own viewBox has since been cropped to their real content
+   bounds (was 0 0 3783 991, ~58% of that empty vertical padding) — the
+   ratio below and the gap/sizing here all assume that tight crop. */
 .logo-mark {
-  /* The new SVGs are proportionally taller/narrower than the old inline
-     one (3783:991 vs 3039:432) — at the old 62.4px height it rendered
-     much narrower overall (238px vs the old ~438px) and read as tiny.
-     90px height gets back to a similar visual footprint. */
-  display: block; position: relative; height: 90px; width: auto;
-  aspect-ratio: 3783 / 991;
+  display: block; position: relative; height: 180px; width: auto;
+  aspect-ratio: 3080.43 / 444.55;
 }
 .logo-img {
   display: block; position: absolute; inset: 0;
@@ -626,7 +625,7 @@ a.practice-card:hover .practice-card-thumb {
      phones — it was cropping against the header's side padding. Fluid
      width instead, capped so it doesn't get oversized on the larger
      phones/small tablets at the top of this breakpoint. */
-  .logo-mark { height: auto; width: min(260px, 68vw); aspect-ratio: 3783 / 991; }
+  .logo-mark { height: auto; width: min(260px, 68vw); aspect-ratio: 3080.43 / 444.55; }
   #work { padding: 0 16px 80px; }
   .project-card { padding: 28px 16px 24px; }
   .project-card:not(:first-child) { margin-top: -20px; }
