@@ -405,7 +405,7 @@ a { color: inherit; text-decoration: none; }
 .about-photo {
   display: block; position: absolute; inset: 0;
   width: 100%; height: 100%; margin: 0;
-  object-fit: cover; object-position: center center;
+  object-fit: contain; object-position: center center;
 }
 .about-photo--hover { opacity: 0; transition: opacity 0.35s ease; }
 .about-photo-wrap:hover .about-photo--hover { opacity: 1; }
