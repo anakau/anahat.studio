@@ -90,7 +90,7 @@ a { color: inherit; text-decoration: none; }
    bounds (was 0 0 3783 991, ~58% of that empty vertical padding) — the
    ratio below and the gap/sizing here all assume that tight crop. */
 .logo-mark {
-  display: block; position: relative; height: 360px; width: auto;
+  display: block; position: relative; height: 180px; width: auto;
   aspect-ratio: 3080.43 / 444.55;
 }
 .logo-img {
@@ -625,7 +625,7 @@ a.practice-card:hover .practice-card-thumb {
      header's side padding. Fluid width instead, capped so it doesn't
      get oversized on the larger phones/small tablets at the top of
      this breakpoint. */
-  .logo-mark { height: auto; width: min(520px, 68vw); aspect-ratio: 3080.43 / 444.55; }
+  .logo-mark { height: auto; width: min(260px, 68vw); aspect-ratio: 3080.43 / 444.55; }
   #work { padding: 0 16px 80px; }
   .project-card { padding: 28px 16px 24px; }
   .project-card:not(:first-child) { margin-top: -20px; }
