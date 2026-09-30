@@ -391,7 +391,11 @@ a { color: inherit; text-decoration: none; }
 .about-columns {
   display: flex; gap: 56px; align-items: flex-start; margin-bottom: 8px;
 }
-.about-photo-col { flex: 1 1 50%; width: 50%; }
+/* Capped so it can't balloon on very wide/large monitors — since the page
+   itself has no max-width and the photo is sized by its own aspect ratio
+   (2955:4168), an uncapped 50% column got absurdly tall on big screens.
+   Text (flex 1 1 50%, no cap) grows to fill whatever width this frees up. */
+.about-photo-col { flex: 1 1 50%; width: 50%; max-width: 520px; }
 .about-photo-wrap {
   position: relative; width: 100%;
   aspect-ratio: 2955 / 4168; /* the self-portrait's own ratio */
