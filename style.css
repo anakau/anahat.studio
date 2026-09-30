@@ -511,7 +511,7 @@ a { color: inherit; text-decoration: none; }
   display: flex; align-items: center; justify-content: center;
 }
 a.practice-card:hover .practice-card-thumb {
-  box-shadow: 0 0 28px 6px rgba(74, 222, 128, 0.45);
+  box-shadow: 0 0 16px 1px rgba(74, 222, 128, 0.25);
 }
 .practice-row--feature .practice-card-thumb,
 .practice-row--single .practice-card-thumb {
