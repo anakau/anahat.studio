@@ -90,12 +90,16 @@ html:not(.theme-dark):not(.theme-green) .logo-mark { color: #333333; }
    that page's own --ink happens to be (theme-dark's is white). */
 html.theme-dark .logo-mark,
 html.theme-green .logo-mark { color: #4ADE80; }
-/* logo-accent (the central oval) inherits currentColor by default, same
-   as the rest of the mark — on dark pages that's the theme's green. Only
-   on hover does it reveal the brand pink; the wordmark itself stays put. */
-.logo-mark #logo-accent { transition: fill 0.15s ease; }
+/* logo-accent (the central oval) is outline-only — no fill — stroked in
+   the same color as the rest of the mark (green on dark pages, dark grey
+   on light ones, via currentColor). Only on hover does the stroke reveal
+   the brand pink; the wordmark itself stays put. */
+.logo-mark #logo-accent {
+  fill: none; stroke: currentColor; stroke-width: 14;
+  transition: stroke 0.15s ease;
+}
 html.theme-dark .logo-mark:hover #logo-accent,
-html.theme-green .logo-mark:hover #logo-accent { fill: #EE8AB2; }
+html.theme-green .logo-mark:hover #logo-accent { stroke: #EE8AB2; }
 .site-nav { display: flex; gap: 28px; }
 .site-nav a {
   font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
