@@ -389,15 +389,16 @@ a { color: inherit; text-decoration: none; }
 }
 #about-page { padding: 40px 40px 100px; }
 .about-columns {
-  display: flex; gap: 56px; align-items: flex-start; margin-bottom: 8px;
+  display: flex; gap: 56px; align-items: stretch; margin: 0 auto 8px;
+  max-width: 1300px; /* centers the whole block on very wide monitors instead of sitting flush-left */
 }
-/* Capped so it can't balloon on very wide/large monitors — since the page
-   itself has no max-width and the photo is sized by its own aspect ratio
-   (2955:4168), an uncapped 50% column got absurdly tall on big screens.
-   Text (flex 1 1 50%, no cap) grows to fill whatever width this frees up. */
+/* Width capped so the column itself can't balloon on very wide monitors.
+   Height stretches to match the text column (flex's own cross-axis
+   stretch, not content-based — safe from the collapse bug content-based
+   flex-basis had with absolutely-positioned children). */
 .about-photo-col { flex: 1 1 50%; width: 50%; max-width: 520px; }
 .about-photo-wrap {
-  position: relative; width: 100%;
+  position: relative; height: 100%; width: auto; max-width: 100%;
   aspect-ratio: 2955 / 4168; /* the self-portrait's own ratio */
   overflow: hidden;
 }
@@ -616,7 +617,11 @@ a.practice-card:hover .practice-card-thumb {
   .card-title { font-size: clamp(28px, 11vw, 56px); }
   #about-page { padding: 24px 20px 80px; }
   .about-columns { flex-direction: column; gap: 24px; }
-  .about-photo-col { width: 100%; flex: none; }
+  .about-photo-col { width: 100%; max-width: 100%; flex: none; }
+  /* Stacked on mobile, there's no sibling height to stretch to — go back
+     to width-driven sizing (the safe direction for aspect-ratio) instead
+     of the desktop's height-driven one. */
+  .about-photo-wrap { width: 100%; height: auto; max-width: none; }
 
   /* Archive: the single-line name/tags/year layout only works with room to
      truncate the tags — on narrow screens it either overflows or squeezes
