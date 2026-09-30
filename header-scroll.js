@@ -4,8 +4,8 @@
 // Practice/About/Archive — not the homepage (full-viewport hero, nothing
 // to scroll past) and not project.html (logo stays static size there).
 // Runs on mobile too: full size is computed to match style.css's own
-// rules at each breakpoint (desktop: fixed 180px height; mobile:
-// min(260px, 68vw) width) rather than measured from the DOM, so it stays
+// rules at each breakpoint (desktop: fixed 360px height; mobile:
+// min(520px, 68vw) width) rather than measured from the DOM, so it stays
 // correct even mid-scroll when an inline style is already overriding the
 // logo's natural size.
 (function () {
@@ -19,9 +19,9 @@
 
   function fullWidth() {
     if (window.innerWidth <= MOBILE_BREAKPOINT) {
-      return Math.min(260, window.innerWidth * 0.68);
+      return Math.min(520, window.innerWidth * 0.68);
     }
-    return 180 * ASPECT;
+    return 360 * ASPECT;
   }
 
   let navWidth = nav.getBoundingClientRect().width;
