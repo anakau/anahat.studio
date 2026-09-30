@@ -12,7 +12,7 @@
   const nav = document.querySelector('.site-nav');
   if (!logo || !nav) return;
 
-  const ASPECT = 3039 / 432; // logo's own viewBox ratio
+  const ASPECT = 3783 / 991; // logo SVGs' own viewBox ratio
   const MOBILE_BREAKPOINT = 860;
   const SHRINK_DISTANCE = 160; // px of scroll to go from full size to fully shrunk
 

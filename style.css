@@ -82,39 +82,19 @@ a { color: inherit; text-decoration: none; }
   padding: 4px 40px 24px;
   position: sticky; top: 0; z-index: 50;
 }
-.logo-mark { display: block; height: 62.4px; width: auto; color: var(--ink); }
-/* Light pages (no theme-dark/theme-green class): logo reads as dark grey,
-   not the page's near-black --ink text color. */
-html:not(.theme-dark):not(.theme-green) .logo-mark { color: #333333; }
-/* Dark pages: logo is always the brand green specifically, not whatever
-   that page's own --ink happens to be (theme-dark's is white). */
-html.theme-dark .logo-mark,
-html.theme-green .logo-mark { color: #4ADE80; }
-/* logo-accent (the central oval) is outline-only — no fill — stroked in
-   the same color as the rest of the mark (green on dark pages, dark grey
-   on light ones, via currentColor). Only on hover does the stroke reveal
-   the brand pink; the wordmark itself stays put. */
-.logo-mark #logo-accent {
-  fill: none; stroke: currentColor; stroke-width: 30;
-  transition: stroke 0.15s ease;
-  /* fill:none means browsers only hit-test the stroke line by default —
-     the transparent interior wouldn't register hover at all, silently
-     breaking the pink reveal whenever the pointer is over the middle of
-     the oval rather than exactly on its outline. */
-  pointer-events: visible;
+/* Pre-made SVG files now (images/logo-{black,green}-{default,hover}.svg —
+   own colors/hover state baked in by design, not CSS-driven currentColor
+   tricks). .logo-mark is a fixed-size box; the two <img>s stack and
+   crossfade on hover, same pattern as .about-photo-wrap. */
+.logo-mark {
+  display: block; position: relative; height: 62.4px; width: 238.2px; /* matches the new SVGs' 3783:991 ratio at the old 62.4px height */
 }
-/* The botanical linework is a raster image (pattern-filled rect), not a
-   vector path, so it can't take currentColor directly — an SVG filter
-   (feFlood + feComposite, defined per-page right before </defs>) recolors
-   its opaque pixels to a flat color while keeping its own alpha shape,
-   same green/grey split as the rest of the logo. Without this it stayed
-   baked-in black, invisible against a dark page background. */
-.logo-mark rect[fill^="url(#pattern"] { filter: url(#logoTintGreen); }
-html:not(.theme-dark):not(.theme-green) .logo-mark rect[fill^="url(#pattern"] {
-  filter: url(#logoTintGrey);
+.logo-img {
+  display: block; position: absolute; inset: 0;
+  width: 100%; height: 100%;
 }
-html.theme-dark .logo-mark:hover #logo-accent,
-html.theme-green .logo-mark:hover #logo-accent { stroke: #EE8AB2; }
+.logo-img--hover { opacity: 0; transition: opacity 0.15s ease; }
+.logo-mark:hover .logo-img--hover { opacity: 1; }
 .site-nav { display: flex; gap: 28px; }
 .site-nav a {
   font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
@@ -641,7 +621,7 @@ a.practice-card:hover .practice-card-thumb {
      phones — it was cropping against the header's side padding. Fluid
      width instead, capped so it doesn't get oversized on the larger
      phones/small tablets at the top of this breakpoint. */
-  .logo-mark { height: auto; width: min(260px, 68vw); }
+  .logo-mark { height: auto; width: min(260px, 68vw); aspect-ratio: 3783 / 991; }
   #work { padding: 0 16px 80px; }
   .project-card { padding: 28px 16px 24px; }
   .project-card:not(:first-child) { margin-top: -20px; }
