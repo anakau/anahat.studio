@@ -42,7 +42,7 @@
 /* Per-page theme: homepage dark green/electric green, work page dark purple/bright purple. */
 html.theme-purple { --bg: #241132; --ink: #C77DFF; }
 html.theme-green { --bg: #0D2818; --ink: #4ADE80; }
-html.theme-dark { --bg: #06140C; --ink: #ffffff; --line: #4d4d4d; }
+html.theme-dark { --bg: #1E1E1E; --ink: #ffffff; --line: #4d4d4d; }
 
 html, body { background: var(--bg); color: var(--ink); }
 html { scroll-behavior: smooth; scrollbar-gutter: stable; }
