@@ -522,7 +522,7 @@ a.practice-card:hover .practice-card-thumb {
 /* Plain, uniform list of every project — no huge titles or overlapping
    cards. Practice will hold the curated, fully-designed pages over time;
    this is just the complete record in the meantime. */
-#archive-page { padding: 60px 80px 120px; }
+#archive-page { padding: 60px 160px 120px; }
 /* One line per project: title, tags, year — title keeps its natural
    width, tags take whatever's left and truncate rather than wrap, year
    stays fixed at the end. No wrapping to a second line. */
