@@ -124,6 +124,13 @@ const PROJECTS = [
     ],
     "year": "2026",
     "externalLink": null,
+    "details": [
+      ["Year", "2026"],
+      ["Role", "Visual concepts, creative direction, experience design"],
+      ["With", "Arianna Smaron"],
+      ["Partners", "Berggruen Institute, Dark Matter Labs"],
+      ["Funded by", "Berggruen Institute"]
+    ],
     "paragraphs": [],
     "sections": [
       {
