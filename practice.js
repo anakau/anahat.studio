@@ -33,16 +33,24 @@
 
   const AWARD_ICON = `<svg class="practice-award-icon" width="14" height="14" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="8" r="7"/><path d="M8.21 13.89L7 23L12 20L17 23L15.79 13.88Z"/></svg>`;
 
-  // Thumbnails are off across the board for now — Anahat's getting new
-  // images, so every card (including ones with a real cover in data.js)
-  // shows the plain "Coming soon" block until those are in.
+  // Thumbnails are off for now while Anahat gets new images — every card
+  // shows the plain "Coming soon" block except the slugs listed here.
+  const SHOW_THUMBS = ['the-planetary-compendium'];
+
+  function thumbHtml(p) {
+    if (SHOW_THUMBS.includes(p.slug) && p.cover) {
+      return `<img class="practice-card-thumb" src="${p.cover}" alt="${p.name}">`;
+    }
+    return `<div class="practice-card-thumb practice-card-thumb--empty">Coming soon</div>`;
+  }
+
   function projectCard(p, { award } = {}) {
     const href = projectHref(p);
     const tag = href ? 'a' : 'div';
     const externalAttrs = href && !p.hasFullDocs ? ' target="_blank" rel="noopener"' : '';
     return `
       <${tag} class="practice-card"${href ? ` href="${href}"` : ''}${externalAttrs}>
-        <div class="practice-card-thumb practice-card-thumb--empty">Coming soon</div>
+        ${thumbHtml(p)}
         <div class="practice-card-title">${p.name}${award ? AWARD_ICON : ''}</div>
         ${(p.tags || []).length ? `<div class="practice-card-tags">${tagPills(p)}</div>` : ''}
       </${tag}>
