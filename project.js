@@ -226,17 +226,13 @@
         ...groups.map(g => ({ name: g.name, html: g.blocks.map(renderBlock).join('') })),
         ...(creditText ? [{ name: 'Credits', html: `<div class="mini-credits">${creditText}</div>${logos}` }] : []),
       ];
-      const visitUrl = project.url ? `<a class="mini-btn" href="${project.url}" target="_blank" rel="noopener">Visit ${project.url.replace(/^https?:\/\//, '')} ↗</a>` : '';
       content.innerHTML = `
         <div class="mini">
           <nav class="mini-bar">
             <a class="mini-logo" href="index.html"><img src="images/logo-black-default.svg" alt="Anahat Studio"></a>
             <div class="mini-nav"><a href="practice.html">Practice</a><a href="about.html">About</a><a href="archive.html">Archive</a></div>
           </nav>
-          <header class="mini-row mini-title">
-            <div></div>
-            <div class="mini-title-inner"><h1>${project.name}</h1>${visitUrl}</div>
-          </header>
+          <h1 class="visually-hidden">${project.name}</h1>
           <div class="mini-main">
             <nav class="mini-jump" aria-label="Sections">
               ${sections.map((sc, i) => `<i class="mini-gap"></i><a href="#${slugify(sc.name)}" style="--i:${i};--rest:${sections.length - 1 - i}"><span class="mini-num">${i + 1}</span>${sc.name}</a>`).join('')}
