@@ -112,15 +112,15 @@ const PROJECTS = [
     "category": "A living archive and civic tool for planetary governance, co-developed with the Berggruen Institute",
     "url": "https://governtheplanet.org",
     "external": true,
-    "cover": "images/projects/the-planetary-compendium/hero.png",
+    "cover": "images/projects/the-planetary-compendium/home.jpg",
     "images": [
-      "images/projects/the-planetary-compendium/hero.png",
-      "images/projects/the-planetary-compendium/gtlogo.svg",
-      "images/projects/the-planetary-compendium/Extractive.png",
-      "images/projects/the-planetary-compendium/Generative.png",
-      "images/projects/the-planetary-compendium/soil-illustration.png",
-      "images/projects/the-planetary-compendium/rela.png",
-      "images/projects/the-planetary-compendium/dolls-new.png"
+      "images/projects/the-planetary-compendium/home.jpg",
+      "images/projects/the-planetary-compendium/map.jpg",
+      "images/projects/the-planetary-compendium/cases.jpg",
+      "images/projects/the-planetary-compendium/case-hero.jpg",
+      "images/projects/the-planetary-compendium/case-body.jpg",
+      "images/projects/the-planetary-compendium/connected.jpg",
+      "images/projects/the-planetary-compendium/about.jpg"
     ],
     "year": "2026",
     "externalLink": null,
@@ -130,6 +130,144 @@ const PROJECTS = [
       ["With", "Arianna Smaron"],
       ["Partners", "Berggruen Institute, Dark Matter Labs"],
       ["Funded by", "Berggruen Institute"]
+    ],
+    "blocks": [
+      {
+        "type": "text",
+        "heading": "Overview",
+        "paragraphs": [
+          "The Planetary Compendium is an evolving wunderkammer of planetary governance: a living archive of historic precedents, emerging experiments, and speculative futures, from lunar governance and rights of nature to geoengineering ethics and interspecies communication.",
+          "Co-developed by the Berggruen Institute and Dark Matter Labs, it is designed as a civic and pedagogical tool. The design brief was to give form and texture to planetary thinking, an idea that is clear in intention but hard to picture."
+        ]
+      },
+      {
+        "type": "text",
+        "heading": "Role",
+        "paragraphs": [
+          "Visual concepts, creative direction, and experience design, together with Arianna Smaron, from the first visual language through to the interface and its components."
+        ]
+      },
+      {
+        "type": "step",
+        "n": "01",
+        "heading": "Threshold",
+        "text": "One doorway: the globe mark, a line on what the Compendium is, and a single Enter button, with a note that what follows is an audio/visual experience. Behind it, case imagery drifts out of focus and the globe takes on its colours.",
+        "images": [
+          "images/projects/the-planetary-compendium/home-2.jpg"
+        ]
+      },
+      {
+        "type": "step",
+        "n": "02",
+        "heading": "System connectors",
+        "text": "Cases float as image orbs, linked to the themes they share. Choosing a connector shows how topics relate across cases.",
+        "images": [
+          "images/projects/the-planetary-compendium/map.jpg"
+        ]
+      },
+      {
+        "type": "step",
+        "n": "03",
+        "heading": "Cases index",
+        "text": "A numbered list of every case, opened from the top right; immersive cases are tagged.",
+        "images": [
+          "images/projects/the-planetary-compendium/cases.jpg"
+        ]
+      },
+      {
+        "type": "step",
+        "n": "04",
+        "heading": "Case study",
+        "text": "Each case opens on a full-bleed figure in a soft-edged frame, followed by themes, title, authors in italics, reading time, and a PDF download. A green number pill keeps your place while you read.",
+        "images": [
+          "images/projects/the-planetary-compendium/case-hero.jpg",
+          "images/projects/the-planetary-compendium/case-body.jpg"
+        ]
+      },
+      {
+        "type": "step",
+        "n": "05",
+        "heading": "Connected case studies",
+        "text": "Every case ends with the cases it shares themes with, so readers move on through the archive rather than back to the start.",
+        "images": [
+          "images/projects/the-planetary-compendium/connected.jpg"
+        ]
+      },
+      {
+        "type": "step",
+        "n": "06",
+        "heading": "About and credits",
+        "text": "One panel holds the project's story and its credits, switched with two pill tabs.",
+        "images": [
+          "images/projects/the-planetary-compendium/about.jpg"
+        ]
+      },
+      {
+        "type": "system",
+        "fonts": [
+          [
+            "ABC Diatype",
+            "Titles and reading text",
+            "images/projects/the-planetary-compendium/type-sans.png"
+          ],
+          [
+            "Ivar Italic",
+            "Authors",
+            "images/projects/the-planetary-compendium/type-serif.png"
+          ],
+          [
+            "Geist Mono",
+            "Buttons, tags, captions",
+            "images/projects/the-planetary-compendium/type-mono.png"
+          ]
+        ],
+        "heading": "Design system",
+        "colours": [
+          [
+            "Lavender",
+            "#B9B3FF",
+            "Buttons, connectors, glow"
+          ],
+          [
+            "Signal green",
+            "#00FF77",
+            "Active state, case number"
+          ],
+          [
+            "Ink",
+            "#0F0F0E",
+            "Text, mark"
+          ],
+          [
+            "Paper",
+            "#FAFAF3",
+            "Reading ground"
+          ],
+          [
+            "White",
+            "#FFFFFF",
+            "Pills, panels"
+          ]
+        ],
+        "cases": [
+          [
+            "images/projects/the-planetary-compendium/case-1.jpg",
+            "Owens Lake: Repair as Planetary Reinvention",
+            [
+              "Terraforming Infrastructures",
+              "More-Than-Human Agency"
+            ]
+          ],
+          [
+            "images/projects/the-planetary-compendium/case-2.jpg",
+            "Reimagining Biodiversity Governance: The North Sea as a Living Marine Democracy",
+            [
+              "More-Than-Human Agency",
+              "Sovereignty"
+            ]
+          ]
+        ]
+      }
     ],
     "paragraphs": [],
     "sections": [

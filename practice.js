@@ -38,7 +38,7 @@
   const SHOW_THUMBS = ['the-planetary-compendium'];
 
   function thumbHtml(p) {
-    if (SHOW_THUMBS.includes(p.slug) && p.cover) {
+    if (SHOW_THUMBS.includes(p.slug) && p.cover && !isDraftHidden(p.slug)) {
       return `<img class="practice-card-thumb" src="${p.cover}" alt="${p.name}">`;
     }
     return `<div class="practice-card-thumb practice-card-thumb--empty">Coming soon</div>`;
