@@ -122,31 +122,42 @@
       if (!paras.length) return '';
       return `<section class="pd-block"><h2 class="pd-heading">${s.heading}</h2>${paras.map(p => `<p>${p}</p>`).join('')}</section>`;
     }).join('');
-    // Case studies (with `blocks`) carry their credits in the side column;
-    // older pages keep them at the end of the text.
-    const sections = project.blocks
-      ? project.blocks.map(renderBlock).join('') + credits.replace('pd-block--credits', 'pd-block--credits pd-credits-end')
-      : legacy + credits;
-    const sideCredits = project.blocks ? credits.replace('pd-block pd-block--text pd-block--credits', 'pd-side-credits') : '';
-    // Cover and description run full width; the story (left) and the
-    // details (right) sit in two columns below.
-    content.innerHTML = `
-      <header class="pd-intro">
-        <img class="pd-thumb" src="${project.cover}" alt="${project.name}">
-        <h1>${project.name}</h1>
-        <p class="pd-summary">${project.summary || project.category}</p>
-      </header>
-      <div class="pd-layout">
-        <div class="pd-main">
-          <div class="pd-text">${sections}</div>
-        </div>
-        <aside class="pd-side">
-          <dl class="pd-details">${details}</dl>
-          ${visit}
-          <div class="pd-tags">${tags}</div>
-          ${sideCredits}
-        </aside>
-      </div>`;
+    // Case studies (with `blocks`): cover, then every detail and the credits
+    // under it in columns, then the story full width. Older pages keep a
+    // side column and put their credits at the end of the text.
+    if (project.blocks) {
+      const creditList = (project.sections || []).filter(s => s.credits).map(s =>
+        `<section class="pd-intro-credits"><h2 class="pd-heading">${s.heading}</h2><div class="pd-credits">${s.credits.map(c => `<p>${c}</p>`).join('')}</div>${logos}</section>`).join('');
+      content.innerHTML = `
+        <header class="pd-intro">
+          <img class="pd-thumb" src="${project.cover}" alt="${project.name}">
+          <h1 class="visually-hidden">${project.name}</h1>
+          <div class="pd-intro-grid">
+            <div class="pd-intro-info">
+              <dl class="pd-facts">${details}</dl>
+              <div class="pd-intro-links">${visit}<div class="pd-tags">${tags}</div></div>
+            </div>
+            <div class="pd-intro-text">${(project.intro || [project.summary || project.category]).map(p => `<p>${p}</p>`).join('')}</div>
+          </div>
+          ${creditList}
+        </header>
+        <div class="pd-text">${project.blocks.map(renderBlock).join('')}</div>`;
+    } else {
+      content.innerHTML = `
+        <div class="pd-layout">
+          <div class="pd-main">
+            <img class="pd-thumb" src="${project.cover}" alt="${project.name}">
+            <div class="pd-text">${legacy + credits}</div>
+          </div>
+          <aside class="pd-side">
+            <h1>${project.name}</h1>
+            <p class="pd-summary">${project.summary || project.category}</p>
+            <dl class="pd-details">${details}</dl>
+            ${visit}
+            <div class="pd-tags">${tags}</div>
+          </aside>
+        </div>`;
+    }
 
     initModes(content);
     content.querySelectorAll('.cmp-connector').forEach(btn => btn.addEventListener('click', () => btn.classList.toggle('is-on')));
