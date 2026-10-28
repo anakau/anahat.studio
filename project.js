@@ -19,7 +19,7 @@
       const imgs = b.images.map(src => `<img class="pd-screen" src="${src}" alt="${b.heading}" loading="lazy">`).join('');
       return `<section class="pd-block pd-step">
         <div class="pd-step-head"><span class="pd-step-n">${b.n}</span><h2>${b.heading}</h2><p>${b.text}</p></div>
-        <div class="pd-screens pd-screens--${b.images.length}">${imgs}</div>
+        <div class="pd-screens pd-screens--${b.images.length}${b.plain ? ' pd-screens--plain' : ''}">${imgs}</div>
       </section>`;
     }
     if (b.type === 'system') return renderSystem(b);

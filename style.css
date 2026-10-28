@@ -493,6 +493,9 @@ html.theme-compendium .hk[data-mode="immerse"] .hk-panel { background: #0b0b0a; 
   box-shadow: 0 1px 2px rgba(15,15,14,.06), 0 12px 32px -12px rgba(15,15,14,.18);
 }
 .pd-thumb { border-radius: 10px; }
+.pd-screens--plain { align-items: center; }
+.pd-screens--plain .pd-screen { border-radius: 10px; }
+.pd-screens--plain .pd-screen[src$=".png"] { box-shadow: none !important; border-radius: 0; }
 
 /* Observe / immerse, with the site's own toggle */
 .hk-panel {

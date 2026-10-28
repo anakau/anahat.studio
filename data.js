@@ -297,6 +297,17 @@ const PROJECTS = [
       {
         "type": "step",
         "n": "05",
+        "heading": "Printed edition",
+        "plain": true,
+        "text": "Issue 01, November 2025: every case study in print, as Case Studies on Planetary Governance. The cover illustration gathers the archive's subjects into one landscape, from icebreakers and melting peaks to whales and seabed infrastructure. Inside, the web's type system carries over to paper, with Geist Mono abstracts, Diatype reading text, and numbered case openers. The printed Compendium travels with the exhibitions and events.",
+        "images": [
+          "images/projects/the-planetary-compendium/print-cover.png",
+          "images/projects/the-planetary-compendium/print-spread.jpg"
+        ]
+      },
+      {
+        "type": "step",
+        "n": "06",
         "heading": "Connected case studies",
         "text": "Every case ends with the cases it shares themes with, so readers move on through the archive rather than back to the start.",
         "images": [
@@ -305,7 +316,7 @@ const PROJECTS = [
       },
       {
         "type": "step",
-        "n": "06",
+        "n": "07",
         "heading": "About and credits",
         "text": "One panel holds the project's story and its credits, switched with two pill tabs.",
         "images": [
