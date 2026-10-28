@@ -206,9 +206,6 @@ const PROJECTS = [
         ]
       },
       {
-        "type": "credits"
-      },
-      {
         "type": "step",
         "n": "01",
         "heading": "Threshold",

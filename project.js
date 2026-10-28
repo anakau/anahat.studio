@@ -139,11 +139,12 @@
       if (!paras.length) return '';
       return `<section class="pd-block"><h2 class="pd-heading">${s.heading}</h2>${paras.map(p => `<p>${p}</p>`).join('')}</section>`;
     }).join('');
-    // A `credits` block places the credits there; otherwise they close the page.
-    const hasCreditsBlock = (project.blocks || []).some(b => b.type === 'credits');
+    // Case studies (with `blocks`) carry their credits in the side column;
+    // older pages keep them at the end of the text.
     const sections = project.blocks
-      ? project.blocks.map(b => b.type === 'credits' ? credits : renderBlock(b)).join('') + (hasCreditsBlock ? '' : credits)
+      ? project.blocks.map(renderBlock).join('') + credits.replace('pd-block--credits', 'pd-block--credits pd-credits-end')
       : legacy + credits;
+    const sideCredits = project.blocks ? credits.replace('pd-block pd-block--text pd-block--credits', 'pd-side-credits') : '';
     content.innerHTML = `
       <div class="pd-layout">
         <div class="pd-main">
@@ -156,10 +157,18 @@
           <dl class="pd-details">${details}</dl>
           ${visit}
           <div class="pd-tags">${tags}</div>
+          ${sideCredits}
         </aside>
       </div>`;
 
     initModes(content);
+    const side = content.querySelector('.pd-side');
+    const fitSide = () => {
+      side.style.top = Math.min(174, window.innerHeight - side.offsetHeight - 24) + 'px';
+    };
+    fitSide();
+    window.addEventListener('resize', fitSide);
+    window.addEventListener('load', fitSide);
     content.querySelectorAll('.cmp-connector').forEach(btn => btn.addEventListener('click', () => btn.classList.toggle('is-on')));
     content.querySelectorAll('.cmp-tabs').forEach(tabs => tabs.addEventListener('click', e => {
       const btn = e.target.closest('button'); if (!btn) return;

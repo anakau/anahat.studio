@@ -407,7 +407,13 @@ a { color: inherit; text-decoration: none; }
 }
 .pd-heading:first-child { margin-top: 0; }
 .pd-credits p { font-size: 13px; line-height: 1.6; margin-bottom: 8px; color: var(--muted); }
-.pd-side { position: sticky; top: 174px; } /* clears the sticky header (~150px once scrolled) */
+/* top clears the sticky header (~150px once scrolled); project.js lowers it
+   when the column is taller than the screen so it scrolls until its end shows. */
+.pd-side { position: sticky; top: 174px; }
+.pd-credits-end { display: none; }
+.pd-side-credits { margin-top: 36px; padding-top: 16px; border-top: 1px solid rgba(15,15,14,.1); }
+.pd-side-credits .pd-heading { margin: 0 0 12px; }
+.pd-side-credits .pd-credits p { font-size: 12px; line-height: 1.5; margin-bottom: 8px; }
 .pd-side h1 { font-size: 28px; font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 12px; }
 .pd-summary { font-size: 14px; line-height: 1.5; margin-bottom: 28px; }
 .pd-details { font-size: 13px; line-height: 1.45; }
@@ -864,6 +870,8 @@ a.practice-card:hover .practice-card-thumb {
   #project-detail:has(.pd-layout) { padding: 16px 16px 80px; }
   .pd-layout { grid-template-columns: 1fr; gap: 24px; }
   .pd-side { position: static; order: -1; }
+  .pd-side-credits { display: none; }
+  .pd-credits-end { display: block; }
   .pd-text { margin-top: 28px; }
   .pd-block { margin-top: 48px; }
   .pd-step-head { grid-template-columns: 1fr; }
