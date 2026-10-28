@@ -128,8 +128,8 @@
     // under it in columns, then the story full width. Older pages keep a
     // side column and put their credits at the end of the text.
     if (project.blocks) {
-      const creditList = (project.sections || []).filter(s => s.credits).map(s =>
-        `<section class="pd-intro-credits"><h2 class="pd-heading">${s.heading}</h2><div class="pd-credits">${s.credits.map(c => `<p>${c}</p>`).join('')}</div>${logos}</section>`).join('');
+      const creditText = (project.sections || []).filter(s => s.credits).map(s => s.credits.map(c => `<p>${c}</p>`).join('')).join('');
+      const intro = (project.intro || [project.summary || project.category]).map(p => `<p>${p}</p>`).join('');
       content.innerHTML = `
         <header class="pd-intro">
           <img class="pd-thumb" src="${project.cover}" alt="${project.name}">
@@ -137,14 +137,14 @@
           <div class="pd-info">
             <dl class="pd-facts">${details}</dl>
             <dl class="pd-facts">${rows(project.recognition)}</dl>
-          </div>
-          <div class="pd-info">
             <div class="pd-intro-text">
-              ${(project.intro || [project.summary || project.category]).map(p => `<p>${p}</p>`).join('')}
+              <div class="pd-intro-copy">${intro}</div>
               <div class="pd-tags">${tags}</div>
+              ${creditText ? `<button class="pd-credits-toggle" type="button" aria-expanded="false" aria-controls="pd-credits">Credits <span aria-hidden="true">+</span></button>` : ''}
             </div>
           </div>
-          ${creditList}
+          ${creditText ? `<div class="pd-credits pd-credits--intro" id="pd-credits" hidden>${creditText}</div>` : ''}
+          ${logos}
         </header>
         <div class="pd-text">${project.blocks.map(renderBlock).join('')}</div>`;
     } else {
@@ -165,6 +165,14 @@
     }
 
     initModes(content);
+    const creditsBtn = content.querySelector('.pd-credits-toggle');
+    if (creditsBtn) creditsBtn.addEventListener('click', () => {
+      const panel = content.querySelector('#pd-credits');
+      const open = panel.hidden;
+      panel.hidden = !open;
+      creditsBtn.setAttribute('aria-expanded', String(open));
+      creditsBtn.querySelector('span').textContent = open ? '−' : '+';
+    });
     content.querySelectorAll('.cmp-connector').forEach(btn => btn.addEventListener('click', () => btn.classList.toggle('is-on')));
     content.querySelectorAll('.cmp-tabs').forEach(tabs => tabs.addEventListener('click', e => {
       const btn = e.target.closest('button'); if (!btn) return;
