@@ -495,13 +495,15 @@ html.theme-mini #project-detail { max-width: 1760px; padding: 0 80px 120px; }
 .mini-title h1 { font-size: 64px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.05; }
 .mini-btn { flex: none; background: var(--ink); color: #fff; border-radius: 4px; padding: 11px 20px; transition: opacity .15s; }
 .mini-btn:hover { opacity: .85; }
+.mini-main { display: grid; grid-template-columns: 240px minmax(0, 1fr); column-gap: 32px; border-top: 1px solid var(--line); }
+.mini-jump { display: flex; flex-direction: column; gap: 6px; align-self: start; position: sticky; top: 0; padding-top: 48px; }
+.mini-jump a.is-current { color: var(--ink); }
+.mini-jump a.is-current::before { content: '●'; font-size: 8px; vertical-align: 2px; margin-right: 8px; }
 .mini-hero { padding: 48px 0; }
-.mini-jump { display: flex; flex-direction: column; gap: 6px; align-self: start; position: sticky; top: 24px; }
-.mini-jump span { color: var(--ink); }
 .mini-jump a { color: var(--muted); transition: color .15s; }
 .mini-jump a:hover { color: var(--ink); }
 .mini-hero .pd-thumb { border-radius: 0; box-shadow: none; margin: 0; }
-.mini-sec { padding: 28px 0 96px; scroll-margin-top: 16px; }
+.mini-sec { padding: 48px 0 96px; border-top: 1px solid var(--line); scroll-margin-top: 0; }
 .mini-label { font-size: 15px; font-weight: 400; line-height: 1.45; }
 .mini-body > .pd-block:first-child { margin-top: 0; }
 .mini-body.pd-text { max-width: none; margin-top: 0; }
@@ -526,7 +528,9 @@ html.theme-mini #project-detail { max-width: 1760px; padding: 0 80px 120px; }
   .mini-row, .mini-bar { grid-template-columns: 1fr; row-gap: 16px; }
   .mini-title h1 { font-size: 36px; }
   .mini-title-inner { flex-direction: column; align-items: flex-start; }
-  .mini-jump { position: static; flex-direction: row; flex-wrap: wrap; gap: 6px 16px; }
+  .mini-main { grid-template-columns: 1fr; }
+  .mini-jump { position: sticky; top: 0; z-index: 5; background: var(--bg); flex-direction: row; flex-wrap: nowrap; overflow-x: auto; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+  .mini-jump a { flex: none; }
   .mini-lede p { font-size: 20px; }
   .mini-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mini-credits { column-count: 1; }

@@ -237,17 +237,17 @@
             <div></div>
             <div class="mini-title-inner"><h1>${project.name}</h1>${visitUrl}</div>
           </header>
-          <div class="mini-row mini-hero">
-            <div class="mini-jump">
-              <span>Jump to</span>
+          <div class="mini-main">
+            <nav class="mini-jump" aria-label="Sections">
               ${sections.map(sc => `<a href="#${slugify(sc.name)}">${sc.name}</a>`).join('')}
+            </nav>
+            <div class="mini-content">
+              <div class="mini-hero">${coverMedia(project)}</div>
+              ${sections.map(sc => `<section class="mini-sec" id="${slugify(sc.name)}" aria-label="${sc.name}">
+                <div class="mini-body pd-text">${sc.html}</div>
+              </section>`).join('')}
             </div>
-            <div>${coverMedia(project)}</div>
           </div>
-          ${sections.map(sc => `<section class="mini-row mini-sec" id="${slugify(sc.name)}">
-            <h2 class="mini-label">${sc.name}</h2>
-            <div class="mini-body pd-text">${sc.html}</div>
-          </section>`).join('')}
         </div>`;
     } else {
       content.innerHTML = `
@@ -267,6 +267,20 @@
     }
 
     initModes(content);
+    // Scrollspy: the section crossing the upper third of the screen is the
+    // current one in the Jump to nav.
+    const jump = content.querySelector('.mini-jump');
+    if (jump && 'IntersectionObserver' in window) {
+      const links = new Map([...jump.querySelectorAll('a')].map(a => [a.getAttribute('href').slice(1), a]));
+      const spy = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          links.forEach(a => a.classList.remove('is-current'));
+          const a = links.get(e.target.id); if (a) a.classList.add('is-current');
+        });
+      }, { rootMargin: '-33% 0px -66% 0px' });
+      content.querySelectorAll('.mini-sec').forEach(sec => spy.observe(sec));
+    }
     initModeBar(content);
     initCoverVideo(content);
     const creditsBtn = content.querySelector('.pd-credits-toggle');
