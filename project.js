@@ -217,15 +217,25 @@
         : b.chapter || 'Interface';
       const groups = CHAPTERS.map(name => ({ name, blocks: project.blocks.filter(b => sectionOf(b) === name) }))
         .filter(g => g.blocks.length);
+      // Sub-sections get their own nav item under their chapter.
+      const subOf = b => b.type === 'modebar' ? 'Two lenses' : b.heading === 'Design principles' ? 'Design principles' : null;
       const slugify = t => 's-' + t.toLowerCase().replace(/[^a-z0-9]+/g, '-');
       const sections = [
         { name: 'Overview', html: `
           <div class="mini-lede">${intro}</div>
           <dl class="mini-facts">${details}${rows(project.recognition)}</dl>
           <div class="pd-tags">${tags}</div>` },
-        ...groups.map(g => ({ name: g.name, html: g.blocks.map(renderBlock).join('') })),
+        ...groups.map(g => ({ name: g.name, subs: g.blocks.map(subOf).filter(Boolean), html: g.blocks.map(b => {
+          const sub = subOf(b);
+          return sub ? `<div class="mini-sub" id="${slugify(sub)}">${renderBlock(b)}</div>` : renderBlock(b);
+        }).join('') })),
         ...(creditText ? [{ name: 'Credits', html: `<div class="mini-credits">${creditText}</div>${logos}` }] : []),
       ];
+      const navItems = [];
+      sections.forEach((sc, i) => {
+        navItems.push({ name: sc.name, id: slugify(sc.name), n: i + 1 });
+        (sc.subs || []).forEach(name => navItems.push({ name, id: slugify(name), sub: true }));
+      });
       content.innerHTML = `
         <div class="mini">
           <nav class="mini-bar">
@@ -235,7 +245,7 @@
           <h1 class="visually-hidden">${project.name}</h1>
           <div class="mini-main">
             <nav class="mini-jump" aria-label="Sections">
-              ${sections.map((sc, i) => `<i class="mini-gap"></i><a href="#${slugify(sc.name)}" style="--i:${i};--rest:${sections.length - 1 - i}"><span class="mini-num">${i + 1}</span>${sc.name}</a>`).join('')}
+              ${navItems.map((it, i) => `<i class="mini-gap"></i><a href="#${it.id}" class="${it.sub ? 'is-sub' : ''}" style="--i:${i};--rest:${navItems.length - 1 - i}">${it.sub ? '' : `<span class="mini-num">${it.n}</span>`}${it.name}</a>`).join('')}
             </nav>
             <div class="mini-content">
               <div class="mini-hero">${coverMedia(project)}</div>
@@ -269,14 +279,14 @@
     const jump = content.querySelector('.mini-jump');
     if (jump) {
       const labels = [...jump.querySelectorAll('a')];
-      const secs = [...content.querySelectorAll('.mini-sec')];
       const place = () => {
         const base = jump.getBoundingClientRect().top + window.scrollY;
         let y = base;
         // Spacers (not margins) push each label down to its section: a
         // sticky element's margin would stop it moving past its container.
         labels.forEach((a, i) => {
-          const target = secs[i].getBoundingClientRect().top + window.scrollY + 48;
+          const el = content.querySelector(a.getAttribute('href'));
+          const target = el.getBoundingClientRect().top + window.scrollY + (a.classList.contains('is-sub') ? 0 : 48);
           a.previousElementSibling.style.height = Math.max(0, target - y) + 'px';
           y = Math.max(y, target) + a.offsetHeight;
         });
@@ -290,14 +300,19 @@
     // current one in the Jump to nav.
     if (jump && 'IntersectionObserver' in window) {
       const links = new Map([...jump.querySelectorAll('a')].map(a => [a.getAttribute('href').slice(1), a]));
-      const spy = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (!e.isIntersecting) return;
-          links.forEach(a => a.classList.remove('is-current'));
-          const a = links.get(e.target.id); if (a) a.classList.add('is-current');
-        });
-      }, { rootMargin: '-33% 0px -66% 0px' });
-      content.querySelectorAll('.mini-sec').forEach(sec => spy.observe(sec));
+      const spyOn = selector => {
+        const group = [...content.querySelectorAll(selector)].map(el => links.get(el.id)).filter(Boolean);
+        const spy = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            const a = links.get(e.target.id); if (!a) return;
+            if (e.isIntersecting) { group.forEach(x => x.classList.remove('is-current')); a.classList.add('is-current'); }
+            else if (selector === '.mini-sub') a.classList.remove('is-current');
+          });
+        }, { rootMargin: '-33% 0px -66% 0px' });
+        content.querySelectorAll(selector).forEach(el => spy.observe(el));
+      };
+      spyOn('.mini-sec');
+      spyOn('.mini-sub');
     }
     initModeBar(content);
     initCoverVideo(content);
