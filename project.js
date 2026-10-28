@@ -112,8 +112,11 @@
       ? `<a class="pd-visit" href="${project.url}" target="_blank" rel="noopener">${project.url.replace(/^https?:\/\//, '')} ↗</a>`
       : '';
     const tags = (project.tags || []).map(t => `<span class="practice-tag">${t}</span>`).join('');
+    const logoRow = (list, cls) => list ? `<div class="pd-logos ${cls}">${list.map(([src, name]) => `<img src="${src}" alt="${name}">`).join('')}</div>` : '';
+    const cl = project.creditLogos;
+    const logos = cl ? logoRow(cl.lead, 'pd-logos--lead') + logoRow(cl.programmes, 'pd-logos--programmes') + logoRow(cl.partners, 'pd-logos--partners') : '';
     const credits = (project.sections || []).filter(s => s.credits).map(s =>
-      `<section class="pd-block pd-block--text pd-block--credits"><h2 class="pd-heading">${s.heading}</h2><div class="pd-credits">${s.credits.map(c => `<p>${c}</p>`).join('')}</div></section>`).join('');
+      `<section class="pd-block pd-block--text pd-block--credits"><h2 class="pd-heading">${s.heading}</h2><div class="pd-credits">${s.credits.map(c => `<p>${c}</p>`).join('')}</div>${logos}</section>`).join('');
     const legacy = (project.sections || []).filter(s => s.heading !== 'Role' && !s.credits).map(s => {
       const paras = (s.paragraphs || []).filter(p => !isDraft(p));
       if (!paras.length) return '';

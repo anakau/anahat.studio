@@ -416,6 +416,18 @@ a { color: inherit; text-decoration: none; }
 }
 .pd-side::-webkit-scrollbar { display: none; }
 .pd-credits-end { display: none; }
+.pd-logos { display: grid; align-items: center; gap: 18px 20px; margin-top: 24px; }
+.pd-logos img { display: block; max-width: 100%; }
+.pd-logos--lead { grid-template-columns: auto auto; justify-content: start; margin-top: 28px; }
+.pd-logos--lead img { height: 30px; }
+.pd-logos--programmes { grid-template-columns: auto auto; justify-content: start; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.pd-logos--programmes img { height: 22px; }
+.pd-logos--partners { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pd-logos--partners img { height: 20px; width: auto; object-fit: contain; object-position: left center; }
+.pd-logos--partners img[alt="Tehanu"] { height: 13px; }
+.pd-logos--partners img[alt="Living Imaginaries"] { height: 28px; }
+html.theme-compendium .pd-logos img { filter: invert(1); }
+html.theme-compendium .pd-logos--programmes { border-color: rgba(242,242,236,.12); }
 .pd-side-credits { margin-top: 36px; padding-top: 16px; border-top: 1px solid rgba(15,15,14,.1); }
 .pd-side-credits .pd-heading { margin: 0 0 12px; }
 .pd-side-credits .pd-credits p { font-size: 12px; line-height: 1.5; margin-bottom: 8px; }

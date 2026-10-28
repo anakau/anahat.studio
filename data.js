@@ -133,6 +133,66 @@ const PROJECTS = [
       ["Awards", "Honorary Mention, Prix Ars Electronica 2026"],
       ["Exhibited", "Unsorted Love, Zurich, November 2025"]
     ],
+    "creditLogos": {
+      "lead": [
+        [
+          "images/projects/the-planetary-compendium/logos/bi.svg",
+          "Berggruen Institute"
+        ],
+        [
+          "images/projects/the-planetary-compendium/logos/dml.svg",
+          "Dark Matter Labs"
+        ]
+      ],
+      "programmes": [
+        [
+          "images/projects/the-planetary-compendium/logos/berggruen-institute-the-planetary.svg",
+          "Berggruen Institute, The Planetary"
+        ],
+        [
+          "images/projects/the-planetary-compendium/logos/planetary-civics.svg",
+          "Planetary Civics"
+        ]
+      ],
+      "partners": [
+        [
+          "images/projects/the-planetary-compendium/logos/living-imaginaries.svg",
+          "Living Imaginaries"
+        ],
+        [
+          "images/projects/the-planetary-compendium/logos/open-lunar-foundation.svg",
+          "Open Lunar Foundation"
+        ],
+        [
+          "images/projects/the-planetary-compendium/logos/climate-cartographics.svg",
+          "Climate Cartographics"
+        ],
+        [
+          "images/projects/the-planetary-compendium/logos/open-cities-lab.svg",
+          "Open Cities Lab"
+        ],
+        [
+          "images/projects/the-planetary-compendium/logos/next-learning.svg",
+          "Next Learning"
+        ],
+        [
+          "images/projects/the-planetary-compendium/logos/politics-for-tomorrow.svg",
+          "Politics for Tomorrow"
+        ],
+        [
+          "images/projects/the-planetary-compendium/logos/interspecies-internet.svg",
+          "Interspecies Internet"
+        ],
+        [
+          "images/projects/the-planetary-compendium/logos/embassy-of-the-north-sea.svg",
+          "Embassy of the North Sea"
+        ],
+        [
+          "images/projects/the-planetary-compendium/logos/tehanu.svg",
+          "Tehanu"
+        ]
+      ]
+    },
     "blocks": [
       {
         "type": "text",
