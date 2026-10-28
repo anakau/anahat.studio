@@ -74,19 +74,33 @@
   }
 
   function renderMini() {
-    // Preview-only additions go first, ahead of the public curated rows.
-    const PREVIEW_FIRST = ['madrid2050'];
-    const curated = [...PREVIEW_FIRST, ...ROWS.flatMap(r => r.slugs)].filter(Boolean).map(bySlug).filter(Boolean);
-    const rest = PROJECTS.filter(p => !curated.includes(p))
-      .sort((a, b) => String(b.year).localeCompare(String(a.year)));
-    const id = p => 'p-' + p.slug;
+    // Categories (provisional) and the project tags that put a project in
+    // each. A project can sit in several; untagged ones only show in Archive.
+    const CATEGORIES = [
+      ['Art Direction', ['Art Direction']],
+      ['Brand Identity Design', ['Brand Identity']],
+      ['Product Design', ['Product', 'Interface Design']],
+      ['Information Design', ['Information']],
+      ['Publication Design', ['Publication']],
+      ['Packaging Design', ['Packaging']],
+    ];
+    const newest = (a, b) => String(b.year).localeCompare(String(a.year));
+    const groups = CATEGORIES.map(([name, tags]) => ({
+      name, id: 'c-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      projects: PROJECTS.filter(p => (p.tags || []).some(t => tags.includes(t))).sort(newest),
+    })).filter(g => g.projects.length);
+    const rest = [...PROJECTS].sort(newest);
     // Up to three images per project, cross-fading on a loop.
     const thumb = p => {
       const imgs = (p.slides || (SHOW_THUMBS.includes(p.slug) && p.cover ? [p.cover] : [])).slice(0, 3);
       if (!imgs.length) return `<span class="mini-thumb-empty">${p.name}</span>`;
-      return imgs.map((src, i) => `<img src="${src}" alt="${i ? '' : p.name}"${i ? ' loading="lazy"' : ''} class="${i ? '' : 'is-on'}">`).join('');
+      return imgs.map((src, i) => `<img src="${src}" alt="${i ? '' : p.name}" loading="lazy" class="${i ? '' : 'is-on'}">`).join('');
     };
     const link = (p, inner) => { const h = projectHref(p); return h ? `<a href="${h}"${p.hasFullDocs ? '' : ' target="_blank" rel="noopener"'}>${inner}</a>` : inner; };
+    const card = p => `<article class="mini-card">
+      ${link(p, `<div class="mini-thumb">${thumb(p)}</div>`)}
+      <p class="mini-card-meta"><span>${p.name}</span><span>${p.year || ''}</span></p>
+    </article>`;
     const archiveRows = rest.map(p => `<li>${link(p, `<span class="arc-name">${p.name}</span>`)}<span class="arc-tags">${(p.tags || []).join(', ')}</span><span class="arc-year">${p.year || ''}</span></li>`).join('');
     document.documentElement.classList.add('theme-mini');
     el.closest('#practice-page').innerHTML = `
@@ -98,16 +112,15 @@
           </div>
         </nav>
         <div class="mini-main">
-          <nav class="mini-jump" aria-label="Projects">
-            ${curated.map(p => `<i class="mini-gap"></i><a href="#${id(p)}"><span class="mini-title">${p.name}</span>${p.category || p.year ? `<span class="mini-desc">${p.category ? `<span class="mini-desc-text">${p.category}</span>` : ''}${p.year ? `<span class="mini-desc-year">${p.year}</span>` : ''}</span>` : ''}</a>`).join('')}
-            <i class="mini-gap"></i><a href="#p-archive">Archive</a>
+          <nav class="mini-jump" aria-label="Categories">
+            ${groups.map(g => `<i class="mini-gap"></i><a href="#${g.id}"><span class="mini-title">${g.name}</span><span class="mini-desc"><span class="mini-desc-year">${g.projects.length} project${g.projects.length === 1 ? '' : 's'}</span></span></a>`).join('')}
+            <i class="mini-gap"></i><a href="#p-archive"><span class="mini-title">Archive</span><span class="mini-desc"><span class="mini-desc-year">All ${rest.length} projects</span></span></a>
           </nav>
           <div class="mini-content">
-            ${curated.map(p => `<section class="mini-sec mini-project" id="${id(p)}">
-              ${link(p, `<div class="mini-thumb">${thumb(p)}</div>`)}
-              ${(p.tags || []).length ? `<div class="mini-project-tags">${tagPills(p)}</div>` : ''}
+            ${groups.map(g => `<section class="mini-sec mini-cat" id="${g.id}" aria-label="${g.name}">
+              <div class="mini-grid">${g.projects.map(card).join('')}</div>
             </section>`).join('')}
-            <section class="mini-sec" id="p-archive">
+            <section class="mini-sec" id="p-archive" aria-label="Archive">
               <ul class="mini-archive">${archiveRows}</ul>
             </section>
           </div>
