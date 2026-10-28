@@ -524,11 +524,12 @@ html.theme-mini #project-detail, html.theme-mini #practice-page { max-width: non
    positioned outside the label's box so the stacks don't shift. */
 .mini-desc {
   position: absolute; left: 0; top: 100%; width: 210px; white-space: normal;
-  font-size: 13px; line-height: 18px; color: var(--muted);
-  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  font-size: 13px; line-height: 18px; color: var(--muted); display: flex; flex-direction: column; gap: 8px;
   opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .3s ease, transform .3s ease;
 }
 .mini-jump a.is-current .mini-desc { opacity: 1; transform: none; }
+.mini-desc-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.mini-desc-tags { color: var(--ink); }
 .mini-num { flex: none; }
 .mini-jump a.is-current .mini-num { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .mini-jump a.is-current { color: var(--ink); }
