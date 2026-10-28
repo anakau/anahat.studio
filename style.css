@@ -438,6 +438,9 @@ html.theme-compendium .pd-logos--programmes { border-color: rgba(242,242,236,.12
 .pd-row dt { color: var(--muted); }
 .pd-row dd a { border-bottom: 1px solid currentColor; }
 .pd-mediums { list-style: none; display: grid; gap: 3px; }
+.pd-events { list-style: none; display: grid; gap: 12px; }
+.pd-events b { display: block; font-weight: 400; }
+.pd-events span { display: block; color: var(--muted); }
 .pd-row dd a:hover { color: #00FF77; }
 .pd-visit {
   display: inline-block; margin-top: 20px; font-size: 13px;
