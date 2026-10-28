@@ -579,8 +579,10 @@ html.theme-mini { --radius: 16px; }
   .mini-title h1 { font-size: 36px; }
   .mini-title-inner { flex-direction: column; align-items: flex-start; }
   .mini-main { grid-template-columns: 1fr; }
-  .mini-jump { position: sticky; top: 0; z-index: 5; align-self: start; flex-direction: row; flex-wrap: nowrap; gap: 16px; background: var(--bg); overflow-x: auto; padding: 12px 0; border-bottom: 1px solid var(--line); scrollbar-width: none; }
-  .mini-jump a { position: static; flex: none; height: auto; }
+  .mini-jump { display: none; }
+  .mini-bar { display: flex; align-items: center; justify-content: space-between; }
+  .mini-nav { display: none; }
+  .mini-bar .mini-menu-btn { display: flex; }
   .mini-gap { display: none; }
   .mini-jump a.is-sub { display: none; }
   .mini-nav { opacity: 1; transform: none; pointer-events: auto; }
@@ -589,6 +591,24 @@ html.theme-mini { --radius: 16px; }
   .mini-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mini-credits { column-count: 1; }
 }
+
+/* Phone menu (button hidden on wider screens). */
+.mini-menu-btn {
+  display: none; flex-direction: column; justify-content: center; gap: 6px; pointer-events: auto;
+  width: 40px; height: 40px; padding: 0 8px; border: 0; background: none; cursor: pointer; position: relative; z-index: 60;
+}
+.mini-menu-btn i { display: block; height: 1.5px; background: var(--ink); transition: transform .25s ease; }
+.mini-menu-btn.is-open i:first-of-type { transform: translateY(3.75px) rotate(45deg); }
+.mini-menu-btn.is-open i:last-of-type { transform: translateY(-3.75px) rotate(-45deg); }
+.mini-menu {
+  position: fixed; inset: 0; z-index: 50; background: var(--bg); padding: 96px 16px 32px;
+  display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto;
+}
+.mini-menu[hidden] { display: none; }
+.mini-menu-sections { display: flex; flex-direction: column; gap: 4px; font-size: 26px; line-height: 1.25; letter-spacing: -0.01em; }
+.mini-menu-site { display: flex; gap: 20px; color: var(--muted); padding-top: 24px; border-top: 1px solid var(--line); }
+html.mini-menu-open, html.mini-menu-open body { overflow: hidden; }
+html.mini-menu-open .mini-bar { z-index: 70; }
 
 /* Practice mini site: one large thumbnail per curated project, then the archive. */
 /* Each project fills the screen below the logo bar: image, then tags, with

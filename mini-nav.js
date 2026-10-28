@@ -9,6 +9,7 @@
 function initMiniNav(root) {
   const jump = root.querySelector('.mini-jump');
   if (!jump) return;
+  initMobileMenu(root, jump);
   const labels = [...jump.querySelectorAll('a')];
   const place = () => {
     const base = jump.getBoundingClientRect().top + window.scrollY;
@@ -57,4 +58,36 @@ function initMiniNav(root) {
   const contentEl = root.querySelector('.mini-content');
   if (contentEl) new ResizeObserver(place).observe(contentEl);
   spy();
+}
+
+// Phones: the side nav is hidden and a menu button in the top bar opens a
+// full-screen panel with the same sections plus Practice / About / Archive.
+function initMobileMenu(root, jump) {
+  const bar = root.querySelector('.mini-bar');
+  if (!bar || bar.querySelector('.mini-menu-btn')) return;
+  const btn = document.createElement('button');
+  btn.className = 'mini-menu-btn';
+  btn.type = 'button';
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-controls', 'mini-menu');
+  btn.innerHTML = '<span class="visually-hidden">Menu</span><i></i><i></i>';
+  const panel = document.createElement('div');
+  panel.className = 'mini-menu';
+  panel.id = 'mini-menu';
+  panel.hidden = true;
+  const sections = [...jump.querySelectorAll('a')].filter(a => !a.dataset.parent)
+    .map(a => `<a href="${a.getAttribute('href')}">${a.querySelector('.mini-title') ? a.querySelector('.mini-title').textContent : a.textContent.replace(/^\d+/, '')}</a>`).join('');
+  const site = [...bar.querySelectorAll('.mini-nav a')].map(a => `<a href="${a.getAttribute('href')}">${a.textContent}</a>`).join('');
+  panel.innerHTML = `<nav class="mini-menu-sections" aria-label="On this page">${sections}</nav><nav class="mini-menu-site" aria-label="Site">${site}</nav>`;
+  bar.appendChild(btn);
+  document.body.appendChild(panel);
+  const set = open => {
+    panel.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.classList.toggle('is-open', open);
+    document.documentElement.classList.toggle('mini-menu-open', open);
+  };
+  btn.addEventListener('click', () => set(panel.hidden));
+  panel.addEventListener('click', e => { if (e.target.closest('a')) set(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
 }
