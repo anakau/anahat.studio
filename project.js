@@ -58,7 +58,7 @@
   // shifting from paper (observe) to near-black (immerse).
   function renderModeBar(b) {
     const side = mode => b[mode] ? `<div class="modebar-side" data-for="${mode}">
-        <span class="modebar-label">${mode}</span>
+        <span class="modebar-label">${mode} mode</span>
         <p>${b[mode].text}</p>
         <small>${b[mode].notes}</small>
       </div>` : '';

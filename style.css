@@ -539,11 +539,11 @@ html.theme-compendium .hk[data-mode="immerse"] .hk-panel { background: #0b0b0a; 
 .modebar[data-mode="immerse"]::before { background: radial-gradient(closest-side, rgba(0,255,119,.28), transparent); }
 .modebar > * { position: relative; }
 .modebar-side { font-size: 7pt; line-height: 14px; transition: opacity .6s ease; }
-.modebar-side[data-for="observe"] { text-align: right; }
 .modebar-side p { margin: 10px 0 12px; }
-.modebar-side[data-for="observe"] p { margin-left: auto; }
-.modebar-side p { max-width: 440px; }
-.modebar-side small { display: block; font-size: 7pt; letter-spacing: 0.03em; opacity: .55; } /* same as the tags */
+.modebar-side p { max-width: 260px; font-size: inherit; line-height: 14px; }
+.modebar-side[data-for="observe"] { justify-self: end; }
+.modebar-side { width: 320px; }
+.modebar-side small { display: block; font-size: 7pt; letter-spacing: 0.03em; opacity: .55; white-space: nowrap; } /* same as the tags */
 .modebar-label { font-size: 7pt; letter-spacing: 0.08em; text-transform: uppercase; }
 .modebar[data-mode="observe"] .modebar-side[data-for="immerse"],
 .modebar[data-mode="immerse"] .modebar-side[data-for="observe"] { opacity: .28; }
