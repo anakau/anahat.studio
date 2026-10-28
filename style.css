@@ -524,7 +524,7 @@ html.theme-mini #project-detail, html.theme-mini #practice-page { max-width: non
    positioned outside the label's box so the stacks don't shift. */
 .mini-desc {
   position: absolute; left: 0; top: 100%; width: 210px; white-space: normal;
-  font-size: 13px; line-height: 18px; color: var(--muted); display: flex; flex-direction: column; gap: 8px;
+  font-size: calc(13px - 2pt); line-height: 15px; color: var(--muted); display: flex; flex-direction: column; gap: 8px;
   opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .3s ease, transform .3s ease;
 }
 .mini-jump a.is-current .mini-desc { opacity: 1; transform: none; }
@@ -541,6 +541,7 @@ html.theme-mini #project-detail, html.theme-mini #practice-page { max-width: non
 .mini-hero + .mini-sec { border-top: 0; }
 .mini-sec { padding: 48px 0 96px; border-top: 1px solid var(--line); scroll-margin-top: 70px; }
 /* Sub-items: nested under their chapter, indented to its text. */
+.mini-jump a.is-sub { font-size: calc(15px - 2pt); }
 .mini-jump a.is-sub { padding-left: 23px; }
 .mini-jump a.is-sub.is-current { color: var(--ink); }
 .mini-jump a.is-hidden { height: 0; opacity: 0; overflow: hidden; pointer-events: none; }
