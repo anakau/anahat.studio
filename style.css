@@ -426,6 +426,13 @@ html.theme-compendium .pd-logos img { filter: invert(1); }
    only — ink for content, muted for labels and secondary lines. */
 .pd-intro { margin-bottom: 96px; font-size: 14px; line-height: 1.55; }
 .pd-intro .pd-thumb { margin-bottom: 40px; }
+.pd-cover-video { position: relative; }
+.pd-video-toggle {
+  position: absolute; right: 16px; bottom: 56px; border: 0; cursor: pointer; border-radius: 999px;
+  padding: 6px 12px; font: 11px 'ABC Areal', sans-serif; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #F2F2EC; background: rgba(15,15,14,.6); backdrop-filter: blur(6px); opacity: 0; transition: opacity .2s;
+}
+.pd-cover-video:hover .pd-video-toggle, .pd-video-toggle:focus-visible, .pd-video-toggle[data-paused="1"] { opacity: 1; }
 .pd-info {
   display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 48px;
   padding-top: 24px; border-top: 1px solid rgba(242,242,236,.12);

@@ -76,14 +76,34 @@
     });
   }
 
-  // A looping, muted screen recording when the project has one (a still
-  // poster for reduced motion), otherwise the cover image.
+  // A looping, muted screen recording when the project has one (always
+  // autoplays; a pause button lets anyone stop it), otherwise the cover image.
   function coverMedia(p) {
     const v = p.coverVideo;
-    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!v || still) return `<img class="pd-thumb" src="${v ? v.poster : p.cover}" alt="${p.name}">`;
-    return `<video class="pd-thumb" autoplay muted loop playsinline preload="auto" poster="${v.poster}" aria-label="${p.name}: a walk through the system connectors map">
-      <source src="${v.webm}" type="video/webm"><source src="${v.mp4}" type="video/mp4"></video>`;
+    if (!v) return `<img class="pd-thumb" src="${p.cover}" alt="${p.name}">`;
+    return `<div class="pd-cover-video">
+      <video class="pd-thumb" autoplay muted loop playsinline preload="auto" poster="${v.poster}" aria-label="${p.name}: a walk through the system connectors map">
+        <source src="${v.webm}" type="video/webm"><source src="${v.mp4}" type="video/mp4"></video>
+      <button class="pd-video-toggle" type="button" aria-label="Pause video">Pause</button>
+    </div>`;
+  }
+
+  function initCoverVideo(root) {
+    const video = root.querySelector('.pd-cover-video video');
+    if (!video) return;
+    const btn = root.querySelector('.pd-video-toggle');
+    // muted must be set as a property for browsers to allow autoplay.
+    video.muted = true;
+    const play = () => video.play().catch(() => {});
+    play();
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && btn.dataset.paused !== '1') play(); });
+    btn.addEventListener('click', () => {
+      const pause = !video.paused;
+      if (pause) video.pause(); else play();
+      btn.dataset.paused = pause ? '1' : '';
+      btn.textContent = pause ? 'Play' : 'Pause';
+      btn.setAttribute('aria-label', pause ? 'Play video' : 'Pause video');
+    });
   }
 
   function renderSystem(b) {
@@ -175,6 +195,7 @@
     }
 
     initModes(content);
+    initCoverVideo(content);
     const creditsBtn = content.querySelector('.pd-credits-toggle');
     if (creditsBtn) creditsBtn.addEventListener('click', () => {
       const panel = content.querySelector('#pd-credits');
