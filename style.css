@@ -498,7 +498,7 @@ html.theme-mini #project-detail { max-width: none; padding: 0 40px 120px; }
 .mini-title h1 { font-size: 64px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.05; }
 .mini-btn { flex: none; background: var(--ink); color: #fff; border-radius: 4px; padding: 11px 20px; transition: opacity .15s; }
 .mini-btn:hover { opacity: .85; }
-.mini-main { display: grid; grid-template-columns: 240px minmax(0, 1fr); column-gap: 32px; border-top: 1px solid var(--line); }
+.mini-main { display: grid; grid-template-columns: 240px minmax(0, 1fr); column-gap: 32px; }
 .mini-jump { display: flex; flex-direction: column; align-self: stretch; --step: 26px; }
 .mini-jump a {
   position: sticky; z-index: 5; display: flex; align-items: center; gap: 8px; height: var(--step);
@@ -521,7 +521,9 @@ html.theme-mini #project-detail { max-width: none; padding: 0 40px 120px; }
 .mini-hero { padding: 48px 0; }
 .mini-jump a { color: var(--muted); transition: color .15s; }
 .mini-jump a:hover { color: var(--ink); }
-.mini-hero .pd-thumb { border-radius: 0; box-shadow: none; margin: 0; }
+.mini-hero .pd-thumb { border-radius: var(--radius); box-shadow: none; margin: 0; }
+.mini-hero { padding-top: 8px; }
+.mini-hero + .mini-sec { border-top: 0; }
 .mini-sec { display: grid; grid-template-columns: 200px minmax(0, 1fr); column-gap: 32px; padding: 48px 0 96px; border-top: 1px solid var(--line); scroll-margin-top: 70px; }
 /* Sub-nav: its own column, sticky only within its chapter. */
 .mini-subnav { position: sticky; top: 96px; align-self: start; display: flex; flex-direction: column; gap: 6px; }
@@ -544,7 +546,14 @@ html.theme-mini #project-detail { max-width: none; padding: 0 40px 120px; }
 .mini .pd-logos--row { margin-top: 56px; padding: 32px 0 0; border: 0; }
 .mini .modebar-concept .pd-heading { display: none; }
 .mini .pd-heading { font-size: 15px; font-weight: 400; letter-spacing: 0; color: var(--muted); }
-.mini .pd-screen, .mini .hk-layer img { box-shadow: none; border-radius: 6px; outline: 1px solid rgba(15,15,14,.08); }
+/* One corner radius for every container on the mini site. */
+html.theme-mini { --radius: 16px; }
+.mini .pd-screen, .mini .hk-layer img, .mini .modebar-tile, .mini .hk-panel, .mini .ds-cell, .mini .ds-chip, .mini .ds-type-img {
+  border-radius: var(--radius);
+}
+.mini .pd-screen, .mini .hk-layer img { box-shadow: none; outline: 1px solid rgba(15,15,14,.08); }
+.mini .pd-screens--plain .pd-screen[src$=".png"] { border-radius: 0; outline: 0; }
+.mini .pd-cover-video { border-radius: var(--radius); overflow: hidden; }
 .mini .pd-step-head h2 { font-size: 22px; }
 @media (max-width: 860px) {
   html.theme-mini #project-detail { padding: 0 16px 80px; }
