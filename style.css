@@ -424,6 +424,7 @@ html.theme-compendium { --bg: #FAFAF3; }
 .pd-block:first-child { margin-top: 0; }
 .pd-block--text { max-width: 640px; }
 .pd-block--text + .pd-block--text { margin-top: 40px; }
+.pd-credits p:last-child { margin-bottom: 0; }
 .pd-text:has(.pd-block) { max-width: none; margin-top: 64px; }
 .pd-step-head {
   display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 16px;

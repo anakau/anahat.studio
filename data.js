@@ -129,7 +129,8 @@ const PROJECTS = [
       ["Role", "Visual concepts, creative direction, experience design"],
       ["With", "Arianna Smaron"],
       ["Partners", "Berggruen Institute, Dark Matter Labs"],
-      ["Funded by", "Berggruen Institute"]
+      ["Funded by", "Berggruen Institute"],
+      ["Awards", "Honorary Mention, Prix Ars Electronica"]
     ],
     "blocks": [
       {
@@ -146,6 +147,16 @@ const PROJECTS = [
         "paragraphs": [
           "Visual concepts, creative direction, and experience design, together with Arianna Smaron, from the first visual language through to the interface and its components."
         ]
+      },
+      {
+        "type": "text",
+        "heading": "Awards",
+        "paragraphs": [
+          "Honorary Mention, Prix Ars Electronica."
+        ]
+      },
+      {
+        "type": "credits"
       },
       {
         "type": "step",

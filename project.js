@@ -61,13 +61,17 @@
       : '';
     const tags = (project.tags || []).map(t => `<span class="practice-tag">${t}</span>`).join('');
     const credits = (project.sections || []).filter(s => s.credits).map(s =>
-      `<section class="pd-block"><h2 class="pd-heading">${s.heading}</h2><div class="pd-credits">${s.credits.map(c => `<p>${c}</p>`).join('')}</div></section>`).join('');
+      `<section class="pd-block pd-block--text pd-block--credits"><h2 class="pd-heading">${s.heading}</h2><div class="pd-credits">${s.credits.map(c => `<p>${c}</p>`).join('')}</div></section>`).join('');
     const legacy = (project.sections || []).filter(s => s.heading !== 'Role' && !s.credits).map(s => {
       const paras = (s.paragraphs || []).filter(p => !isDraft(p));
       if (!paras.length) return '';
       return `<section class="pd-block"><h2 class="pd-heading">${s.heading}</h2>${paras.map(p => `<p>${p}</p>`).join('')}</section>`;
     }).join('');
-    const sections = project.blocks ? project.blocks.map(renderBlock).join('') + credits : legacy + credits;
+    // A `credits` block places the credits there; otherwise they close the page.
+    const hasCreditsBlock = (project.blocks || []).some(b => b.type === 'credits');
+    const sections = project.blocks
+      ? project.blocks.map(b => b.type === 'credits' ? credits : renderBlock(b)).join('') + (hasCreditsBlock ? '' : credits)
+      : legacy + credits;
     content.innerHTML = `
       <div class="pd-layout">
         <div class="pd-main">
