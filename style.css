@@ -530,7 +530,8 @@ html.theme-mini #project-detail, html.theme-mini #practice-page { max-width: non
 }
 .mini-jump a.is-current .mini-desc { opacity: 1; transform: none; }
 .mini-desc-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.mini-desc-tags { color: var(--ink); }
+.mini-desc-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.mini-desc-tags .practice-tag { padding: 3px 8px; line-height: 1.2; }
 .mini-num { flex: none; }
 .mini-jump a.is-current .mini-num { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .mini-jump a.is-current { color: var(--ink); }

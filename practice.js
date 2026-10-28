@@ -99,7 +99,7 @@
         </nav>
         <div class="mini-main">
           <nav class="mini-jump" aria-label="Projects">
-            ${curated.map(p => `<i class="mini-gap"></i><a href="#${id(p)}"><span class="mini-title">${p.name}</span>${p.category || (p.tags || []).length || p.year ? `<span class="mini-desc">${p.category ? `<span class="mini-desc-text">${p.category}</span>` : ''}${(p.tags || []).length ? `<span class="mini-desc-tags">${p.tags.join(' · ')}</span>` : ''}${p.year ? `<span class="mini-desc-year">${p.year}</span>` : ''}</span>` : ''}</a>`).join('')}
+            ${curated.map(p => `<i class="mini-gap"></i><a href="#${id(p)}"><span class="mini-title">${p.name}</span>${p.category || (p.tags || []).length || p.year ? `<span class="mini-desc">${p.category ? `<span class="mini-desc-text">${p.category}</span>` : ''}${(p.tags || []).length ? `<span class="mini-desc-tags">${p.tags.map(t => `<span class="practice-tag">${t}</span>`).join('')}</span>` : ''}${p.year ? `<span class="mini-desc-year">${p.year}</span>` : ''}</span>` : ''}</a>`).join('')}
             <i class="mini-gap"></i><a href="#p-archive">Archive</a>
           </nav>
           <div class="mini-content">
