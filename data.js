@@ -240,6 +240,14 @@ const PROJECTS = [
       },
       {
         "type": "text",
+        "heading": "Case: glacier governance in the Hindu Kush Himalayas",
+        "paragraphs": [
+          "The Himalayas cannot be discussed without disputed borders, militarisation, pastoral communities, local ecologies, rivers, history, geopolitical tension, natural disasters, and climate change.",
+          "In observe mode, the case reads as an article with audio for accessibility. In immerse mode, readers explore an interactive visualisation of the range, tracing how data layers connect across these topics. Thematic boards hold shuffleable case files drawn from documents, video interviews, quotes, and illustrations, and interviews with field experts anchor the data in lived knowledge. It is one of three immersive cases we designed."
+        ]
+      },
+      {
+        "type": "text",
         "heading": "Design principles",
         "list": [
           [
@@ -258,14 +266,6 @@ const PROJECTS = [
             "Multisensory",
             "An opening animation sets the tone, presenting the planetary as a rich landscape shaped by human decisions. Sound design carries each immersive case and marks the shift between modes."
           ]
-        ]
-      },
-      {
-        "type": "text",
-        "heading": "Case: glacier governance in the Hindu Kush Himalayas",
-        "paragraphs": [
-          "The Himalayas cannot be discussed without disputed borders, militarisation, pastoral communities, local ecologies, rivers, history, geopolitical tension, natural disasters, and climate change.",
-          "In observe mode, the case reads as an article with audio for accessibility. In immerse mode, readers explore an interactive visualisation of the range, tracing how data layers connect across these topics. Thematic boards hold shuffleable case files drawn from documents, video interviews, quotes, and illustrations, and interviews with field experts anchor the data in lived knowledge. It is one of three immersive cases we designed."
         ]
       },
       {
