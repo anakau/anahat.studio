@@ -11,7 +11,9 @@
   // screens, and a design-system block whose components are rebuilt live.
   function renderBlock(b) {
     if (b.type === 'text') {
-      return `<section class="pd-block pd-block--text"><h2 class="pd-heading">${b.heading}</h2>${b.paragraphs.map(p => `<p>${p}</p>`).join('')}</section>`;
+      const paras = (b.paragraphs || []).map(p => `<p>${p}</p>`).join('');
+      const list = b.list ? `<dl class="pd-list">${b.list.map(([t, d]) => `<div><dt>${t}</dt><dd>${d}</dd></div>`).join('')}</dl>` : '';
+      return `<section class="pd-block pd-block--text"><h2 class="pd-heading">${b.heading}</h2>${paras}${list}</section>`;
     }
     if (b.type === 'step') {
       const imgs = b.images.map(src => `<img class="pd-screen" src="${src}" alt="${b.heading}" loading="lazy">`).join('');

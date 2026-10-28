@@ -130,29 +130,76 @@ const PROJECTS = [
       ["With", "Arianna Smaron"],
       ["Partners", "Berggruen Institute, Dark Matter Labs"],
       ["Funded by", "Berggruen Institute"],
-      ["Awards", "Honorary Mention, Prix Ars Electronica"]
+      ["Awards", "Honorary Mention, Prix Ars Electronica 2026"],
+      ["Exhibited", "Unsorted Love, Zurich, November 2025"]
     ],
     "blocks": [
       {
         "type": "text",
         "heading": "Overview",
         "paragraphs": [
-          "The Planetary Compendium is an evolving wunderkammer of planetary governance: a living archive of historic precedents, emerging experiments, and speculative futures, from lunar governance and rights of nature to geoengineering ethics and interspecies communication.",
-          "Co-developed by the Berggruen Institute and Dark Matter Labs, it is designed as a civic and pedagogical tool. The design brief was to give form and texture to planetary thinking, an idea that is clear in intention but hard to picture."
+          "The Planetary Compendium: Case Studies on Planetary Governance is an evolving wunderkammer of planetary governance, developed jointly by the Berggruen Institute and Dark Matter Labs. It is a living archive of the architectures, imaginaries, and experiments that shape how life on Earth may be organised, sustained, and represented, bringing together historic precedents, emerging experiments, and speculative futures.",
+          "Planetary thinking is easy to invoke and hard to picture. The Compendium gives it form and texture: a civic and pedagogical tool in which each case opens a window onto a planetary question, from lunar governance and rights of nature to the ethics of geoengineering, transboundary risk, and interspecies communication."
+        ]
+      },
+      {
+        "type": "text",
+        "heading": "Concept: observe and immerse",
+        "paragraphs": [
+          "The interface reflects our position within planetary systems, not outside them. Instead of dark and light modes, the Compendium has observe and immerse modes.",
+          "In observe mode, readers move through linear content, including audio, and keep a critical distance. In immerse mode, they navigate case studies non-linearly and shift from observer to participant. The toggle holds that understanding the planetary takes both analytical distance and embodied involvement."
+        ]
+      },
+      {
+        "type": "text",
+        "heading": "Design principles",
+        "list": [
+          [
+            "Relational, not complete",
+            "Every case sits on an interactive map, linked to others through shared themes by system connectors. The platform is meant to be messy, plural, and relational."
+          ],
+          [
+            "More-than-human agency",
+            "Non-human stakeholders get a voice, through questions like what melting glaciers sound like."
+          ],
+          [
+            "Friction on purpose",
+            "Where most digital products remove friction, the Compendium chooses unfamiliarity, to build the reader's capacity for complexity."
+          ],
+          [
+            "Multisensory",
+            "An opening animation sets the tone, presenting the planetary as a rich landscape shaped by human decisions. Sound design carries each immersive case and marks the shift between modes."
+          ]
+        ]
+      },
+      {
+        "type": "text",
+        "heading": "Case: glacier governance in the Hindu Kush Himalayas",
+        "paragraphs": [
+          "The Himalayas cannot be discussed without disputed borders, militarisation, pastoral communities, local ecologies, rivers, history, geopolitical tension, natural disasters, and climate change.",
+          "In observe mode, the case reads as an article with audio for accessibility. In immerse mode, readers explore an interactive visualisation of the range, tracing how data layers connect across these topics. Thematic boards hold shuffleable case files drawn from documents, video interviews, quotes, and illustrations, and interviews with field experts anchor the data in lived knowledge. It is one of three immersive cases we designed."
         ]
       },
       {
         "type": "text",
         "heading": "Role",
         "paragraphs": [
-          "Visual concepts, creative direction, and experience design, together with Arianna Smaron, from the first visual language through to the interface and its components."
+          "Visual concepts, creative direction, and experience design, led with Arianna Smaron, working with Alexandra Bekker and Prateek Shankar, who conceptualised, curated, and edited the Compendium.",
+          "The team worked across continents and disciplines, with a focus on collaboration, care, and artistic freedom despite limited time and budget. The project is entirely human-made and coded without the use of artificial intelligence."
         ]
       },
       {
         "type": "text",
-        "heading": "Awards",
+        "heading": "Exhibition",
         "paragraphs": [
-          "Honorary Mention, Prix Ars Electronica."
+          "In November 2025, with Prateek Shankar, we curated a physical exhibition of the Compendium at Unsorted Love in Zurich."
+        ]
+      },
+      {
+        "type": "text",
+        "heading": "Recognition",
+        "paragraphs": [
+          "Honorary Mention, Prix Ars Electronica 2026."
         ]
       },
       {
@@ -162,7 +209,7 @@ const PROJECTS = [
         "type": "step",
         "n": "01",
         "heading": "Threshold",
-        "text": "One doorway: the globe mark, a line on what the Compendium is, and a single Enter button, with a note that what follows is an audio/visual experience. Behind it, case imagery drifts out of focus and the globe takes on its colours.",
+        "text": "One doorway: the globe mark, a line on what the Compendium is, and a single Enter button, with a note that what follows is an audio/visual experience. Entering plays the opening animation by Studio Kokaachi; behind the threshold, case imagery drifts out of focus and the globe takes on its colours.",
         "images": [
           "images/projects/the-planetary-compendium/home-2.jpg"
         ]
@@ -171,7 +218,7 @@ const PROJECTS = [
         "type": "step",
         "n": "02",
         "heading": "System connectors",
-        "text": "Cases float as image orbs, linked to the themes they share. Choosing a connector shows how topics relate across cases.",
+        "text": "The homepage is a map. Cases float as image orbs, linked by system connectors to the themes they share; choosing one shows how topics relate across cases. Messy, plural, and relational by design.",
         "images": [
           "images/projects/the-planetary-compendium/map.jpg"
         ]
@@ -189,7 +236,7 @@ const PROJECTS = [
         "type": "step",
         "n": "04",
         "heading": "Case study",
-        "text": "Each case opens on a full-bleed figure in a soft-edged frame, followed by themes, title, authors in italics, reading time, and a PDF download. A green number pill keeps your place while you read.",
+        "text": "In observe mode, a case opens on a full-bleed figure in a soft-edged frame, followed by themes, title, authors in italics, reading time, and a PDF download. A green number pill keeps your place while you read.",
         "images": [
           "images/projects/the-planetary-compendium/case-hero.jpg",
           "images/projects/the-planetary-compendium/case-body.jpg"
