@@ -444,7 +444,7 @@ html.theme-compendium .pd-logos img { filter: invert(1); }
 .pd-intro-copy { column-count: 2; column-gap: 48px; }
 .pd-intro-copy p { margin-bottom: 14px; }
 .pd-intro-text em { font-style: italic; }
-.pd-intro-text .pd-tags { margin-top: 20px; }
+.pd-intro-text .pd-tags { margin: 0 0 20px; }
 .pd-credits-toggle {
   margin-top: 24px; border: 0; background: none; padding: 0; cursor: pointer;
   font: inherit; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;

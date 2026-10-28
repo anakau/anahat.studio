@@ -192,8 +192,8 @@
             <dl class="pd-facts">${details}</dl>
             <dl class="pd-facts">${rows(project.recognition)}</dl>
             <div class="pd-intro-text">
-              <div class="pd-intro-copy">${intro}</div>
               <div class="pd-tags">${tags}</div>
+              <div class="pd-intro-copy">${intro}</div>
               ${creditText ? `<button class="pd-credits-toggle" type="button" aria-expanded="false" aria-controls="pd-credits">Credits <span aria-hidden="true">+</span></button>
               <div class="pd-credits pd-credits--intro" id="pd-credits" hidden>${creditText}</div>` : ''}
             </div>
