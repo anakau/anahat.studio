@@ -549,7 +549,7 @@ html.theme-compendium .hk[data-mode="immerse"] .hk-panel { background: #0b0b0a; 
 .modebar[data-mode="immerse"] .modebar-side[data-for="observe"] { opacity: .28; }
 .modebar[data-mode="immerse"] .modebar-side[data-for="immerse"] .modebar-label { color: #00FF77; }
 .modebar[data-mode="immerse"] .hk-toggle { background: #000; box-shadow: 0 4px 6px -1px #00FF77, 0 2px 4px -2px #00FF77; }
-.modebar[data-mode="immerse"] .hk-knob { transform: translateX(50px); }
+.modebar[data-mode="immerse"] .hk-knob { transform: translateX(61px); } /* same 17px inset as the globe on the left */
 .modebar[data-mode="immerse"] .hk-icon--observe { opacity: 0; transform: scale(.6); }
 .modebar[data-mode="immerse"] .hk-icon--immerse { opacity: 1; transform: none; }
 .modebar + .pd-block { margin-top: 56px; }
@@ -571,7 +571,7 @@ html.theme-compendium .hk[data-mode="immerse"] .hk-panel { background: #0b0b0a; 
   position: absolute; top: 50%; left: 2px; width: 80px; height: 80px; margin-top: -40px;
   transition: transform .6s cubic-bezier(.65,0,.35,1);
 }
-.hk[data-mode="immerse"] .hk-knob { transform: translateX(50px); }
+.hk[data-mode="immerse"] .hk-knob { transform: translateX(61px); } /* same 17px inset as the globe on the left */
 .hk-icon { position: absolute; inset: 0; width: 100%; height: 100%; transition: opacity .35s ease, transform .6s cubic-bezier(.65,0,.35,1); }
 .hk-icon--immerse { inset: 8px; width: 64px; height: 64px; opacity: 0; transform: rotate(-90deg) scale(.6); }
 .hk[data-mode="immerse"] .hk-icon--observe { opacity: 0; transform: scale(.6); }

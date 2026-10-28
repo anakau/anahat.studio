@@ -92,16 +92,18 @@
         el.querySelector('.hk-layer--observe').setAttribute('aria-hidden', String(mode !== 'observe'));
       };
       const flip = () => set(el.dataset.mode === 'observe' ? 'immerse' : 'observe');
-      let auto = null, touched = false;
+      // Loops while in view; a click flips it straight away and the loop
+      // carries on from there.
+      let auto = null, inView = false;
+      const start = () => { clearInterval(auto); auto = setInterval(flip, 4000); };
       const stop = () => { clearInterval(auto); auto = null; };
-      btn.addEventListener('click', () => { touched = true; stop(); flip(); });
-      // Shows itself off while in view, until someone takes over.
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+      btn.addEventListener('click', () => { flip(); if (inView) start(); });
+      if ('IntersectionObserver' in window) {
         new IntersectionObserver(([entry]) => {
-          if (entry.isIntersecting && !auto && !touched) auto = setInterval(flip, 4000);
-          else if (!entry.isIntersecting) stop();
+          inView = entry.isIntersecting;
+          if (inView && !auto) start(); else if (!inView) stop();
         }, { threshold: 0.4 }).observe(el);
-      }
+      } else start();
     });
   }
 
