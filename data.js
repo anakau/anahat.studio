@@ -217,6 +217,40 @@ const PROJECTS = [
         "type": "modebar"
       },
       {
+        "type": "lenses",
+        "lenses": [
+          {
+            "mode": "observe",
+            "title": "Observe lens",
+            "text": [
+              "Where you can read, understand, and tangibly view the data and stories, kept as straightforward as possible.",
+              "The focus is on accessibility, legibility, and clear, precise dissemination of information."
+            ],
+            "notes": [
+              "Translation",
+              "Colours",
+              "Audio",
+              "Download PDF",
+              "On mobile, only observe mode is available"
+            ]
+          },
+          {
+            "mode": "immerse",
+            "title": "Immerse lens",
+            "text": [
+              "Where you can step away from the written content and immerse yourself in the experience.",
+              "It explores varied ways of placing you inside the cosmic dance we are all part of, through tools of storytelling and design."
+            ],
+            "notes": [
+              "Not every case has both modes, but every case has an observe mode",
+              "On the homepage the toggle is inactive",
+              "Immersive cases can also be reached through the floating question buttons",
+              "Two lenses for now, with room for more in the future"
+            ]
+          }
+        ]
+      },
+      {
         "type": "modes",
         "heading": "Case study: Melting Borders",
         "text": "The Hindu Kush Himalayas case in both modes. Observe reads as an article: a full-bleed figure, themes, authors, audio, and figures like the 50-year risk profile. The toggle at the top turns the page dark and opens an interactive map of the range, where thematic case files and data layers (dams, conflict, mountain passes, glaciers, rivers) can be revealed and hidden.",

@@ -478,7 +478,7 @@ html.theme-compendium .pd-logos img { filter: invert(1); }
 /* Case-study blocks */
 /* Compendium case study: off-black page; components and observe screens
    sit on light artboards so they read as they do on the site. */
-html.theme-compendium { --bg: #161615; --ink: #F2F2EC; --muted: #8f8f88; --line: #F2F2EC; }
+html.theme-compendium { --bg: #161615; --ink: #D9D9D2; --muted: #8f8f88; --line: #F2F2EC; }
 html.theme-compendium .logo-img { filter: invert(1); }
 html.theme-compendium #site-header { background: var(--bg); }
 html.theme-compendium .pd-row { border-color: rgba(242,242,236,.12); }
@@ -547,6 +547,18 @@ html.theme-compendium .hk[data-mode="immerse"] .hk-panel { background: #0b0b0a; 
 .modebar[data-mode="immerse"] .hk-icon--observe { opacity: 0; transform: scale(.6); }
 .modebar[data-mode="immerse"] .hk-icon--immerse { opacity: 1; transform: none; }
 .modebar + .pd-block { margin-top: 56px; }
+.modebar + .lenses { margin-top: 12px; }
+.lenses { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.lens { border-radius: 16px; padding: 32px; font-size: 10.2pt; line-height: 1.55; }
+.lens--observe { background: #ecebe2; color: #0F0F0E; }
+.lens--immerse { background: #0b0b0a; color: #F2F2EC; box-shadow: inset 0 0 0 1px rgba(0,255,119,.14); }
+.lens h3 { font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+.lens--observe h3 { color: #6b6b66; }
+.lens--immerse h3 { color: #00FF77; }
+.lens p { margin-bottom: 12px; max-width: 520px; }
+.lens h4 { font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; margin: 28px 0 10px; opacity: .55; }
+.lens ul { list-style: none; display: grid; gap: 4px; }
+.lens li::before { content: '→ '; opacity: .5; }
 
 /* Observe / immerse, with the site's own toggle */
 .hk-panel {
@@ -953,6 +965,8 @@ a.practice-card:hover .practice-card-thumb {
   .pd-screens--2, .cmp-cases, .hk-layer, .pd-list { grid-template-columns: 1fr; }
   .hk-panel { padding: 16px; }
   .modebar { height: 128px; gap: 20px; }
+  .lenses { grid-template-columns: 1fr; }
+  .lens { padding: 24px; }
   .ds-swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .ds-types, .ds-board { grid-template-columns: 1fr; }
 
