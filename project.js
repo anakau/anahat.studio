@@ -63,9 +63,16 @@
         <small>${b[mode].notes}</small>
       </div>` : '';
     return `<section class="pd-block modebar" data-mode="observe" aria-label="Observe and immerse modes">
-      ${side('observe')}
-      <button class="hk-toggle" type="button" aria-label="Switch to immerse mode"><span class="hk-knob">${OBSERVE_ICON.replace(/hk(Grad|Clip|Orbit)/g, 'mb$1')}${IMMERSE_ICON.replace(/hkBlur/g, 'mbBlur')}</span></button>
-      ${side('immerse')}
+      <div class="modebar-concept">
+        <h2 class="pd-heading">${b.heading}</h2>
+        ${(b.paragraphs || []).map(p => `<p>${p}</p>`).join('')}
+      </div>
+      <div class="modebar-demo">
+        <div class="modebar-tile">
+          <button class="hk-toggle" type="button" aria-label="Switch to immerse mode"><span class="hk-knob">${OBSERVE_ICON.replace(/hk(Grad|Clip|Orbit)/g, 'mb$1')}${IMMERSE_ICON.replace(/hkBlur/g, 'mbBlur')}</span></button>
+        </div>
+        <div class="modebar-texts" aria-live="polite">${side('observe')}${side('immerse')}</div>
+      </div>
     </section>`;
   }
 

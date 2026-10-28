@@ -524,30 +524,32 @@ html.theme-compendium .hk[data-mode="immerse"] .hk-panel { background: #0b0b0a; 
 .pd-screens--plain .pd-screen { border-radius: 10px; }
 .pd-screens--plain .pd-screen[src$=".png"] { box-shadow: none !important; border-radius: 0; }
 
-/* Observe / immerse band: each lens on its side, toggle centred and
-   looping; the active side is lit, the other dims. */
+/* Observe / immerse: concept text on the left; on the right a square tile
+   with the toggle on loop, and under it the active mode's text. */
 .modebar {
-  position: relative; overflow: hidden; border-radius: 16px; margin-top: 40px; padding: 40px 48px;
-  display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 48px;
-  background: #ecebe2; color: #0F0F0E; transition: background .9s cubic-bezier(.65,0,.35,1), color .9s;
+  display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 64px; align-items: start; margin-top: 0;
 }
-.modebar::before {
-  content: ''; position: absolute; inset: -40% 30%; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(closest-side, rgba(185,179,255,.55), transparent);
-  filter: blur(30px); transition: background .9s ease;
+.modebar-concept { max-width: 640px; }
+.modebar-tile {
+  position: relative; overflow: hidden; aspect-ratio: 1; border-radius: 16px;
+  display: grid; place-items: center;
+  background: #ecebe2; transition: background .9s cubic-bezier(.65,0,.35,1), box-shadow .9s;
 }
-.modebar[data-mode="immerse"] { background: #0b0b0a; color: #F2F2EC; box-shadow: inset 0 0 0 1px rgba(0,255,119,.14); }
-.modebar[data-mode="immerse"]::before { background: radial-gradient(closest-side, rgba(0,255,119,.28), transparent); }
-.modebar > * { position: relative; }
-.modebar-side { font-size: 9pt; line-height: 18px; transition: opacity .6s ease; }
-.modebar-side p { margin: 10px 0 12px; }
-.modebar-side p { max-width: 320px; font-size: inherit; line-height: 18px; }
-.modebar-side[data-for="observe"] { justify-self: end; }
-.modebar-side { width: 400px; }
-.modebar-side small { display: block; font-size: 9pt; opacity: .55; white-space: nowrap; }
-.modebar-label { font-size: 7pt; letter-spacing: 0.08em; text-transform: uppercase; }
+.modebar-tile::before {
+  content: ''; position: absolute; inset: 10%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(185,179,255,.6), transparent);
+  filter: blur(24px); transition: background .9s ease;
+}
+.modebar-tile > * { position: relative; }
+.modebar[data-mode="immerse"] .modebar-tile { background: #0b0b0a; box-shadow: inset 0 0 0 1px rgba(0,255,119,.14); }
+.modebar[data-mode="immerse"] .modebar-tile::before { background: radial-gradient(closest-side, rgba(0,255,119,.3), transparent); }
+.modebar-texts { display: grid; margin-top: 20px; }
+.modebar-side { grid-area: 1 / 1; font-size: 9pt; line-height: 18px; transition: opacity .5s ease, transform .5s ease; }
+.modebar-side p { margin: 6px 0 10px; font-size: inherit; line-height: 18px; }
+.modebar-side small { display: block; font-size: 9pt; line-height: 18px; color: var(--muted); }
+.modebar-label { font-size: 7pt; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .modebar[data-mode="observe"] .modebar-side[data-for="immerse"],
-.modebar[data-mode="immerse"] .modebar-side[data-for="observe"] { opacity: .28; }
+.modebar[data-mode="immerse"] .modebar-side[data-for="observe"] { opacity: 0; transform: translateY(6px); pointer-events: none; }
 .modebar[data-mode="immerse"] .modebar-side[data-for="immerse"] .modebar-label { color: #00FF77; }
 .modebar[data-mode="immerse"] .hk-toggle { background: #000; box-shadow: 0 4px 6px -1px #00FF77, 0 2px 4px -2px #00FF77; }
 .modebar[data-mode="immerse"] .hk-knob { transform: translateX(61px); } /* same 17px inset as the globe on the left */
@@ -959,8 +961,9 @@ a.practice-card:hover .practice-card-thumb {
   .pd-step-head p { grid-column: 1; }
   .pd-screens--2, .cmp-cases, .hk-layer, .pd-list { grid-template-columns: 1fr; }
   .hk-panel { padding: 16px; }
-  .modebar { height: 128px; gap: 20px; }
-      .ds-swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .modebar { grid-template-columns: 1fr; gap: 32px; }
+  .modebar-demo { max-width: 360px; }
+  .ds-swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .ds-types, .ds-board { grid-template-columns: 1fr; }
 
   #practice-page { padding: 24px 16px 60px; }

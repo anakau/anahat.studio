@@ -133,7 +133,7 @@ const PROJECTS = [
     "details": [
       ["Website", "<a href=\"https://governtheplanet.org\" target=\"_blank\" rel=\"noopener\">governtheplanet.org ↗</a>"],
       ["Year", "2025"],
-      ["Role", "<span class=\"pd-nowrap\">Creative direction</span>, <span class=\"pd-nowrap\">Visual concepts</span>, <span class=\"pd-nowrap\">Storytelling</span>, <span class=\"pd-nowrap\">UX/UI design</span>, <span class=\"pd-nowrap\">Stakeholder management</span>"],
+      ["Role", "<span class=\"pd-nowrap\">Creative direction</span>, <span class=\"pd-nowrap\">Visual concepts</span>, <span class=\"pd-nowrap\">Storytelling</span>, <span class=\"pd-nowrap\">Interface design</span>, <span class=\"pd-nowrap\">Stakeholder management</span>"],
       ["Core team", "Arianna Smaron<br>Prateek Shankar"],
       ["Partners", "Berggruen Institute<br>Dark Matter Labs"]
     ],
@@ -206,15 +206,12 @@ const PROJECTS = [
     },
     "blocks": [
       {
-        "type": "text",
+        "type": "modebar",
         "heading": "Concept: observe and immerse",
         "paragraphs": [
-          "The interface reflects our position within planetary systems, not outside them. Instead of dark and light modes, the Compendium has observe and immerse modes.",
-          "In observe mode, readers move through linear content, including audio, and keep a critical distance. In immerse mode, they navigate case studies non-linearly and shift from observer to participant. The toggle holds that understanding the planetary takes both analytical distance and embodied involvement."
-        ]
-      },
-      {
-        "type": "modebar",
+            "The interface reflects our position within planetary systems, not outside them. Instead of dark and light modes, the Compendium has observe and immerse modes.",
+            "In observe mode, readers move through linear content, including audio, and keep a critical distance. In immerse mode, they navigate case studies non-linearly and shift from observer to participant. The toggle holds that understanding the planetary takes both analytical distance and embodied involvement."
+        ],
         "observe": {
           "text": "Where you can read, understand, and tangibly view the data and stories, kept as straightforward as possible, with a focus on accessibility, legibility, and clear, precise dissemination of information.",
           "notes": "Translation · Colours · Audio · Download PDF · Observe only on mobile"
