@@ -129,7 +129,7 @@ const PROJECTS = [
     ],
     "year": "2025",
     "externalLink": null,
-    "intro": ["<em>The Planetary Compendium</em> is an evolving wunderkammer of planetary governance, where lunar treaties, melting Himalayan borders, whale economies, and the rights of rivers share one shifting map.", "Co-developed by the Berggruen Institute and Dark Matter Labs, it brings together historic precedents, emerging experiments, and speculative futures. Planetary thinking is easy to invoke and hard to picture; the Compendium gives it form and texture, as a civic and pedagogical tool in which each case opens a window onto a planetary question.", "Read it at a critical distance in observe mode, or step inside it in immerse mode, where sound, film, and living maps turn the planetary from an abstraction into something you can feel."],
+    "intro": ["The Planetary Compendium is an evolving wunderkammer of planetary governance, where lunar treaties, melting Himalayan borders, whale economies, and the rights of rivers share one shifting map.", "Co-developed by the Berggruen Institute and Dark Matter Labs, it brings together historic precedents, emerging experiments, and speculative futures. Planetary thinking is easy to invoke and hard to picture; the Compendium gives it form and texture, as a civic and pedagogical tool in which each case opens a window onto a planetary question.", "Read it at a critical distance in observe mode, or step inside it in immerse mode, where sound, film, and living maps turn the planetary from an abstraction into something you can feel."],
     "details": [
       ["Website", "<a href=\"https://governtheplanet.org\" target=\"_blank\" rel=\"noopener\">governtheplanet.org ↗</a>"],
       ["Year", "2025"],
