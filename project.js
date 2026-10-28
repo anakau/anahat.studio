@@ -24,8 +24,7 @@
     }
     if (b.type === 'system') return renderSystem(b);
     if (b.type === 'modes') return renderModes(b);
-    if (b.type === 'modebar') return renderModeBar();
-    if (b.type === 'lenses') return renderLenses(b);
+    if (b.type === 'modebar') return renderModeBar(b);
     return '';
   }
 
@@ -57,23 +56,17 @@
 
   // Full-width band: the rebuilt toggle flipping on its own, with the band
   // shifting from paper (observe) to near-black (immerse).
-  function renderModeBar() {
-    return `<section class="pd-block modebar" data-mode="observe" aria-label="Observe and immerse toggle">
-      <span class="modebar-label" data-for="observe">Observe</span>
+  function renderModeBar(b) {
+    const side = mode => b[mode] ? `<div class="modebar-side" data-for="${mode}">
+        <span class="modebar-label">${mode}</span>
+        <p>${b[mode].text}</p>
+        <small>${b[mode].notes}</small>
+      </div>` : '';
+    return `<section class="pd-block modebar" data-mode="observe" aria-label="Observe and immerse modes">
+      ${side('observe')}
       <button class="hk-toggle" type="button" aria-label="Switch to immerse mode"><span class="hk-knob">${OBSERVE_ICON.replace(/hk(Grad|Clip|Orbit)/g, 'mb$1')}${IMMERSE_ICON.replace(/hkBlur/g, 'mbBlur')}</span></button>
-      <span class="modebar-label" data-for="immerse">Immerse</span>
+      ${side('immerse')}
     </section>`;
-  }
-
-  // The two lenses side by side, each with its description and notes.
-  function renderLenses(b) {
-    const lens = l => `<div class="lens lens--${l.mode}">
-      <h3>${l.title}</h3>
-      ${l.text.map(t => `<p>${t}</p>`).join('')}
-      <h4>Important notes</h4>
-      <ul>${l.notes.map(n => `<li>${n}</li>`).join('')}</ul>
-    </div>`;
-    return `<section class="pd-block lenses">${b.lenses.map(lens).join('')}</section>`;
   }
 
   function initModeBar(root) {

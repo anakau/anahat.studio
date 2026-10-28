@@ -214,41 +214,15 @@ const PROJECTS = [
         ]
       },
       {
-        "type": "modebar"
-      },
-      {
-        "type": "lenses",
-        "lenses": [
-          {
-            "mode": "observe",
-            "title": "Observe lens",
-            "text": [
-              "Where you can read, understand, and tangibly view the data and stories, kept as straightforward as possible.",
-              "The focus is on accessibility, legibility, and clear, precise dissemination of information."
-            ],
-            "notes": [
-              "Translation",
-              "Colours",
-              "Audio",
-              "Download PDF",
-              "On mobile, only observe mode is available"
-            ]
-          },
-          {
-            "mode": "immerse",
-            "title": "Immerse lens",
-            "text": [
-              "Where you can step away from the written content and immerse yourself in the experience.",
-              "It explores varied ways of placing you inside the cosmic dance we are all part of, through tools of storytelling and design."
-            ],
-            "notes": [
-              "Not every case has both modes, but every case has an observe mode",
-              "On the homepage the toggle is inactive",
-              "Immersive cases can also be reached through the floating question buttons",
-              "Two lenses for now, with room for more in the future"
-            ]
-          }
-        ]
+        "type": "modebar",
+        "observe": {
+          "text": "Where you can read, understand, and tangibly view the data and stories, kept as straightforward as possible, with a focus on accessibility, legibility, and clear, precise dissemination of information.",
+          "notes": "Translation · Colours · Audio · Download PDF · Observe only on mobile"
+        },
+        "immerse": {
+          "text": "Where you can step away from the written content and immerse yourself in the experience, placed inside the cosmic dance we are all part of through tools of storytelling and design.",
+          "notes": "Selected cases only · Off on the homepage · Via floating buttons too"
+        }
       },
       {
         "type": "modes",
