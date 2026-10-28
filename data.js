@@ -60,7 +60,7 @@ const PROJECTS = [
       "Systems Change",
       "Civic Infrastructure",
       "Information",
-      "UX/UI",
+      "Interface Design",
       "Art Direction"
     ],
     "favorite": false
@@ -83,7 +83,7 @@ const PROJECTS = [
       "Craft Revival",
       "Product",
       "Vibe Code",
-      "UX/UI"
+      "Interface Design"
     ],
     "favorite": true
   },
@@ -103,7 +103,7 @@ const PROJECTS = [
       "Systems Change",
       "Circular Economy",
       "Art Direction",
-      "UX/UI"
+      "Interface Design"
     ],
     "favorite": false
   },
@@ -482,7 +482,7 @@ const PROJECTS = [
       "More-Than-Human",
       "Art Direction",
       "Information",
-      "UX/UI",
+      "Interface Design",
       "Publication"
     ],
     "favorite": true
@@ -556,7 +556,7 @@ const PROJECTS = [
       "Governance",
       "Systems Change",
       "Civic Infrastructure",
-      "UX/UI",
+      "Interface Design",
       "Vibe Code",
       "Art Direction",
       "Information"
@@ -640,7 +640,7 @@ const PROJECTS = [
       "Circular Economy",
       "Sustainability",
       "Art Direction",
-      "UX/UI"
+      "Interface Design"
     ],
     "favorite": false
   },
@@ -689,7 +689,7 @@ const PROJECTS = [
     "hasFullDocs": false,
     "tags": [
       "Timekeeping Application",
-      "UX/UI",
+      "Interface Design",
       "Product"
     ],
     "favorite": false
@@ -740,7 +740,7 @@ const PROJECTS = [
     "year": "2022",
     "externalLink": null,
     "paragraphs": [
-      "ResearchGate \n2022 - 2023\nResearchGate is a social networking website for scientists, researchers and academics. My role as an in-house Brand Designer was to assist the day-to-day needs of a tech company like infographics, illustrations, icons and UX/UI design like the Top Navigation Bar that is currently in use.",
+      "ResearchGate \n2022 - 2023\nResearchGate is a social networking website for scientists, researchers and academics. My role as an in-house Brand Designer was to assist the day-to-day needs of a tech company like infographics, illustrations, icons and interface design like the Top Navigation Bar that is currently in use.",
       "Our larger goal was to do brand refresh while working under the product team and in conversation with the designs system and UX research team.",
       "I worked under agile work flows with agile team tools like figma, jira and Adobe creative suite."
     ],
@@ -749,7 +749,7 @@ const PROJECTS = [
     "tags": [
       "Knowledge Platform",
       "Brand Identity",
-      "UX/UI"
+      "Interface Design"
     ],
     "favorite": false
   },
