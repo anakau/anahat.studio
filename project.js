@@ -218,7 +218,7 @@
       const groups = CHAPTERS.map(name => ({ name, blocks: project.blocks.filter(b => sectionOf(b) === name) }))
         .filter(g => g.blocks.length);
       // Sub-sections get their own nav item under their chapter.
-      const subOf = b => b.type === 'modebar' ? 'Two lenses' : b.heading === 'Design principles' ? 'Design principles' : null;
+      const subOf = b => b.type === 'modebar' ? 'Two lenses' : b.heading === 'Design principles' ? 'Design principles' : b.chapter === 'Interface' ? b.heading : null;
       const slugify = t => 's-' + t.toLowerCase().replace(/[^a-z0-9]+/g, '-');
       const sections = [
         { name: 'Overview', html: `
@@ -231,16 +231,14 @@
         }).join('') })),
         ...(creditText ? [{ name: 'Credits', html: `<div class="mini-credits">${creditText}</div>${logos}` }] : []),
       ];
-      const navItems = [];
-      sections.forEach((sc, i) => {
-        navItems.push({ name: sc.name, id: slugify(sc.name), n: i + 1 });
-        (sc.subs || []).forEach(name => navItems.push({ name, id: slugify(name), sub: true }));
-      });
+      const navItems = sections.map((sc, i) => ({ name: sc.name, id: slugify(sc.name), n: i + 1 }));
       content.innerHTML = `
         <div class="mini">
           <nav class="mini-bar">
-            <a class="mini-logo" href="index.html"><img src="images/logo-black-default.svg" alt="Anahat Studio"></a>
-            <div class="mini-nav"><a href="practice.html">Practice</a><a href="about.html">About</a><a href="archive.html">Archive</a></div>
+            <div class="mini-brand">
+              <a class="mini-logo" href="index.html"><img src="images/logo-black-default.svg" alt="Anahat Studio, home"></a>
+              <div class="mini-nav"><a href="practice.html">Practice</a><a href="about.html">About</a><a href="archive.html">Archive</a></div>
+            </div>
           </nav>
           <h1 class="visually-hidden">${project.name}</h1>
           <div class="mini-main">
@@ -250,6 +248,7 @@
             <div class="mini-content">
               <div class="mini-hero">${coverMedia(project)}</div>
               ${sections.map(sc => `<section class="mini-sec" id="${slugify(sc.name)}" aria-label="${sc.name}">
+                <nav class="mini-subnav" aria-label="${sc.name} sections">${(sc.subs || []).map(n => `<a href="#${slugify(n)}">${n}</a>`).join('')}</nav>
                 <div class="mini-body pd-text">${sc.html}</div>
               </section>`).join('')}
             </div>
@@ -286,7 +285,7 @@
         // sticky element's margin would stop it moving past its container.
         labels.forEach((a, i) => {
           const el = content.querySelector(a.getAttribute('href'));
-          const target = el.getBoundingClientRect().top + window.scrollY + (a.classList.contains('is-sub') ? 0 : 48);
+          const target = el.getBoundingClientRect().top + window.scrollY + 48;
           a.previousElementSibling.style.height = Math.max(0, target - y) + 'px';
           y = Math.max(y, target) + a.offsetHeight;
         });
@@ -299,7 +298,7 @@
     // Scrollspy: the section crossing the upper third of the screen is the
     // current one in the Jump to nav.
     if (jump && 'IntersectionObserver' in window) {
-      const links = new Map([...jump.querySelectorAll('a')].map(a => [a.getAttribute('href').slice(1), a]));
+      const links = new Map([...content.querySelectorAll('.mini-jump a, .mini-subnav a')].map(a => [a.getAttribute('href').slice(1), a]));
       const spyOn = selector => {
         const group = [...content.querySelectorAll(selector)].map(el => links.get(el.id)).filter(Boolean);
         const spy = new IntersectionObserver(entries => {

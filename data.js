@@ -278,16 +278,16 @@ const PROJECTS = [
       },
       {
         "type": "step",
-        "n": "01",
-        "heading": "Threshold",
-        "text": "One doorway: the globe mark, a line on what the Compendium is, and a single Enter button, with a note that what follows is an audio/visual experience. Entering plays the opening animation by Studio Kokaachi; behind the threshold, case imagery drifts out of focus and the globe takes on its colours.",
+        "chapter": "Interface",
+        "heading": "Cases",
+        "text": "Every case in one numbered index, opened from the top right; immersive cases carry a tag.",
         "images": [
-          "images/projects/the-planetary-compendium/home-2.jpg"
+          "images/projects/the-planetary-compendium/cases.jpg"
         ]
       },
       {
         "type": "step",
-        "n": "02",
+        "chapter": "Interface",
         "heading": "System connectors",
         "text": "The homepage is a map. Cases float as image orbs, linked by system connectors to the themes they share; choosing one shows how topics relate across cases. Messy, plural, and relational by design.",
         "images": [
@@ -296,40 +296,48 @@ const PROJECTS = [
       },
       {
         "type": "step",
-        "n": "03",
-        "heading": "Cases index",
-        "text": "A numbered list of every case, opened from the top right; immersive cases are tagged.",
+        "chapter": "Interface",
+        "heading": "Curatorial note",
+        "text": "Each case opens with a curatorial note, set in Geist Mono inside a lavender-edged frame, that frames the case before the essay begins.",
         "images": [
-          "images/projects/the-planetary-compendium/cases.jpg"
+          "images/projects/the-planetary-compendium/ui-curatorial.jpg"
         ]
       },
       {
         "type": "step",
-        "n": "04",
+        "chapter": "Interface",
+        "heading": "Citations",
+        "text": "Citations open in place: the numbered marker beside a sentence reveals the full note in a green-edged panel, with a link down to the footnotes.",
+        "images": [
+          "images/projects/the-planetary-compendium/ui-citation.jpg"
+        ]
+      },
+      {
+        "type": "step",
+        "chapter": "Interface",
+        "heading": "Footnotes",
+        "text": "Footnotes gather at the end in two numbered columns, each with an arrow back to its place in the text.",
+        "images": [
+          "images/projects/the-planetary-compendium/ui-footnotes.jpg"
+        ]
+      },
+      {
+        "type": "step",
+        "chapter": "Interface",
+        "heading": "Connected case studies",
+        "text": "Every case ends with the cases it shares themes with, so readers move on through the archive rather than back to the start.",
+        "images": [
+          "images/projects/the-planetary-compendium/ui-connected.jpg"
+        ]
+      },
+      {
+        "type": "step",
         "heading": "Printed edition",
         "plain": true,
         "text": "Issue 01, November 2025: every case study in print, as Case Studies on Planetary Governance. The cover illustration gathers the archive's subjects into one landscape, from icebreakers and melting peaks to whales and seabed infrastructure. Inside, the web's type system carries over to paper, with Geist Mono abstracts, Diatype reading text, and numbered case openers. The printed Compendium travels with the exhibitions and events.",
         "images": [
           "images/projects/the-planetary-compendium/print-cover.png",
           "images/projects/the-planetary-compendium/print-spread.jpg"
-        ]
-      },
-      {
-        "type": "step",
-        "n": "05",
-        "heading": "Connected case studies",
-        "text": "Every case ends with the cases it shares themes with, so readers move on through the archive rather than back to the start.",
-        "images": [
-          "images/projects/the-planetary-compendium/connected.jpg"
-        ]
-      },
-      {
-        "type": "step",
-        "n": "06",
-        "heading": "About and credits",
-        "text": "One panel holds the project's story and its credits, switched with two pill tabs.",
-        "images": [
-          "images/projects/the-planetary-compendium/about.jpg"
         ]
       },
       {
