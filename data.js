@@ -112,7 +112,7 @@ const PROJECTS = [
     "category": "A living archive and civic tool for planetary governance, co-developed with the Berggruen Institute",
     "url": "https://governtheplanet.org",
     "external": true,
-    "cover": "images/projects/the-planetary-compendium/home.jpg",
+    "cover": "images/projects/the-planetary-compendium/cover-map.jpg",
     "images": [
       "images/projects/the-planetary-compendium/home.jpg",
       "images/projects/the-planetary-compendium/map.jpg",

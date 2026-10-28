@@ -3,11 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="robots" content="noindex">
+<script>
+  // Set the Compendium's dark theme before first paint (project.js also sets it).
+  if (new URLSearchParams(location.search).get('slug') === 'the-planetary-compendium') document.documentElement.classList.add('theme-compendium');
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Anahat Kaur — Project</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&display=swap">
-<link rel="stylesheet" href="style.css?v=11">
+<link rel="stylesheet" href="style.css?v=13">
 </head>
 <body>
 
@@ -37,7 +41,7 @@
 <script src="cursor.js"></script>
 <script src="header-scroll.js"></script>
 <script src="preview.js"></script>
-<script src="data.js?v=11"></script>
-<script src="project.js?v=11"></script>
+<script src="data.js?v=12"></script>
+<script src="project.js?v=12"></script>
 </body>
 </html>

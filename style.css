@@ -430,7 +430,22 @@ a { color: inherit; text-decoration: none; }
 }
 .pd-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 24px; }
 /* Case-study blocks */
-html.theme-compendium { --bg: #FAFAF3; }
+/* Compendium case study: off-black page; components and observe screens
+   sit on light artboards so they read as they do on the site. */
+html.theme-compendium { --bg: #161615; --ink: #F2F2EC; --muted: #8f8f88; --line: #F2F2EC; }
+html.theme-compendium .logo-img { filter: invert(1); }
+html.theme-compendium #site-header { background: var(--bg); }
+html.theme-compendium .pd-row,
+html.theme-compendium .pd-side-credits { border-color: rgba(242,242,236,.12); }
+html.theme-compendium .pd-tags .practice-tag { background: #2a2a28; color: #F2F2EC; }
+html.theme-compendium .pd-screen,
+html.theme-compendium .pd-thumb,
+html.theme-compendium .hk-layer img { box-shadow: 0 16px 40px -16px rgba(0,0,0,.7); }
+html.theme-compendium .ds-chip { box-shadow: inset 0 0 0 1px rgba(242,242,236,.14); }
+html.theme-compendium .ds-type-img { box-shadow: none; }
+html.theme-compendium .ds-cell { background: #ecebe2; }
+html.theme-compendium .hk-panel { background: #ecebe2; }
+html.theme-compendium .hk[data-mode="immerse"] .hk-panel { background: #0b0b0a; box-shadow: inset 0 0 0 1px rgba(0,255,119,.18); }
 .pd-block { margin-top: 72px; }
 .pd-block:first-child { margin-top: 0; }
 .pd-block--text { max-width: 640px; }
