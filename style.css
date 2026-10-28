@@ -426,16 +426,19 @@ html.theme-compendium .pd-logos img { filter: invert(1); }
    only — ink for content, muted for labels and secondary lines. */
 .pd-intro { margin-bottom: 96px; font-size: 14px; line-height: 1.55; }
 .pd-intro .pd-thumb { margin-bottom: 40px; }
-.pd-intro-text { column-count: 2; column-gap: 48px; }
-.pd-intro-text p { margin-bottom: 14px; break-inside: avoid-column; }
-.pd-intro-text em { font-style: italic; }
-.pd-facts {
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 48px;
-  margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(242,242,236,.12);
+.pd-info {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px;
+  padding-top: 24px; border-top: 1px solid rgba(242,242,236,.12);
 }
+.pd-info + .pd-info { margin-top: 40px; }
+.pd-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 48px; align-content: start; }
 .pd-facts .pd-row { display: block; padding: 0; border: 0; }
 .pd-facts .pd-row dt { color: var(--muted); margin-bottom: 4px; }
-.pd-intro-links { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 32px; }
+.pd-intro-text p { margin-bottom: 14px; }
+.pd-intro-text p:last-child { margin-bottom: 0; }
+.pd-intro-text em { font-style: italic; }
+.pd-intro-text .pd-tags { margin-top: 24px; }
+.pd-intro-links { display: flex; flex-wrap: wrap; align-content: start; align-items: center; gap: 16px 24px; }
 .pd-intro-links .pd-visit { margin: 0; font-size: 14px; }
 .pd-intro-links .pd-tags { margin: 0; }
 .pd-intro-credits { margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(242,242,236,.12); }
@@ -902,7 +905,7 @@ a.practice-card:hover .practice-card-thumb {
   .pd-side { position: static; order: -1; max-height: none; overflow: visible; }
   .pd-text { margin-top: 28px; }
   .pd-intro { margin-bottom: 56px; }
-  .pd-intro-text { column-count: 1; }
+  .pd-info { grid-template-columns: 1fr; gap: 24px; }
   .pd-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 24px; }
   .pd-logos--row { flex-wrap: wrap; justify-content: flex-start; gap: 20px 28px; }
   .pd-intro-credits .pd-credits { column-count: 1; }

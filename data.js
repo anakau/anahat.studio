@@ -127,12 +127,17 @@ const PROJECTS = [
     "intro": ["<em>The Planetary Compendium</em> is an evolving wunderkammer of planetary governance, where lunar treaties, melting Himalayan borders, whale economies, and the rights of rivers share one shifting map.", "Co-developed by the Berggruen Institute and Dark Matter Labs, it brings together historic precedents, emerging experiments, and speculative futures. Planetary thinking is easy to invoke and hard to picture; the Compendium gives it form and texture, as a civic and pedagogical tool in which each case opens a window onto a planetary question.", "Read it at a critical distance in observe mode, or step inside it in immerse mode, where sound, film, and living maps turn the planetary from an abstraction into something you can feel."],
     "details": [
       ["Year", "2025"],
+      ["Core team", "Arianna Smaron<br>Prateek Shankar"],
       ["Role", "Creative direction, UX/UI design, stakeholder management"],
-      ["With", "Arianna Smaron"],
       ["Partners", "Berggruen Institute<br>Dark Matter Labs"],
-      ["Mediums", "<ul class=\"pd-mediums\"><li>Interactive web platform</li><li>Immersive sound</li><li>Audio interviews</li><li>Animation</li><li>Illustration</li><li>Game design</li><li>Physical exhibition, Zurich</li><li>Printed publication of the case studies</li></ul>"],
+      ["Website", "<a href=\"https://governtheplanet.org\" target=\"_blank\" rel=\"noopener\">governtheplanet.org ↗</a>"]
+    ],
+    "recognition": [
       ["Awards", "<a href=\"https://archive.aec.at/prix/320414/\" target=\"_blank\" rel=\"noopener\">Honorary Mention, Digital Humanity, Prix Ars Electronica 2026 ↗</a>"],
       ["Exhibitions & events", "<ul class=\"pd-events\"><li><b>Slow Listening: Sounds from the Planetary Compendium</b><span>Listening experience, Medulla, Berlin · 28 October 2026 · <a href=\"https://luma.com/dyr6sdgn\" target=\"_blank\" rel=\"noopener\">Event ↗</a></span></li><li><b>The Planetary Compendium</b><span>Physical exhibition, Unsorted Love, Zurich · November 2025</span></li></ul>"]
+    ],
+    "detailsHidden": [
+      ["Mediums", "<ul class=\"pd-mediums\"><li>Interactive web platform</li><li>Immersive sound</li><li>Audio interviews</li><li>Animation</li><li>Illustration</li><li>Game design</li><li>Physical exhibition, Zurich</li><li>Printed publication of the case studies</li></ul>"]
     ],
     "creditLogos": {
       "lead": [

@@ -106,8 +106,9 @@
   }
   if (project && content && !isDraftHidden(project.slug)) {
     const isDraft = text => text.includes('[PLACEHOLDER');
-    const details = (project.details || []).map(([label, value]) =>
+    const rows = list => (list || []).map(([label, value]) =>
       `<div class="pd-row"><dt>${label}</dt><dd>${value}</dd></div>`).join('');
+    const details = rows(project.details);
     const visit = project.url
       ? `<a class="pd-visit" href="${project.url}" target="_blank" rel="noopener">${project.url.replace(/^https?:\/\//, '')} ↗</a>`
       : '';
@@ -133,9 +134,16 @@
         <header class="pd-intro">
           <img class="pd-thumb" src="${project.cover}" alt="${project.name}">
           <h1 class="visually-hidden">${project.name}</h1>
-          <div class="pd-intro-text">${(project.intro || [project.summary || project.category]).map(p => `<p>${p}</p>`).join('')}</div>
-          <dl class="pd-facts">${details}</dl>
-          <div class="pd-intro-links">${visit}<div class="pd-tags">${tags}</div></div>
+          <div class="pd-info">
+            <dl class="pd-facts">${details}</dl>
+            <dl class="pd-facts">${rows(project.recognition)}</dl>
+          </div>
+          <div class="pd-info">
+            <div class="pd-intro-text">
+              ${(project.intro || [project.summary || project.category]).map(p => `<p>${p}</p>`).join('')}
+              <div class="pd-tags">${tags}</div>
+            </div>
+          </div>
           ${creditList}
         </header>
         <div class="pd-text">${project.blocks.map(renderBlock).join('')}</div>`;
