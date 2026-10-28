@@ -151,6 +151,9 @@ const PROJECTS = [
         ]
       },
       {
+        "type": "modes"
+      },
+      {
         "type": "text",
         "heading": "Design principles",
         "list": [

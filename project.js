@@ -23,7 +23,77 @@
       </section>`;
     }
     if (b.type === 'system') return renderSystem(b);
+    if (b.type === 'modes') return renderModes();
     return '';
+  }
+
+  // Observe ↔ immerse demo: the same pieces sit as a linear article
+  // (observe) or float as linked orbs with case imagery (immerse).
+  // Positions are in cqw (stage width = 100) so orbs stay round.
+  const MODE_PIECES = [
+    { o: [30, 7, 28, 3.4], i: [47, 4, 5, 5], cls: 'is-ink' },
+    { o: [30, 13.5, 13, 3.8], i: [72, 30, 9, 9], cls: 'is-lav', label: '▶ Listen' },
+    { o: [30, 21, 40, 2.2], i: [14, 10, 16, 16], img: 'case-1.jpg' },
+    { o: [30, 25.5, 38, 2.2], i: [38, 19, 13, 13], img: 'case-2.jpg' },
+    { o: [30, 30, 40, 2.2], i: [60, 6, 14, 14], img: 'case-3.jpg' },
+    { o: [30, 34.5, 31, 2.2], i: [22, 33, 14, 14], img: 'case-4.jpg' },
+    { o: [30, 41, 40, 2.2], i: [50, 38, 10, 10], cls: 'is-green' },
+  ];
+  const MODE_LINKS = [[0, 2], [0, 3], [0, 4], [2, 3], [3, 5], [3, 6], [4, 1], [4, 6], [5, 6], [6, 1], [2, 5]];
+
+  function renderModes() {
+    const dir = 'images/projects/the-planetary-compendium/';
+    const pieces = MODE_PIECES.map(p => {
+      const [ox, oy, ow, oh] = p.o, [ix, iy, iw] = p.i;
+      return `<span class="mode-piece ${p.cls || ''}" style="--ox:${ox};--oy:${oy};--ow:${ow};--oh:${oh};--ix:${ix};--iy:${iy};--iw:${iw}">
+        ${p.img ? `<img src="${dir}${p.img}" alt="">` : ''}${p.label ? `<em>${p.label}</em>` : ''}</span>`;
+    }).join('');
+    const centre = i => { const [x, y, w] = MODE_PIECES[i].i; return [x + w / 2, y + w / 2]; };
+    const lines = MODE_LINKS.map(([a, b]) => {
+      const [x1, y1] = centre(a), [x2, y2] = centre(b);
+      return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" pathLength="1"/>`;
+    }).join('');
+    return `<section class="pd-block modes" data-mode="observe">
+      <div class="modes-toggle" role="group" aria-label="Mode">
+        <span class="modes-thumb"></span>
+        <button type="button" data-set="observe" aria-pressed="true">Observe</button>
+        <button type="button" data-set="immerse" aria-pressed="false">Immerse</button>
+      </div>
+      <div class="modes-stage">
+        <svg class="modes-lines" viewBox="0 0 100 56.25" preserveAspectRatio="none" aria-hidden="true">${lines}</svg>
+        ${pieces}
+      </div>
+      <p class="modes-caption"><span data-for="observe">Observe — linear reading with audio, at a critical distance.</span><span data-for="immerse">Immerse — non-linear and sound-led: from observer to participant.</span></p>
+    </section>`;
+  }
+
+  function initModes(root) {
+    root.querySelectorAll('.modes').forEach(el => {
+      const set = (mode) => {
+        el.dataset.mode = mode;
+        el.querySelectorAll('[data-set]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.set === mode)));
+      };
+      let auto = null;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const stop = () => { clearInterval(auto); auto = null; };
+      el.querySelector('.modes-toggle').addEventListener('click', e => {
+        const b = e.target.closest('[data-set]'); if (!b) return;
+        stop(); set(b.dataset.set);
+      });
+      el.querySelector('.modes-stage').addEventListener('click', () => {
+        stop(); set(el.dataset.mode === 'observe' ? 'immerse' : 'observe');
+      });
+      // Plays on its own while in view until someone takes over.
+      if (!reduce && 'IntersectionObserver' in window) {
+        let touched = false;
+        el.addEventListener('pointerdown', () => { touched = true; });
+        new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting && !auto && !touched) {
+            auto = setInterval(() => set(el.dataset.mode === 'observe' ? 'immerse' : 'observe'), 3200);
+          } else if (!entry.isIntersecting) stop();
+        }, { threshold: 0.5 }).observe(el);
+      }
+    });
   }
 
   function renderSystem(b) {
@@ -89,6 +159,7 @@
         </aside>
       </div>`;
 
+    initModes(content);
     content.querySelectorAll('.cmp-connector').forEach(btn => btn.addEventListener('click', () => btn.classList.toggle('is-on')));
     content.querySelectorAll('.cmp-tabs').forEach(tabs => tabs.addEventListener('click', e => {
       const btn = e.target.closest('button'); if (!btn) return;

@@ -444,6 +444,78 @@ html.theme-compendium { --bg: #FAFAF3; }
 }
 .pd-thumb { border-radius: 10px; }
 
+/* Observe / immerse demo */
+.modes { margin-top: 40px; }
+.modes-toggle {
+  position: relative; display: inline-flex; background: #fff; border-radius: 999px; padding: 6px;
+  box-shadow: 0 4px 6px -1px #B9B3FF, 0 2px 4px -2px #B9B3FF; margin-bottom: 20px;
+}
+.modes-toggle button {
+  position: relative; z-index: 1; border: 0; background: none; cursor: pointer; width: 108px;
+  padding: 9px 0; border-radius: 999px; font: 14px 'Geist Mono', ui-monospace, monospace; color: #0F0F0E;
+}
+.modes-thumb {
+  position: absolute; top: 6px; left: 6px; width: 108px; height: calc(100% - 12px); border-radius: 999px;
+  background: #B9B3FF; transition: transform .5s cubic-bezier(.65,0,.35,1), background .5s;
+}
+.modes[data-mode="immerse"] .modes-thumb { transform: translateX(108px); background: #00FF77; }
+.modes-stage {
+  container-type: inline-size; position: relative; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden;
+  cursor: pointer; background: #FAFAF3; box-shadow: inset 0 0 0 1px rgba(15,15,14,.08);
+  transition: background .9s ease;
+}
+.modes[data-mode="immerse"] .modes-stage { background: #d9d8ce; }
+.modes-stage::before {
+  content: ''; position: absolute; inset: -10%; opacity: 0; transition: opacity 1s ease;
+  background: radial-gradient(40% 50% at 30% 40%, rgba(185,179,255,.55), transparent 70%),
+              radial-gradient(35% 45% at 70% 65%, rgba(0,255,119,.25), transparent 70%);
+  filter: blur(20px);
+}
+.modes[data-mode="immerse"] .modes-stage::before { opacity: 1; animation: modes-drift 12s ease-in-out infinite alternate; }
+@keyframes modes-drift { to { transform: translate(4%, -3%) scale(1.08); } }
+.modes-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+.modes-lines line {
+  stroke: #0F0F0E; stroke-width: 0.12; stroke-dasharray: 1; stroke-dashoffset: 1;
+  transition: stroke-dashoffset .9s ease;
+}
+.modes[data-mode="immerse"] .modes-lines line { stroke-dashoffset: 0; transition-delay: .45s; }
+.mode-piece {
+  position: absolute; overflow: hidden; background: #dddcd2;
+  left: calc(var(--ox) * 1cqw); top: calc(var(--oy) * 1cqw);
+  width: calc(var(--ow) * 1cqw); height: calc(var(--oh) * 1cqw); border-radius: 0.6cqw;
+  transition: left .9s cubic-bezier(.65,0,.35,1), top .9s cubic-bezier(.65,0,.35,1),
+              width .9s cubic-bezier(.65,0,.35,1), height .9s cubic-bezier(.65,0,.35,1),
+              border-radius .9s ease, box-shadow .9s ease, background .6s;
+}
+.mode-piece:nth-child(3) { transition-delay: .04s; } .mode-piece:nth-child(4) { transition-delay: .08s; }
+.mode-piece:nth-child(5) { transition-delay: .12s; } .mode-piece:nth-child(6) { transition-delay: .16s; }
+.mode-piece:nth-child(7) { transition-delay: .2s; } .mode-piece:nth-child(8) { transition-delay: .24s; }
+.mode-piece.is-ink { background: #0F0F0E; }
+.mode-piece.is-lav { background: #B9B3FF; border-radius: 4cqw; }
+.mode-piece.is-green { background: #c9c8bf; }
+.mode-piece em {
+  position: absolute; inset: 0; display: grid; place-items: center; font: normal 1.3cqw 'Geist Mono', ui-monospace, monospace;
+  color: #0F0F0E; transition: opacity .3s;
+}
+.mode-piece img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s ease .3s; }
+.modes[data-mode="immerse"] .mode-piece {
+  left: calc(var(--ix) * 1cqw); top: calc(var(--iy) * 1cqw);
+  width: calc(var(--iw) * 1cqw); height: calc(var(--iw) * 1cqw); border-radius: 50%;
+  box-shadow: 0 0.4cqw 1.6cqw -0.4cqw #B9B3FF, 0 0 0 0.5cqw #fff;
+}
+.modes[data-mode="immerse"] .mode-piece.is-green { background: #00FF77; }
+.modes[data-mode="immerse"] .mode-piece.is-ink { box-shadow: 0 0 0 0.6cqw #fff; }
+.modes[data-mode="immerse"] .mode-piece img { opacity: 1; }
+.modes[data-mode="immerse"] .mode-piece em { opacity: 0; }
+.modes-caption { position: relative; margin-top: 12px; font-size: 13px; color: var(--muted); min-height: 1.5em; }
+.modes-caption span { transition: opacity .4s; }
+.modes-caption span[data-for="immerse"] { position: absolute; left: 0; top: 0; opacity: 0; }
+.modes[data-mode="immerse"] .modes-caption span[data-for="observe"] { opacity: 0; }
+.modes[data-mode="immerse"] .modes-caption span[data-for="immerse"] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .modes *, .modes *::before { transition: none !important; animation: none !important; }
+}
+
 /* Design system */
 .ds-sub { font-size: 15px; font-weight: 500; margin: 36px 0 16px; }
 .ds-sub span { font-weight: 400; color: var(--muted); margin-left: 8px; font-size: 13px; }
