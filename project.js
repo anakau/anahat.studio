@@ -170,10 +170,10 @@
             <div class="pd-intro-text">
               <div class="pd-intro-copy">${intro}</div>
               <div class="pd-tags">${tags}</div>
-              ${creditText ? `<button class="pd-credits-toggle" type="button" aria-expanded="false" aria-controls="pd-credits">Credits <span aria-hidden="true">+</span></button>` : ''}
+              ${creditText ? `<button class="pd-credits-toggle" type="button" aria-expanded="false" aria-controls="pd-credits">Credits <span aria-hidden="true">+</span></button>
+              <div class="pd-credits pd-credits--intro" id="pd-credits" hidden>${creditText}</div>` : ''}
             </div>
           </div>
-          ${creditText ? `<div class="pd-credits pd-credits--intro" id="pd-credits" hidden>${creditText}</div>` : ''}
           ${logos}
         </header>
         <div class="pd-text">${project.blocks.map(renderBlock).join('')}</div>`;
