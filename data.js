@@ -214,6 +214,9 @@ const PROJECTS = [
         ]
       },
       {
+        "type": "modebar"
+      },
+      {
         "type": "modes",
         "heading": "Case study: Melting Borders",
         "text": "The Hindu Kush Himalayas case in both modes. Observe reads as an article: a full-bleed figure, themes, authors, audio, and figures like the 50-year risk profile. The toggle at the top turns the page dark and opens an interactive map of the range, where thematic case files and data layers (dams, conflict, mountain passes, glaciers, rivers) can be revealed and hidden.",

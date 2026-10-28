@@ -24,6 +24,7 @@
     }
     if (b.type === 'system') return renderSystem(b);
     if (b.type === 'modes') return renderModes(b);
+    if (b.type === 'modebar') return renderModeBar();
     return '';
   }
 
@@ -51,6 +52,29 @@
         </div>
       </div>
     </section>`;
+  }
+
+  // Full-width band: the rebuilt toggle flipping on its own, with the band
+  // shifting from paper (observe) to near-black (immerse).
+  function renderModeBar() {
+    return `<section class="pd-block modebar" data-mode="observe" aria-label="Observe and immerse toggle">
+      <span class="modebar-label" data-for="observe">Observe</span>
+      <button class="hk-toggle" type="button" aria-label="Switch to immerse mode"><span class="hk-knob">${OBSERVE_ICON.replace(/hk(Grad|Clip|Orbit)/g, 'mb$1')}${IMMERSE_ICON.replace(/hkBlur/g, 'mbBlur')}</span></button>
+      <span class="modebar-label" data-for="immerse">Immerse</span>
+    </section>`;
+  }
+
+  function initModeBar(root) {
+    root.querySelectorAll('.modebar').forEach(el => {
+      const btn = el.querySelector('.hk-toggle');
+      const flip = () => {
+        const mode = el.dataset.mode === 'observe' ? 'immerse' : 'observe';
+        el.dataset.mode = mode;
+        btn.setAttribute('aria-label', mode === 'observe' ? 'Switch to immerse mode' : 'Switch to observe mode');
+      };
+      let timer = setInterval(flip, 2600);
+      btn.addEventListener('click', () => { clearInterval(timer); flip(); timer = setInterval(flip, 2600); });
+    });
   }
 
   function initModes(root) {
@@ -195,6 +219,7 @@
     }
 
     initModes(content);
+    initModeBar(content);
     initCoverVideo(content);
     const creditsBtn = content.querySelector('.pd-credits-toggle');
     if (creditsBtn) creditsBtn.addEventListener('click', () => {

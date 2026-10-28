@@ -521,6 +521,33 @@ html.theme-compendium .hk[data-mode="immerse"] .hk-panel { background: #0b0b0a; 
 .pd-screens--plain .pd-screen { border-radius: 10px; }
 .pd-screens--plain .pd-screen[src$=".png"] { box-shadow: none !important; border-radius: 0; }
 
+/* Observe / immerse band: toggle centred, loops on its own */
+.modebar {
+  position: relative; overflow: hidden; height: 168px; border-radius: 16px; margin-top: 40px;
+  display: flex; align-items: center; justify-content: center; gap: 40px;
+  background: #ecebe2; transition: background .9s cubic-bezier(.65,0,.35,1);
+}
+.modebar::before {
+  content: ''; position: absolute; inset: -40% 20%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(185,179,255,.55), transparent);
+  filter: blur(30px); transition: background .9s ease;
+}
+.modebar[data-mode="immerse"] { background: #0b0b0a; box-shadow: inset 0 0 0 1px rgba(0,255,119,.14); }
+.modebar[data-mode="immerse"]::before { background: radial-gradient(closest-side, rgba(0,255,119,.28), transparent); }
+.modebar > * { position: relative; }
+.modebar-label {
+  width: 9ch; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(15,15,14,.35); transition: color .6s ease;
+}
+.modebar-label[data-for="observe"] { text-align: right; color: #0F0F0E; }
+.modebar[data-mode="immerse"] .modebar-label[data-for="observe"] { color: rgba(242,242,236,.3); }
+.modebar[data-mode="immerse"] .modebar-label[data-for="immerse"] { color: #00FF77; }
+.modebar[data-mode="immerse"] .hk-toggle { background: #000; box-shadow: 0 4px 6px -1px #00FF77, 0 2px 4px -2px #00FF77; }
+.modebar[data-mode="immerse"] .hk-knob { transform: translateX(50px); }
+.modebar[data-mode="immerse"] .hk-icon--observe { opacity: 0; transform: scale(.6); }
+.modebar[data-mode="immerse"] .hk-icon--immerse { opacity: 1; transform: none; }
+.modebar + .pd-block { margin-top: 56px; }
+
 /* Observe / immerse, with the site's own toggle */
 .hk-panel {
   position: relative; border-radius: 16px; padding: 24px; background: #ecebe2;
@@ -925,6 +952,7 @@ a.practice-card:hover .practice-card-thumb {
   .pd-step-head p { grid-column: 1; }
   .pd-screens--2, .cmp-cases, .hk-layer, .pd-list { grid-template-columns: 1fr; }
   .hk-panel { padding: 16px; }
+  .modebar { height: 128px; gap: 20px; }
   .ds-swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .ds-types, .ds-board { grid-template-columns: 1fr; }
 
