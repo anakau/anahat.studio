@@ -479,7 +479,9 @@ html.theme-compendium .pd-thumb,
 html.theme-compendium .hk-layer img { box-shadow: 0 16px 40px -16px rgba(0,0,0,.7); }
 html.theme-compendium .ds-chip { box-shadow: inset 0 0 0 1px rgba(242,242,236,.14); }
 html.theme-compendium .ds-type-img { box-shadow: none; }
-html.theme-compendium .ds-cell { background: #ecebe2; }
+html.theme-compendium .ds-cell { background: #1f1f1d; color: #F2F2EC; }
+html.theme-compendium .ds-cell small { color: var(--muted); }
+.ds-cell > :first-child, .cmp-mail input { color: #0F0F0E; }
 html.theme-compendium .hk-panel { background: #ecebe2; }
 html.theme-compendium .hk[data-mode="immerse"] .hk-panel { background: #0b0b0a; box-shadow: inset 0 0 0 1px rgba(0,255,119,.18); }
 .pd-block { margin-top: 72px; }
