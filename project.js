@@ -231,7 +231,11 @@
         }).join('') })),
         ...(creditText ? [{ name: 'Credits', html: `<div class="mini-credits">${creditText}</div>${logos}` }] : []),
       ];
-      const navItems = sections.map((sc, i) => ({ name: sc.name, id: slugify(sc.name), n: i + 1 }));
+      const navItems = [];
+      sections.forEach((sc, i) => {
+        navItems.push({ name: sc.name, id: slugify(sc.name), n: i + 1 });
+        (sc.subs || []).forEach(name => navItems.push({ name, id: slugify(name), parent: slugify(sc.name) }));
+      });
       content.innerHTML = `
         <div class="mini">
           <nav class="mini-bar">
@@ -243,12 +247,11 @@
           <h1 class="visually-hidden">${project.name}</h1>
           <div class="mini-main">
             <nav class="mini-jump" aria-label="Sections">
-              ${navItems.map((it, i) => `<i class="mini-gap"></i><a href="#${it.id}" class="${it.sub ? 'is-sub' : ''}" style="--i:${i};--rest:${navItems.length - 1 - i}">${it.sub ? '' : `<span class="mini-num">${it.n}</span>`}${it.name}</a>`).join('')}
+              ${navItems.map(it => `<i class="mini-gap"></i><a href="#${it.id}"${it.parent ? ` class="is-sub is-hidden" data-parent="${it.parent}"` : ''}>${it.parent ? '' : `<span class="mini-num">${it.n}</span>`}${it.name}</a>`).join('')}
             </nav>
             <div class="mini-content">
               <div class="mini-hero">${coverMedia(project)}</div>
               ${sections.map(sc => `<section class="mini-sec" id="${slugify(sc.name)}" aria-label="${sc.name}">
-                <nav class="mini-subnav" aria-label="${sc.name} sections">${(sc.subs || []).map((n, i, all) => `<i class="mini-gap"></i><a href="#${slugify(n)}" style="--i:${i};--rest:${all.length - 1 - i}">${n}</a>`).join('')}</nav>
                 <div class="mini-body pd-text">${sc.html}</div>
               </section>`).join('')}
             </div>
@@ -276,54 +279,60 @@
     // Sticky at both ends, upcoming ones stack at the bottom of the screen,
     // the current one rides with its section, past ones stack at the top.
     const jump = content.querySelector('.mini-jump');
-    // Same for each chapter's sub-nav, inside its own column.
-    const placeIn = (col, offset) => {
-      const base = col.getBoundingClientRect().top + window.scrollY;
-      let y = base;
-      col.querySelectorAll('a').forEach(a => {
-        const el = content.querySelector(a.getAttribute('href'));
-        const target = el.getBoundingClientRect().top + window.scrollY + offset;
-        a.previousElementSibling.style.height = Math.max(0, target - y) + 'px';
-        y = Math.max(y, target) + a.offsetHeight;
-      });
-    };
     if (jump) {
       const labels = [...jump.querySelectorAll('a')];
+      // Sub-items show only while their chapter is current; the visible
+      // items are re-indexed so the top and bottom stacks stay tight.
+      const layout = current => {
+        const shown = labels.filter(a => !a.dataset.parent || a.dataset.parent === current);
+        labels.forEach(a => a.classList.toggle('is-hidden', !shown.includes(a)));
+        shown.forEach((a, i) => { a.style.setProperty('--i', i); a.style.setProperty('--rest', shown.length - 1 - i); });
+        place();
+      };
+      jump.layout = layout;
       const place = () => {
-        content.querySelectorAll('.mini-subnav').forEach(col => placeIn(col, 0));
         const base = jump.getBoundingClientRect().top + window.scrollY;
         let y = base;
         // Spacers (not margins) push each label down to its section: a
         // sticky element's margin would stop it moving past its container.
-        labels.forEach((a, i) => {
+        labels.forEach(a => {
+          if (a.classList.contains('is-hidden')) { a.previousElementSibling.style.height = '0px'; return; }
           const el = content.querySelector(a.getAttribute('href'));
-          const target = el.getBoundingClientRect().top + window.scrollY + 48;
+          const target = el.getBoundingClientRect().top + window.scrollY + (a.dataset.parent ? 0 : 48);
           a.previousElementSibling.style.height = Math.max(0, target - y) + 'px';
           y = Math.max(y, target) + a.offsetHeight;
         });
       };
-      place();
+      layout(null);
       window.addEventListener('resize', place);
       window.addEventListener('load', place);
       new ResizeObserver(place).observe(content.querySelector('.mini-content'));
     }
     // Scrollspy: the section crossing the upper third of the screen is the
     // current one in the Jump to nav.
-    if (jump && 'IntersectionObserver' in window) {
-      const links = new Map([...content.querySelectorAll('.mini-jump a, .mini-subnav a')].map(a => [a.getAttribute('href').slice(1), a]));
-      const spyOn = selector => {
-        const group = [...content.querySelectorAll(selector)].map(el => links.get(el.id)).filter(Boolean);
-        const spy = new IntersectionObserver(entries => {
-          entries.forEach(e => {
-            const a = links.get(e.target.id); if (!a) return;
-            if (e.isIntersecting) { group.forEach(x => x.classList.remove('is-current')); a.classList.add('is-current'); }
-            else if (selector === '.mini-sub') a.classList.remove('is-current');
-          });
-        }, { rootMargin: '-33% 0px -66% 0px' });
-        content.querySelectorAll(selector).forEach(el => spy.observe(el));
+    // Current chapter (and sub-section): the last one whose top has passed
+    // a third of the way down the screen.
+    if (jump) {
+      const links = new Map([...jump.querySelectorAll('a')].map(a => [a.getAttribute('href').slice(1), a]));
+      const secs = [...content.querySelectorAll('.mini-sec')];
+      let currentSec = null;
+      const lastPassed = els => {
+        const line = window.innerHeight / 3;
+        let hit = null;
+        els.forEach(el => { if (el.getBoundingClientRect().top <= line) hit = el; });
+        return hit;
       };
-      spyOn('.mini-sec');
-      spyOn('.mini-sub');
+      const spy = () => {
+        const sec = lastPassed(secs);
+        const id = sec ? sec.id : null;
+        if (id !== currentSec) { currentSec = id; jump.layout(id); }
+        const sub = sec ? lastPassed([...sec.querySelectorAll('.mini-sub')]) : null;
+        links.forEach((a, key) => a.classList.toggle('is-current', key === id || (sub && key === sub.id)));
+      };
+      let ticking = false;
+      window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { spy(); ticking = false; }); } }, { passive: true });
+      window.addEventListener('resize', spy);
+      spy();
     }
     initModeBar(content);
     initCoverVideo(content);

@@ -482,6 +482,8 @@ html.theme-compendium .pd-logos img { filter: invert(1); }
    left label column and a wide content column. */
 html.theme-mini { --bg: #ffffff; --ink: #0F0F0E; --muted: #8a8a86; --line: #0F0F0E; }
 html.theme-mini #site-header, html.theme-mini #back-link { display: none; }
+/* The nav's spacers resize as chapters change; stop the browser shifting the scroll to compensate. */
+html.theme-mini, html.theme-mini body { overflow-anchor: none; }
 html.theme-mini #project-detail { max-width: none; padding: 0 40px 120px; }
 .mini { font-size: 15px; line-height: 1.45; }
 .mini-row { display: grid; grid-template-columns: 240px minmax(0, 1fr); column-gap: 32px; border-top: 1px solid var(--line); }
@@ -498,7 +500,7 @@ html.theme-mini #project-detail { max-width: none; padding: 0 40px 120px; }
 .mini-title h1 { font-size: 64px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.05; }
 .mini-btn { flex: none; background: var(--ink); color: #fff; border-radius: 4px; padding: 11px 20px; transition: opacity .15s; }
 .mini-btn:hover { opacity: .85; }
-.mini-main { display: grid; grid-template-columns: 170px minmax(0, 1fr); column-gap: 24px; }
+.mini-main { display: grid; grid-template-columns: 240px minmax(0, 1fr); column-gap: 32px; }
 .mini-jump { display: flex; flex-direction: column; align-self: stretch; --step: 26px; }
 .mini-jump a {
   position: sticky; z-index: 5; display: flex; align-items: center; gap: 8px; height: var(--step);
@@ -524,15 +526,12 @@ html.theme-mini #project-detail { max-width: none; padding: 0 40px 120px; }
 .mini-hero .pd-thumb { border-radius: var(--radius); box-shadow: none; margin: 0; }
 .mini-hero { padding-top: 8px; }
 .mini-hero + .mini-sec { border-top: 0; }
-.mini-sec { display: grid; grid-template-columns: 190px minmax(0, 1fr); column-gap: 32px; padding: 48px 0 96px; border-top: 1px solid var(--line); scroll-margin-top: 70px; }
-/* Sub-nav: its own column, sticky only within its chapter. */
-.mini-subnav { align-self: stretch; display: flex; flex-direction: column; --step: 26px; }
-.mini-subnav a {
-  position: sticky; display: flex; align-items: center; height: var(--step);
-  top: calc(96px + var(--i) * var(--step)); bottom: calc(40px + var(--rest) * var(--step));
-}
-.mini-subnav a { color: var(--muted); transition: color .15s; }
-.mini-subnav a:hover, .mini-subnav a.is-current { color: var(--ink); }
+.mini-sec { padding: 48px 0 96px; border-top: 1px solid var(--line); scroll-margin-top: 70px; }
+/* Sub-items: nested under their chapter, indented to its text. */
+.mini-jump a.is-sub { padding-left: 23px; }
+.mini-jump a.is-sub.is-current { color: var(--ink); }
+.mini-jump a.is-hidden { height: 0; opacity: 0; overflow: hidden; pointer-events: none; }
+.mini-jump a { transition: color .15s, opacity .3s; }
 .mini-label { font-size: 15px; font-weight: 400; line-height: 1.45; }
 .mini-body > .pd-block:first-child { margin-top: 0; }
 .mini-body.pd-text { max-width: none; margin-top: 0; }
@@ -568,8 +567,7 @@ html.theme-mini { --radius: 16px; }
   .mini-jump { position: sticky; top: 0; z-index: 5; align-self: start; flex-direction: row; flex-wrap: nowrap; gap: 16px; background: var(--bg); overflow-x: auto; padding: 12px 0; border-bottom: 1px solid var(--line); scrollbar-width: none; }
   .mini-jump a { position: static; flex: none; height: auto; }
   .mini-gap { display: none; }
-  .mini-sec { grid-template-columns: 1fr; }
-  .mini-subnav { display: none; }
+  .mini-jump a.is-sub { display: none; }
   .mini-nav { opacity: 1; transform: none; pointer-events: auto; }
   .mini-jump a { flex: none; }
   .mini-lede p { font-size: 18px; }
