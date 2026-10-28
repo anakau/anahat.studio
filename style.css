@@ -481,10 +481,10 @@ html.theme-compendium .pd-logos img { filter: invert(1); }
 /* Project mini site (Grilli Type-like): light page, hairline rules, a
    left label column and a wide content column. */
 html.theme-mini { --bg: #ffffff; --ink: #0F0F0E; --muted: #8a8a86; --line: #0F0F0E; }
-html.theme-mini #site-header, html.theme-mini #back-link { display: none; }
+html.theme-mini #site-header, html.theme-mini #back-link, html.theme-mini #site-footer { display: none; }
 /* The nav's spacers resize as chapters change; stop the browser shifting the scroll to compensate. */
 html.theme-mini, html.theme-mini body { overflow-anchor: none; }
-html.theme-mini #project-detail { max-width: none; padding: 0 40px 120px; }
+html.theme-mini #project-detail, html.theme-mini #practice-page { max-width: none; padding: 0 40px 120px; }
 .mini { font-size: 15px; line-height: 1.45; }
 .mini-row { display: grid; grid-template-columns: 240px minmax(0, 1fr); column-gap: 32px; border-top: 1px solid var(--line); }
 .mini-bar { position: sticky; top: 0; z-index: 10; background: var(--bg); padding: 24px 0 20px; }
@@ -518,6 +518,8 @@ html.theme-mini #project-detail { max-width: none; padding: 0 40px 120px; }
 .mini .mini-sub > .pd-step .pd-step-head .pd-step-n { display: none; }
 .mini .mini-sub > .pd-step .pd-step-head p { grid-column: 1; margin-top: 0; }
 .mini-sub > .pd-block > .pd-heading:first-child { display: none; }
+.mini-jump a { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mini-num { flex: none; }
 .mini-jump a.is-current .mini-num { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .mini-jump a.is-current { color: var(--ink); }
 .mini-hero { padding: 48px 0; }
@@ -559,7 +561,7 @@ html.theme-mini { --radius: 16px; }
 .mini .pd-cover-video { border-radius: var(--radius); overflow: hidden; }
 .mini .pd-step-head h2 { font-size: 22px; }
 @media (max-width: 860px) {
-  html.theme-mini #project-detail { padding: 0 16px 80px; }
+  html.theme-mini #project-detail, html.theme-mini #practice-page { padding: 0 16px 80px; }
   .mini-row { grid-template-columns: 1fr; row-gap: 16px; }
   .mini-title h1 { font-size: 36px; }
   .mini-title-inner { flex-direction: column; align-items: flex-start; }
@@ -573,6 +575,25 @@ html.theme-mini { --radius: 16px; }
   .mini-lede p { font-size: 18px; }
   .mini-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mini-credits { column-count: 1; }
+}
+
+/* Practice mini site: one large thumbnail per curated project, then the archive. */
+.mini-project { padding: 8px 0 72px; border-top: 0; }
+.mini-project a { display: block; }
+.mini-thumb { border-radius: var(--radius); overflow: hidden; aspect-ratio: 16 / 10; background: #f1f0ec; }
+.mini-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.mini-project a:hover .mini-thumb img { transform: scale(1.015); }
+.mini-thumb-empty { display: grid; place-items: center; height: 100%; color: var(--muted); }
+.mini-caption { display: flex; justify-content: space-between; gap: 24px; margin-top: 12px; color: var(--muted); }
+.mini-archive { list-style: none; }
+.mini-archive li { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 2fr) 60px; gap: 24px; padding: 10px 0; border-bottom: 1px solid rgba(15,15,14,.12); }
+.mini-archive li:first-child { border-top: 1px solid rgba(15,15,14,.12); }
+.mini-archive .arc-tags { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mini-archive .arc-year { color: var(--muted); text-align: right; }
+.mini-archive a:hover .arc-name { border-bottom: 1px solid currentColor; }
+@media (max-width: 860px) {
+  .mini-archive li { grid-template-columns: 1fr 48px; }
+  .mini-archive .arc-tags { display: none; }
 }
 
 /* Case-study blocks */

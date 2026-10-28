@@ -66,6 +66,51 @@
     return p ? projectCard(p, { award }) : placeholderCard();
   }
 
+  // Preview: the mini-site version — curated projects on the right, their
+  // titles in the riding nav on the left, and an Archive of everything else.
+  if (window.PREVIEW && typeof initMiniNav === 'function') {
+    renderMini();
+    return;
+  }
+
+  function renderMini() {
+    const curated = ROWS.flatMap(r => r.slugs).filter(Boolean).map(bySlug).filter(Boolean);
+    const rest = PROJECTS.filter(p => !curated.includes(p))
+      .sort((a, b) => String(b.year).localeCompare(String(a.year)));
+    const id = p => 'p-' + p.slug;
+    const thumb = p => SHOW_THUMBS.includes(p.slug) && p.cover
+      ? `<img src="${p.cover}" alt="${p.name}">`
+      : `<span class="mini-thumb-empty">${p.name}</span>`;
+    const link = (p, inner) => { const h = projectHref(p); return h ? `<a href="${h}"${p.hasFullDocs ? '' : ' target="_blank" rel="noopener"'}>${inner}</a>` : inner; };
+    const archiveRows = rest.map(p => `<li>${link(p, `<span class="arc-name">${p.name}</span>`)}<span class="arc-tags">${(p.tags || []).join(', ')}</span><span class="arc-year">${p.year || ''}</span></li>`).join('');
+    document.documentElement.classList.add('theme-mini');
+    el.closest('#practice-page').innerHTML = `
+      <div class="mini">
+        <nav class="mini-bar">
+          <div class="mini-brand">
+            <a class="mini-logo" href="index.html"><img src="images/logo-black-default.svg" alt="Anahat Studio, home"></a>
+            <div class="mini-nav"><a href="practice.html">Practice</a><a href="about.html">About</a><a href="archive.html">Archive</a></div>
+          </div>
+        </nav>
+        <div class="mini-main">
+          <nav class="mini-jump" aria-label="Projects">
+            ${curated.map((p, i) => `<i class="mini-gap"></i><a href="#${id(p)}"><span class="mini-num">${i + 1}</span>${p.name}</a>`).join('')}
+            <i class="mini-gap"></i><a href="#p-archive"><span class="mini-num">+</span>Archive</a>
+          </nav>
+          <div class="mini-content">
+            ${curated.map(p => `<section class="mini-sec mini-project" id="${id(p)}">
+              ${link(p, `<div class="mini-thumb">${thumb(p)}</div>`)}
+              <p class="mini-caption">${p.category || ''}<span>${p.year || ''}</span></p>
+            </section>`).join('')}
+            <section class="mini-sec" id="p-archive">
+              <ul class="mini-archive">${archiveRows}</ul>
+            </section>
+          </div>
+        </div>
+      </div>`;
+    initMiniNav(document.getElementById('practice-page'));
+  }
+
   el.innerHTML = ROWS.map(row => {
     const cards = row.slugs.map(slug => slotCard(slug, (row.award || []).includes(slug))).join('');
     return `<div class="practice-row practice-row--${row.type}">${cards}</div>`;

@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  // Preview: switch to the light mini-site theme before first paint.
+  try { const f = new URLSearchParams(location.search).get('preview'); if (f === '1' || (f !== '0' && localStorage.getItem('preview') === '1')) document.documentElement.className = 'theme-mini'; } catch (e) {}
+</script>
 <title>Anahat Kaur — Practice</title>
-<link rel="stylesheet" href="style.css?v=81">
+<link rel="stylesheet" href="style.css?v=83">
 </head>
 <body>
 
@@ -30,9 +34,9 @@
 </footer>
 
 <script src="cursor.js"></script>
-<script src="header-scroll.js"></script>
 <script src="preview.js"></script>
-<script src="data.js?v=76"></script>
-<script src="practice.js?v=3"></script>
+<script src="mini-nav.js?v=1"></script>
+<script src="data.js?v=80"></script>
+<script src="practice.js?v=4"></script>
 </body>
 </html>

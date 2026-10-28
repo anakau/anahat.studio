@@ -275,65 +275,7 @@
     }
 
     initModes(content);
-    // GT America-style labels: each sits beside the start of its section.
-    // Sticky at both ends, upcoming ones stack at the bottom of the screen,
-    // the current one rides with its section, past ones stack at the top.
-    const jump = content.querySelector('.mini-jump');
-    if (jump) {
-      const labels = [...jump.querySelectorAll('a')];
-      // Sub-items show only while their chapter is current; the visible
-      // items are re-indexed so the top and bottom stacks stay tight.
-      const layout = current => {
-        const shown = labels.filter(a => !a.dataset.parent || a.dataset.parent === current);
-        labels.forEach(a => a.classList.toggle('is-hidden', !shown.includes(a)));
-        shown.forEach((a, i) => { a.style.setProperty('--i', i); a.style.setProperty('--rest', shown.length - 1 - i); });
-        place();
-      };
-      jump.layout = layout;
-      const place = () => {
-        const base = jump.getBoundingClientRect().top + window.scrollY;
-        let y = base;
-        // Spacers (not margins) push each label down to its section: a
-        // sticky element's margin would stop it moving past its container.
-        labels.forEach(a => {
-          if (a.classList.contains('is-hidden')) { a.previousElementSibling.style.height = '0px'; return; }
-          const el = content.querySelector(a.getAttribute('href'));
-          const target = el.getBoundingClientRect().top + window.scrollY + (a.dataset.parent ? 0 : 48);
-          a.previousElementSibling.style.height = Math.max(0, target - y) + 'px';
-          y = Math.max(y, target) + a.offsetHeight;
-        });
-      };
-      layout(null);
-      window.addEventListener('resize', place);
-      window.addEventListener('load', place);
-      new ResizeObserver(place).observe(content.querySelector('.mini-content'));
-    }
-    // Scrollspy: the section crossing the upper third of the screen is the
-    // current one in the Jump to nav.
-    // Current chapter (and sub-section): the last one whose top has passed
-    // a third of the way down the screen.
-    if (jump) {
-      const links = new Map([...jump.querySelectorAll('a')].map(a => [a.getAttribute('href').slice(1), a]));
-      const secs = [...content.querySelectorAll('.mini-sec')];
-      let currentSec = null;
-      const lastPassed = els => {
-        const line = window.innerHeight / 3;
-        let hit = null;
-        els.forEach(el => { if (el.getBoundingClientRect().top <= line) hit = el; });
-        return hit;
-      };
-      const spy = () => {
-        const sec = lastPassed(secs);
-        const id = sec ? sec.id : null;
-        if (id !== currentSec) { currentSec = id; jump.layout(id); }
-        const sub = sec ? lastPassed([...sec.querySelectorAll('.mini-sub')]) : null;
-        links.forEach((a, key) => a.classList.toggle('is-current', key === id || (sub && key === sub.id)));
-      };
-      let ticking = false;
-      window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { spy(); ticking = false; }); } }, { passive: true });
-      window.addEventListener('resize', spy);
-      spy();
-    }
+    initMiniNav(content);
     initModeBar(content);
     initCoverVideo(content);
     const creditsBtn = content.querySelector('.pd-credits-toggle');
