@@ -128,15 +128,19 @@
       ? project.blocks.map(renderBlock).join('') + credits.replace('pd-block--credits', 'pd-block--credits pd-credits-end')
       : legacy + credits;
     const sideCredits = project.blocks ? credits.replace('pd-block pd-block--text pd-block--credits', 'pd-side-credits') : '';
+    // Cover and description run full width; the story (left) and the
+    // details (right) sit in two columns below.
     content.innerHTML = `
+      <header class="pd-intro">
+        <img class="pd-thumb" src="${project.cover}" alt="${project.name}">
+        <h1>${project.name}</h1>
+        <p class="pd-summary">${project.summary || project.category}</p>
+      </header>
       <div class="pd-layout">
         <div class="pd-main">
-          <img class="pd-thumb" src="${project.cover}" alt="${project.name}">
           <div class="pd-text">${sections}</div>
         </div>
         <aside class="pd-side">
-          <h1>${project.name}</h1>
-          <p class="pd-summary">${project.summary || project.category}</p>
           <dl class="pd-details">${details}</dl>
           ${visit}
           <div class="pd-tags">${tags}</div>
