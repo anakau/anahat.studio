@@ -114,7 +114,8 @@
     const tags = (project.tags || []).map(t => `<span class="practice-tag">${t}</span>`).join('');
     const logoRow = (list, cls) => list ? `<div class="pd-logos ${cls}">${list.map(([src, name]) => `<img src="${src}" alt="${name}">`).join('')}</div>` : '';
     const cl = project.creditLogos;
-    const logos = cl ? logoRow(cl.lead, 'pd-logos--lead') + logoRow(cl.programmes, 'pd-logos--programmes') + logoRow(cl.partners, 'pd-logos--partners') : '';
+    // Every credited organisation in one row, lead partners first.
+    const logos = cl ? logoRow([...(cl.lead || []), ...(cl.programmes || []), ...(cl.partners || [])], 'pd-logos--row') : '';
     const credits = (project.sections || []).filter(s => s.credits).map(s =>
       `<section class="pd-block pd-block--text pd-block--credits"><h2 class="pd-heading">${s.heading}</h2><div class="pd-credits">${s.credits.map(c => `<p>${c}</p>`).join('')}</div>${logos}</section>`).join('');
     const legacy = (project.sections || []).filter(s => s.heading !== 'Role' && !s.credits).map(s => {
@@ -132,13 +133,9 @@
         <header class="pd-intro">
           <img class="pd-thumb" src="${project.cover}" alt="${project.name}">
           <h1 class="visually-hidden">${project.name}</h1>
-          <div class="pd-intro-grid">
-            <div class="pd-intro-info">
-              <dl class="pd-facts">${details}</dl>
-              <div class="pd-intro-links">${visit}<div class="pd-tags">${tags}</div></div>
-            </div>
-            <div class="pd-intro-text">${(project.intro || [project.summary || project.category]).map(p => `<p>${p}</p>`).join('')}</div>
-          </div>
+          <div class="pd-intro-text">${(project.intro || [project.summary || project.category]).map(p => `<p>${p}</p>`).join('')}</div>
+          <dl class="pd-facts">${details}</dl>
+          <div class="pd-intro-links">${visit}<div class="pd-tags">${tags}</div></div>
           ${creditList}
         </header>
         <div class="pd-text">${project.blocks.map(renderBlock).join('')}</div>`;

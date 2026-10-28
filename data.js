@@ -129,7 +129,7 @@ const PROJECTS = [
       ["Year", "2025"],
       ["Role", "Creative direction, UX/UI design, stakeholder management"],
       ["With", "Arianna Smaron"],
-      ["Partners", "Berggruen Institute, Dark Matter Labs"],
+      ["Partners", "Berggruen Institute<br>Dark Matter Labs"],
       ["Mediums", "<ul class=\"pd-mediums\"><li>Interactive web platform</li><li>Immersive sound</li><li>Audio interviews</li><li>Animation</li><li>Illustration</li><li>Game design</li><li>Physical exhibition, Zurich</li><li>Printed publication of the case studies</li></ul>"],
       ["Awards", "<a href=\"https://archive.aec.at/prix/320414/\" target=\"_blank\" rel=\"noopener\">Honorary Mention, Digital Humanity, Prix Ars Electronica 2026 ↗</a>"],
       ["Exhibitions & events", "<ul class=\"pd-events\"><li><b>Slow Listening: Sounds from the Planetary Compendium</b><span>Listening experience, Medulla, Berlin · 28 October 2026 · <a href=\"https://luma.com/dyr6sdgn\" target=\"_blank\" rel=\"noopener\">Event ↗</a></span></li><li><b>The Planetary Compendium</b><span>Physical exhibition, Unsorted Love, Zurich · November 2025</span></li></ul>"]
