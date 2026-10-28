@@ -205,23 +205,51 @@
       const creditLine = c => c.replace(/^(.+?)( by | in )/, '<b>$1</b>$2');
       const creditText = (project.sections || []).filter(s => s.credits).map(s => s.credits.map(c => `<p>${creditLine(c)}</p>`).join('')).join('');
       const intro = (project.intro || [project.summary || project.category]).map(p => `<p>${p}</p>`).join('');
+      // Mini site: top bar, title row, "Jump to" beside the cover, then one
+      // ruled section per topic with its name in the left column.
+      const sectionOf = b => b.type === 'modebar' || b.type === 'modes' || /^Case: glacier/.test(b.heading || '') ? 'Observe & immerse'
+        : b.heading === 'Design principles' ? 'Principles'
+        : b.type === 'system' ? 'Design system'
+        : b.heading === 'Printed edition' ? 'Printed edition' : 'Interface';
+      const groups = [];
+      project.blocks.forEach(b => {
+        const name = sectionOf(b);
+        let g = groups.find(x => x.name === name);
+        if (!g) groups.push(g = { name, blocks: [] });
+        g.blocks.push(b);
+      });
+      const slugify = t => 's-' + t.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      const sections = [
+        { name: 'Overview', html: `
+          <div class="mini-lede">${intro}</div>
+          <dl class="mini-facts">${details}${rows(project.recognition)}</dl>
+          <div class="pd-tags">${tags}</div>` },
+        ...groups.map(g => ({ name: g.name, html: g.blocks.map(renderBlock).join('') })),
+        ...(creditText ? [{ name: 'Credits', html: `<div class="mini-credits">${creditText}</div>${logos}` }] : []),
+      ];
+      const visitUrl = project.url ? `<a class="mini-btn" href="${project.url}" target="_blank" rel="noopener">Visit ${project.url.replace(/^https?:\/\//, '')} ↗</a>` : '';
       content.innerHTML = `
-        <header class="pd-intro">
-          ${coverMedia(project)}
-          <h1 class="visually-hidden">${project.name}</h1>
-          <div class="pd-info">
-            <dl class="pd-facts">${details}</dl>
-            <dl class="pd-facts">${rows(project.recognition)}</dl>
-            <div class="pd-intro-text">
-              <div class="pd-tags">${tags}</div>
-              <div class="pd-intro-copy">${intro}</div>
-              ${creditText ? `<button class="pd-credits-toggle" type="button" aria-expanded="false" aria-controls="pd-credits">Credits <span aria-hidden="true">+</span></button>
-              <div class="pd-credits pd-credits--intro" id="pd-credits" hidden>${creditText}</div>` : ''}
+        <div class="mini">
+          <nav class="mini-bar">
+            <a class="mini-logo" href="index.html"><img src="images/logo-black-default.svg" alt="Anahat Studio"></a>
+            <div class="mini-nav"><a href="practice.html">Practice</a><a href="about.html">About</a><a href="archive.html">Archive</a></div>
+          </nav>
+          <header class="mini-row mini-title">
+            <div></div>
+            <div class="mini-title-inner"><h1>${project.name}</h1>${visitUrl}</div>
+          </header>
+          <div class="mini-row mini-hero">
+            <div class="mini-jump">
+              <span>Jump to</span>
+              ${sections.map(sc => `<a href="#${slugify(sc.name)}">${sc.name}</a>`).join('')}
             </div>
+            <div>${coverMedia(project)}</div>
           </div>
-          ${logos}
-        </header>
-        <div class="pd-text">${project.blocks.map(renderBlock).join('')}</div>`;
+          ${sections.map(sc => `<section class="mini-row mini-sec" id="${slugify(sc.name)}">
+            <h2 class="mini-label">${sc.name}</h2>
+            <div class="mini-body pd-text">${sc.html}</div>
+          </section>`).join('')}
+        </div>`;
     } else {
       content.innerHTML = `
         <div class="pd-layout">
@@ -256,7 +284,7 @@
       tabs.querySelectorAll('button').forEach(b => b.classList.toggle('is-on', b === btn));
     }));
     content.querySelectorAll('.cmp-burger').forEach(btn => btn.addEventListener('click', () => btn.classList.toggle('is-open')));
-    if (project.slug === 'the-planetary-compendium') document.documentElement.classList.add('theme-compendium');
+    if (project.blocks) document.documentElement.classList.add('theme-mini');
   }
 
   const backLink = document.getElementById('back-link');
