@@ -239,7 +239,7 @@
           </header>
           <div class="mini-main">
             <nav class="mini-jump" aria-label="Sections">
-              ${sections.map(sc => `<a href="#${slugify(sc.name)}">${sc.name}</a>`).join('')}
+              ${sections.map((sc, i) => `<i class="mini-gap"></i><a href="#${slugify(sc.name)}" style="--i:${i};--rest:${sections.length - 1 - i}"><span class="mini-num">${i + 1}</span>${sc.name}</a>`).join('')}
             </nav>
             <div class="mini-content">
               <div class="mini-hero">${coverMedia(project)}</div>
@@ -267,9 +267,31 @@
     }
 
     initModes(content);
+    // GT America-style labels: each sits beside the start of its section.
+    // Sticky at both ends, upcoming ones stack at the bottom of the screen,
+    // the current one rides with its section, past ones stack at the top.
+    const jump = content.querySelector('.mini-jump');
+    if (jump) {
+      const labels = [...jump.querySelectorAll('a')];
+      const secs = [...content.querySelectorAll('.mini-sec')];
+      const place = () => {
+        const base = jump.getBoundingClientRect().top + window.scrollY;
+        let y = base;
+        // Spacers (not margins) push each label down to its section: a
+        // sticky element's margin would stop it moving past its container.
+        labels.forEach((a, i) => {
+          const target = secs[i].getBoundingClientRect().top + window.scrollY + 48;
+          a.previousElementSibling.style.height = Math.max(0, target - y) + 'px';
+          y = Math.max(y, target) + a.offsetHeight;
+        });
+      };
+      place();
+      window.addEventListener('resize', place);
+      window.addEventListener('load', place);
+      new ResizeObserver(place).observe(content.querySelector('.mini-content'));
+    }
     // Scrollspy: the section crossing the upper third of the screen is the
     // current one in the Jump to nav.
-    const jump = content.querySelector('.mini-jump');
     if (jump && 'IntersectionObserver' in window) {
       const links = new Map([...jump.querySelectorAll('a')].map(a => [a.getAttribute('href').slice(1), a]));
       const spy = new IntersectionObserver(entries => {

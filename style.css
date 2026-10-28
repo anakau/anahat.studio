@@ -496,9 +496,18 @@ html.theme-mini #project-detail { max-width: none; padding: 0 40px 120px; }
 .mini-btn { flex: none; background: var(--ink); color: #fff; border-radius: 4px; padding: 11px 20px; transition: opacity .15s; }
 .mini-btn:hover { opacity: .85; }
 .mini-main { display: grid; grid-template-columns: 240px minmax(0, 1fr); column-gap: 32px; border-top: 1px solid var(--line); }
-.mini-jump { display: flex; flex-direction: column; gap: 6px; align-self: start; position: sticky; top: 0; padding-top: 48px; }
+.mini-jump { display: flex; flex-direction: column; align-self: stretch; --step: 26px; }
+.mini-jump a {
+  position: sticky; z-index: 5; display: flex; align-items: center; gap: 8px; height: var(--step);
+  top: calc(24px + var(--i) * var(--step)); bottom: calc(40px + var(--rest) * var(--step));
+}
+.mini-gap { display: block; flex: none; }
+.mini-num {
+  display: inline-grid; place-items: center; width: 15px; height: 15px; border-radius: 50%;
+  border: 1px solid currentColor; font-size: 9px; line-height: 1;
+}
+.mini-jump a.is-current .mini-num { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .mini-jump a.is-current { color: var(--ink); }
-.mini-jump a.is-current::before { content: '●'; font-size: 8px; vertical-align: 2px; margin-right: 8px; }
 .mini-hero { padding: 48px 0; }
 .mini-jump a { color: var(--muted); transition: color .15s; }
 .mini-jump a:hover { color: var(--ink); }
@@ -529,7 +538,9 @@ html.theme-mini #project-detail { max-width: none; padding: 0 40px 120px; }
   .mini-title h1 { font-size: 36px; }
   .mini-title-inner { flex-direction: column; align-items: flex-start; }
   .mini-main { grid-template-columns: 1fr; }
-  .mini-jump { position: sticky; top: 0; z-index: 5; background: var(--bg); flex-direction: row; flex-wrap: nowrap; overflow-x: auto; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+  .mini-jump { position: sticky; top: 0; z-index: 5; align-self: start; flex-direction: row; flex-wrap: nowrap; gap: 16px; background: var(--bg); overflow-x: auto; padding: 12px 0; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+  .mini-jump a { position: static; flex: none; height: auto; }
+  .mini-gap { display: none; }
   .mini-jump a { flex: none; }
   .mini-lede p { font-size: 20px; }
   .mini-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
