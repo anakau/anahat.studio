@@ -114,9 +114,9 @@ const PROJECTS = [
     "external": true,
     "cover": "images/projects/the-planetary-compendium/cover-map.jpg",
     "coverVideo": {
-      "mp4": "images/projects/the-planetary-compendium/cover-tutorial.mp4",
-      "webm": "images/projects/the-planetary-compendium/cover-tutorial.webm",
-      "poster": "images/projects/the-planetary-compendium/cover-tutorial-poster.jpg"
+      "mp4": "images/projects/the-planetary-compendium/cover-tutorial.mp4?v=2",
+      "webm": "images/projects/the-planetary-compendium/cover-tutorial.webm?v=2",
+      "poster": "images/projects/the-planetary-compendium/cover-tutorial-poster.jpg?v=2"
     },
     "images": [
       "images/projects/the-planetary-compendium/home.jpg",
@@ -133,13 +133,13 @@ const PROJECTS = [
     "details": [
       ["Website", "<a href=\"https://governtheplanet.org\" target=\"_blank\" rel=\"noopener\">governtheplanet.org ↗</a>"],
       ["Year", "2025"],
-      ["Role", "Creative direction, visual concepts, storytelling, UX/UI design, stakeholder management"],
+      ["Role", "<span class=\"pd-nowrap\">Creative direction</span>, <span class=\"pd-nowrap\">Visual concepts</span>, <span class=\"pd-nowrap\">Storytelling</span>, <span class=\"pd-nowrap\">UX/UI design</span>, <span class=\"pd-nowrap\">Stakeholder management</span>"],
       ["Core team", "Arianna Smaron<br>Prateek Shankar"],
       ["Partners", "Berggruen Institute<br>Dark Matter Labs"]
     ],
     "recognition": [
       ["Awards", "<a href=\"https://archive.aec.at/prix/320414/\" target=\"_blank\" rel=\"noopener\">Honorary Mention, Digital Humanity, Prix Ars Electronica 2026 ↗</a>"],
-      ["Exhibitions & events", "<ul class=\"pd-events\"><li><b>Slow Listening: Sounds from the Planetary Compendium</b><time>28 October 2026</time><span>Listening experience, Medulla, Berlin · <a href=\"https://luma.com/dyr6sdgn\" target=\"_blank\" rel=\"noopener\">Event ↗</a></span></li><li><b>Launch of the Planetary Compendium</b><time>22 November 2025</time><span>Physical exhibition, Unsorted Love, Zurich</span></li></ul>"]
+      ["Exhibitions & events", "<ul class=\"pd-events\"><li><time>28 October 2026</time><b>Slow Listening: Sounds from the Planetary Compendium</b><span>Listening experience, Medulla, Berlin · <a href=\"https://luma.com/dyr6sdgn\" target=\"_blank\" rel=\"noopener\">Event ↗</a></span></li><li><time>22 November 2025</time><b>Launch of the Planetary Compendium</b><span>Physical exhibition, Unsorted Love, Zurich</span></li></ul>"]
     ],
     "detailsHidden": [
       ["Mediums", "<ul class=\"pd-mediums\"><li>Interactive web platform</li><li>Immersive sound</li><li>Audio interviews</li><li>Animation</li><li>Illustration</li><li>Game design</li><li>Physical exhibition, Zurich</li><li>Printed publication of the case studies</li></ul>"]

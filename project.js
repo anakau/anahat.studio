@@ -114,7 +114,7 @@
     if (!v) return `<img class="pd-thumb" src="${p.cover}" alt="${p.name}">`;
     return `<div class="pd-cover-video">
       <video class="pd-thumb" autoplay muted loop playsinline preload="auto" poster="${v.poster}" aria-label="${p.name}: a walk through the system connectors map">
-        <source src="${v.webm}" type="video/webm"><source src="${v.mp4}" type="video/mp4"></video>
+        <source src="${v.mp4}" type="video/mp4"><source src="${v.webm}" type="video/webm"></video>
       <button class="pd-video-toggle" type="button" aria-label="Pause video">Pause</button>
     </div>`;
   }
@@ -127,6 +127,11 @@
     video.muted = true;
     const play = () => video.play().catch(() => {});
     play();
+    // Some browsers refuse autoplay until the video has data or the visitor
+    // has interacted with the page, so keep trying at those moments.
+    video.addEventListener('canplay', () => { if (btn.dataset.paused !== '1') play(); });
+    const nudge = () => { if (video.paused && btn.dataset.paused !== '1') play(); };
+    ['pointerdown', 'scroll', 'keydown', 'touchstart'].forEach(ev => window.addEventListener(ev, nudge, { passive: true }));
     document.addEventListener('visibilitychange', () => { if (!document.hidden && btn.dataset.paused !== '1') play(); });
     btn.addEventListener('click', () => {
       const pause = !video.paused;
