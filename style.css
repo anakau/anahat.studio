@@ -518,7 +518,17 @@ html.theme-mini #project-detail, html.theme-mini #practice-page { max-width: non
 .mini .mini-sub > .pd-step .pd-step-head .pd-step-n { display: none; }
 .mini .mini-sub > .pd-step .pd-step-head p { grid-column: 1; margin-top: 0; }
 .mini-sub > .pd-block > .pd-heading:first-child { display: none; }
-.mini-jump a { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mini-jump a { white-space: nowrap; }
+.mini-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+/* Practice: the current project's one-liner opens under its title. It is
+   positioned outside the label's box so the stacks don't shift. */
+.mini-desc {
+  position: absolute; left: 0; top: 100%; width: 210px; white-space: normal;
+  font-size: 13px; line-height: 18px; color: var(--muted);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .3s ease, transform .3s ease;
+}
+.mini-jump a.is-current .mini-desc { opacity: 1; transform: none; }
 .mini-num { flex: none; }
 .mini-jump a.is-current .mini-num { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .mini-jump a.is-current { color: var(--ink); }
