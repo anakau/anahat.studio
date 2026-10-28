@@ -122,15 +122,15 @@ const PROJECTS = [
       "images/projects/the-planetary-compendium/connected.jpg",
       "images/projects/the-planetary-compendium/about.jpg"
     ],
-    "year": "2026",
+    "year": "2025",
     "externalLink": null,
+    "summary": "An evolving wunderkammer of planetary governance, where lunar treaties, melting Himalayan borders, whale economies, and the rights of rivers share one shifting map. Read it at a critical distance in observe mode, or step inside it in immerse mode, where sound, film, and living maps turn the planetary from an abstraction into something you can feel.",
     "details": [
-      ["Year", "2026"],
-      ["Role", "Visual concepts, creative direction, experience design"],
+      ["Year", "2025"],
+      ["Role", "Creative direction, UX/UI design, stakeholder management"],
       ["With", "Arianna Smaron"],
       ["Partners", "Berggruen Institute, Dark Matter Labs"],
-      ["Funded by", "Berggruen Institute"],
-      ["Awards", "Honorary Mention, Prix Ars Electronica 2026"],
+      ["Awards", "<a href=\"https://archive.aec.at/prix/320414/\" target=\"_blank\" rel=\"noopener\">Honorary Mention, Digital Humanity, Prix Ars Electronica 2026 ↗</a>"],
       ["Exhibited", "Unsorted Love, Zurich, November 2025"]
     ],
     "creditLogos": {

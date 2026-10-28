@@ -136,7 +136,7 @@
         </div>
         <aside class="pd-side">
           <h1>${project.name}</h1>
-          <p class="pd-summary">${project.category}</p>
+          <p class="pd-summary">${project.summary || project.category}</p>
           <dl class="pd-details">${details}</dl>
           ${visit}
           <div class="pd-tags">${tags}</div>

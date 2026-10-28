@@ -432,10 +432,12 @@ html.theme-compendium .pd-logos--programmes { border-color: rgba(242,242,236,.12
 .pd-side-credits .pd-heading { margin: 0 0 12px; }
 .pd-side-credits .pd-credits p { font-size: 12px; line-height: 1.5; margin-bottom: 8px; }
 .pd-side h1 { font-size: 28px; font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 12px; }
-.pd-summary { font-size: 14px; line-height: 1.5; margin-bottom: 28px; }
+.pd-summary { font-size: 15px; line-height: 1.55; margin-bottom: 28px; }
 .pd-details { font-size: 13px; line-height: 1.45; }
 .pd-row { display: grid; grid-template-columns: 84px 1fr; gap: 12px; padding: 10px 0; border-top: 1px solid #e4e4e0; }
 .pd-row dt { color: var(--muted); }
+.pd-row dd a { border-bottom: 1px solid currentColor; }
+.pd-row dd a:hover { color: #00FF77; }
 .pd-visit {
   display: inline-block; margin-top: 20px; font-size: 13px;
   border-bottom: 1px solid var(--line); padding-bottom: 1px;
