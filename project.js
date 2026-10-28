@@ -187,7 +187,9 @@
     // under it in columns, then the story full width. Older pages keep a
     // side column and put their credits at the end of the text.
     if (project.blocks) {
-      const creditText = (project.sections || []).filter(s => s.credits).map(s => s.credits.map(c => `<p>${c}</p>`).join('')).join('');
+      // The contribution (before "by"/"in") in ink, the names muted.
+      const creditLine = c => c.replace(/^(.+?)( by | in )/, '<b>$1</b>$2');
+      const creditText = (project.sections || []).filter(s => s.credits).map(s => s.credits.map(c => `<p>${creditLine(c)}</p>`).join('')).join('');
       const intro = (project.intro || [project.summary || project.category]).map(p => `<p>${p}</p>`).join('');
       content.innerHTML = `
         <header class="pd-intro">
