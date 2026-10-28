@@ -151,9 +151,6 @@ const PROJECTS = [
         ]
       },
       {
-        "type": "modes"
-      },
-      {
         "type": "text",
         "heading": "Design principles",
         "list": [
@@ -184,28 +181,6 @@ const PROJECTS = [
         ]
       },
       {
-        "type": "text",
-        "heading": "Role",
-        "paragraphs": [
-          "Visual concepts, creative direction, and experience design, led with Arianna Smaron, working with Alexandra Bekker and Prateek Shankar, who conceptualised, curated, and edited the Compendium.",
-          "The team worked across continents and disciplines, with a focus on collaboration, care, and artistic freedom despite limited time and budget. The project is entirely human-made and coded without the use of artificial intelligence."
-        ]
-      },
-      {
-        "type": "text",
-        "heading": "Exhibition",
-        "paragraphs": [
-          "In November 2025, with Prateek Shankar, we curated a physical exhibition of the Compendium at Unsorted Love in Zurich."
-        ]
-      },
-      {
-        "type": "text",
-        "heading": "Recognition",
-        "paragraphs": [
-          "Honorary Mention, Prix Ars Electronica 2026."
-        ]
-      },
-      {
         "type": "step",
         "n": "01",
         "heading": "Threshold",
@@ -233,13 +208,29 @@ const PROJECTS = [
         ]
       },
       {
-        "type": "step",
+        "type": "modes",
         "n": "04",
-        "heading": "Case study",
-        "text": "In observe mode, a case opens on a full-bleed figure in a soft-edged frame, followed by themes, title, authors in italics, reading time, and a PDF download. A green number pill keeps your place while you read.",
-        "images": [
-          "images/projects/the-planetary-compendium/case-hero.jpg",
-          "images/projects/the-planetary-compendium/case-body.jpg"
+        "heading": "Case study: Melting Borders",
+        "text": "The Hindu Kush Himalayas case in both modes. Observe reads as an article: a full-bleed figure, themes, authors, audio, and figures like the 50-year risk profile. The toggle at the top turns the page dark and opens an interactive map of the range, where thematic case files and data layers (dams, conflict, mountain passes, glaciers, rivers) can be revealed and hidden.",
+        "observe": [
+          [
+            "images/projects/the-planetary-compendium/hk-observe-1.jpg",
+            "Observe: the case opens on Fabio Saitto's photograph of an artificial glacier"
+          ],
+          [
+            "images/projects/the-planetary-compendium/hk-observe-2.jpg",
+            "Observe: the 50-year risk profile, designed by Prateek Shankar"
+          ]
+        ],
+        "immerse": [
+          [
+            "images/projects/the-planetary-compendium/hk-immerse-1.jpg",
+            "Immerse: thematic case files and markers across the range"
+          ],
+          [
+            "images/projects/the-planetary-compendium/hk-immerse-2.jpg",
+            "Immerse: glacier and river layers revealed"
+          ]
         ]
       },
       {
