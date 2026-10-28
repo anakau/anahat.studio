@@ -74,13 +74,18 @@
   }
 
   function renderMini() {
-    const curated = ROWS.flatMap(r => r.slugs).filter(Boolean).map(bySlug).filter(Boolean);
+    // Preview-only additions go first, ahead of the public curated rows.
+    const PREVIEW_FIRST = ['madrid2050'];
+    const curated = [...PREVIEW_FIRST, ...ROWS.flatMap(r => r.slugs)].filter(Boolean).map(bySlug).filter(Boolean);
     const rest = PROJECTS.filter(p => !curated.includes(p))
       .sort((a, b) => String(b.year).localeCompare(String(a.year)));
     const id = p => 'p-' + p.slug;
-    const thumb = p => SHOW_THUMBS.includes(p.slug) && p.cover
-      ? `<img src="${p.cover}" alt="${p.name}">`
-      : `<span class="mini-thumb-empty">${p.name}</span>`;
+    // Up to three images per project, cross-fading on a loop.
+    const thumb = p => {
+      const imgs = (p.slides || (SHOW_THUMBS.includes(p.slug) && p.cover ? [p.cover] : [])).slice(0, 3);
+      if (!imgs.length) return `<span class="mini-thumb-empty">${p.name}</span>`;
+      return imgs.map((src, i) => `<img src="${src}" alt="${i ? '' : p.name}"${i ? ' loading="lazy"' : ''} class="${i ? '' : 'is-on'}">`).join('');
+    };
     const link = (p, inner) => { const h = projectHref(p); return h ? `<a href="${h}"${p.hasFullDocs ? '' : ' target="_blank" rel="noopener"'}>${inner}</a>` : inner; };
     const archiveRows = rest.map(p => `<li>${link(p, `<span class="arc-name">${p.name}</span>`)}<span class="arc-tags">${(p.tags || []).join(', ')}</span><span class="arc-year">${p.year || ''}</span></li>`).join('');
     document.documentElement.classList.add('theme-mini');
@@ -94,8 +99,8 @@
         </nav>
         <div class="mini-main">
           <nav class="mini-jump" aria-label="Projects">
-            ${curated.map((p, i) => `<i class="mini-gap"></i><a href="#${id(p)}"><span class="mini-num">${i + 1}</span>${p.name}</a>`).join('')}
-            <i class="mini-gap"></i><a href="#p-archive"><span class="mini-num">+</span>Archive</a>
+            ${curated.map(p => `<i class="mini-gap"></i><a href="#${id(p)}">${p.name}</a>`).join('')}
+            <i class="mini-gap"></i><a href="#p-archive">Archive</a>
           </nav>
           <div class="mini-content">
             ${curated.map(p => `<section class="mini-sec mini-project" id="${id(p)}">
@@ -109,6 +114,16 @@
         </div>
       </div>`;
     initMiniNav(document.getElementById('practice-page'));
+    document.querySelectorAll('.mini-thumb').forEach((box, k) => {
+      const imgs = [...box.querySelectorAll('img')];
+      if (imgs.length < 2) return;
+      let i = 0;
+      setTimeout(() => setInterval(() => {
+        imgs[i].classList.remove('is-on');
+        i = (i + 1) % imgs.length;
+        imgs[i].classList.add('is-on');
+      }, 3500), k * 400);
+    });
   }
 
   el.innerHTML = ROWS.map(row => {

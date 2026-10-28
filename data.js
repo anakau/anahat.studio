@@ -113,6 +113,11 @@ const PROJECTS = [
     "url": "https://governtheplanet.org",
     "external": true,
     "cover": "images/projects/the-planetary-compendium/cover-map.jpg",
+    "slides": [
+      "images/projects/the-planetary-compendium/cover-map.jpg",
+      "images/projects/the-planetary-compendium/hk-immerse-1.jpg",
+      "images/projects/the-planetary-compendium/print-spread.jpg"
+    ],
     "coverVideo": {
       "mp4": "images/projects/the-planetary-compendium/cover-tutorial.mp4?v=2",
       "webm": "images/projects/the-planetary-compendium/cover-tutorial.webm?v=2",
