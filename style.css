@@ -487,7 +487,8 @@ html.theme-mini, html.theme-mini body { overflow-anchor: none; }
 html.theme-mini #project-detail, html.theme-mini #practice-page { max-width: none; padding: 0 40px 120px; }
 .mini { font-size: 15px; line-height: 1.45; }
 .mini-row { display: grid; grid-template-columns: 240px minmax(0, 1fr); column-gap: 32px; border-top: 1px solid var(--line); }
-.mini-bar { position: sticky; top: 0; z-index: 10; background: var(--bg); padding: 24px 0 20px; }
+.mini-bar { position: sticky; top: 0; z-index: 10; padding: 24px 0 20px; pointer-events: none; }
+.mini-brand { pointer-events: auto; }
 .mini-brand { display: inline-flex; align-items: center; gap: 32px; }
 .mini-logo img { display: block; height: 22px; width: auto; }
 /* Practice / About / Archive open to the right of the logo on hover. */
