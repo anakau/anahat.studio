@@ -248,7 +248,7 @@
             <div class="mini-content">
               <div class="mini-hero">${coverMedia(project)}</div>
               ${sections.map(sc => `<section class="mini-sec" id="${slugify(sc.name)}" aria-label="${sc.name}">
-                <nav class="mini-subnav" aria-label="${sc.name} sections">${(sc.subs || []).map(n => `<a href="#${slugify(n)}">${n}</a>`).join('')}</nav>
+                <nav class="mini-subnav" aria-label="${sc.name} sections">${(sc.subs || []).map((n, i, all) => `<i class="mini-gap"></i><a href="#${slugify(n)}" style="--i:${i};--rest:${all.length - 1 - i}">${n}</a>`).join('')}</nav>
                 <div class="mini-body pd-text">${sc.html}</div>
               </section>`).join('')}
             </div>
@@ -276,9 +276,21 @@
     // Sticky at both ends, upcoming ones stack at the bottom of the screen,
     // the current one rides with its section, past ones stack at the top.
     const jump = content.querySelector('.mini-jump');
+    // Same for each chapter's sub-nav, inside its own column.
+    const placeIn = (col, offset) => {
+      const base = col.getBoundingClientRect().top + window.scrollY;
+      let y = base;
+      col.querySelectorAll('a').forEach(a => {
+        const el = content.querySelector(a.getAttribute('href'));
+        const target = el.getBoundingClientRect().top + window.scrollY + offset;
+        a.previousElementSibling.style.height = Math.max(0, target - y) + 'px';
+        y = Math.max(y, target) + a.offsetHeight;
+      });
+    };
     if (jump) {
       const labels = [...jump.querySelectorAll('a')];
       const place = () => {
+        content.querySelectorAll('.mini-subnav').forEach(col => placeIn(col, 0));
         const base = jump.getBoundingClientRect().top + window.scrollY;
         let y = base;
         // Spacers (not margins) push each label down to its section: a

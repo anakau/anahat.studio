@@ -498,7 +498,7 @@ html.theme-mini #project-detail { max-width: none; padding: 0 40px 120px; }
 .mini-title h1 { font-size: 64px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.05; }
 .mini-btn { flex: none; background: var(--ink); color: #fff; border-radius: 4px; padding: 11px 20px; transition: opacity .15s; }
 .mini-btn:hover { opacity: .85; }
-.mini-main { display: grid; grid-template-columns: 240px minmax(0, 1fr); column-gap: 32px; }
+.mini-main { display: grid; grid-template-columns: 170px minmax(0, 1fr); column-gap: 24px; }
 .mini-jump { display: flex; flex-direction: column; align-self: stretch; --step: 26px; }
 .mini-jump a {
   position: sticky; z-index: 5; display: flex; align-items: center; gap: 8px; height: var(--step);
@@ -524,9 +524,13 @@ html.theme-mini #project-detail { max-width: none; padding: 0 40px 120px; }
 .mini-hero .pd-thumb { border-radius: var(--radius); box-shadow: none; margin: 0; }
 .mini-hero { padding-top: 8px; }
 .mini-hero + .mini-sec { border-top: 0; }
-.mini-sec { display: grid; grid-template-columns: 200px minmax(0, 1fr); column-gap: 32px; padding: 48px 0 96px; border-top: 1px solid var(--line); scroll-margin-top: 70px; }
+.mini-sec { display: grid; grid-template-columns: 190px minmax(0, 1fr); column-gap: 32px; padding: 48px 0 96px; border-top: 1px solid var(--line); scroll-margin-top: 70px; }
 /* Sub-nav: its own column, sticky only within its chapter. */
-.mini-subnav { position: sticky; top: 96px; align-self: start; display: flex; flex-direction: column; gap: 6px; }
+.mini-subnav { align-self: stretch; display: flex; flex-direction: column; --step: 26px; }
+.mini-subnav a {
+  position: sticky; display: flex; align-items: center; height: var(--step);
+  top: calc(96px + var(--i) * var(--step)); bottom: calc(40px + var(--rest) * var(--step));
+}
 .mini-subnav a { color: var(--muted); transition: color .15s; }
 .mini-subnav a:hover, .mini-subnav a.is-current { color: var(--ink); }
 .mini-label { font-size: 15px; font-weight: 400; line-height: 1.45; }
