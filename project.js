@@ -37,7 +37,7 @@
     const screens = (list, mode) => list.map(([src, cap]) =>
       `<figure><img src="${src}" alt="${cap}" loading="lazy"><figcaption>${cap}</figcaption></figure>`).join('');
     return `<section class="pd-block pd-step hk" data-mode="observe">
-      <div class="pd-step-head"><span class="pd-step-n">${b.n}</span><h2>${b.heading}</h2><p>${b.text}</p></div>
+      <div class="pd-step-head"><span class="pd-step-n">${b.n || ''}</span><h2>${b.heading}</h2><p>${b.text}</p></div>
       <div class="hk-panel">
         <div class="hk-bar">
           <button class="hk-toggle" type="button" aria-label="Switch to immerse mode">
@@ -74,6 +74,16 @@
         }, { threshold: 0.4 }).observe(el);
       }
     });
+  }
+
+  // A looping, muted screen recording when the project has one (a still
+  // poster for reduced motion), otherwise the cover image.
+  function coverMedia(p) {
+    const v = p.coverVideo;
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!v || still) return `<img class="pd-thumb" src="${v ? v.poster : p.cover}" alt="${p.name}">`;
+    return `<video class="pd-thumb" autoplay muted loop playsinline preload="auto" poster="${v.poster}" aria-label="${p.name}: a walk through the system connectors map">
+      <source src="${v.webm}" type="video/webm"><source src="${v.mp4}" type="video/mp4"></video>`;
   }
 
   function renderSystem(b) {
@@ -132,7 +142,7 @@
       const intro = (project.intro || [project.summary || project.category]).map(p => `<p>${p}</p>`).join('');
       content.innerHTML = `
         <header class="pd-intro">
-          <img class="pd-thumb" src="${project.cover}" alt="${project.name}">
+          ${coverMedia(project)}
           <h1 class="visually-hidden">${project.name}</h1>
           <div class="pd-info">
             <dl class="pd-facts">${details}</dl>

@@ -113,6 +113,11 @@ const PROJECTS = [
     "url": "https://governtheplanet.org",
     "external": true,
     "cover": "images/projects/the-planetary-compendium/cover-map.jpg",
+    "coverVideo": {
+      "mp4": "images/projects/the-planetary-compendium/cover-tutorial.mp4",
+      "webm": "images/projects/the-planetary-compendium/cover-tutorial.webm",
+      "poster": "images/projects/the-planetary-compendium/cover-tutorial-poster.jpg"
+    },
     "images": [
       "images/projects/the-planetary-compendium/home.jpg",
       "images/projects/the-planetary-compendium/map.jpg",
@@ -126,9 +131,9 @@ const PROJECTS = [
     "externalLink": null,
     "intro": ["<em>The Planetary Compendium</em> is an evolving wunderkammer of planetary governance, where lunar treaties, melting Himalayan borders, whale economies, and the rights of rivers share one shifting map.", "Co-developed by the Berggruen Institute and Dark Matter Labs, it brings together historic precedents, emerging experiments, and speculative futures. Planetary thinking is easy to invoke and hard to picture; the Compendium gives it form and texture, as a civic and pedagogical tool in which each case opens a window onto a planetary question.", "Read it at a critical distance in observe mode, or step inside it in immerse mode, where sound, film, and living maps turn the planetary from an abstraction into something you can feel."],
     "details": [
+      ["Website", "<a href=\"https://governtheplanet.org\" target=\"_blank\" rel=\"noopener\">governtheplanet.org ↗</a>"],
       ["Year", "2025"],
       ["Role", "Creative direction, visual concepts, storytelling, UX/UI design, stakeholder management"],
-      ["Website", "<a href=\"https://governtheplanet.org\" target=\"_blank\" rel=\"noopener\">governtheplanet.org ↗</a>"],
       ["Core team", "Arianna Smaron<br>Prateek Shankar"],
       ["Partners", "Berggruen Institute<br>Dark Matter Labs"]
     ],
@@ -209,6 +214,31 @@ const PROJECTS = [
         ]
       },
       {
+        "type": "modes",
+        "heading": "Case study: Melting Borders",
+        "text": "The Hindu Kush Himalayas case in both modes. Observe reads as an article: a full-bleed figure, themes, authors, audio, and figures like the 50-year risk profile. The toggle at the top turns the page dark and opens an interactive map of the range, where thematic case files and data layers (dams, conflict, mountain passes, glaciers, rivers) can be revealed and hidden.",
+        "observe": [
+          [
+            "images/projects/the-planetary-compendium/hk-observe-1.jpg",
+            "Observe: the case opens on Fabio Saitto's photograph of an artificial glacier"
+          ],
+          [
+            "images/projects/the-planetary-compendium/hk-observe-2.jpg",
+            "Observe: the 50-year risk profile, designed by Prateek Shankar"
+          ]
+        ],
+        "immerse": [
+          [
+            "images/projects/the-planetary-compendium/hk-immerse-1.jpg",
+            "Immerse: thematic case files and markers across the range"
+          ],
+          [
+            "images/projects/the-planetary-compendium/hk-immerse-2.jpg",
+            "Immerse: glacier and river layers revealed"
+          ]
+        ]
+      },
+      {
         "type": "text",
         "heading": "Design principles",
         "list": [
@@ -266,34 +296,8 @@ const PROJECTS = [
         ]
       },
       {
-        "type": "modes",
-        "n": "04",
-        "heading": "Case study: Melting Borders",
-        "text": "The Hindu Kush Himalayas case in both modes. Observe reads as an article: a full-bleed figure, themes, authors, audio, and figures like the 50-year risk profile. The toggle at the top turns the page dark and opens an interactive map of the range, where thematic case files and data layers (dams, conflict, mountain passes, glaciers, rivers) can be revealed and hidden.",
-        "observe": [
-          [
-            "images/projects/the-planetary-compendium/hk-observe-1.jpg",
-            "Observe: the case opens on Fabio Saitto's photograph of an artificial glacier"
-          ],
-          [
-            "images/projects/the-planetary-compendium/hk-observe-2.jpg",
-            "Observe: the 50-year risk profile, designed by Prateek Shankar"
-          ]
-        ],
-        "immerse": [
-          [
-            "images/projects/the-planetary-compendium/hk-immerse-1.jpg",
-            "Immerse: thematic case files and markers across the range"
-          ],
-          [
-            "images/projects/the-planetary-compendium/hk-immerse-2.jpg",
-            "Immerse: glacier and river layers revealed"
-          ]
-        ]
-      },
-      {
         "type": "step",
-        "n": "05",
+        "n": "04",
         "heading": "Printed edition",
         "plain": true,
         "text": "Issue 01, November 2025: every case study in print, as Case Studies on Planetary Governance. The cover illustration gathers the archive's subjects into one landscape, from icebreakers and melting peaks to whales and seabed infrastructure. Inside, the web's type system carries over to paper, with Geist Mono abstracts, Diatype reading text, and numbered case openers. The printed Compendium travels with the exhibitions and events.",
@@ -304,7 +308,7 @@ const PROJECTS = [
       },
       {
         "type": "step",
-        "n": "06",
+        "n": "05",
         "heading": "Connected case studies",
         "text": "Every case ends with the cases it shares themes with, so readers move on through the archive rather than back to the start.",
         "images": [
@@ -313,7 +317,7 @@ const PROJECTS = [
       },
       {
         "type": "step",
-        "n": "07",
+        "n": "06",
         "heading": "About and credits",
         "text": "One panel holds the project's story and its credits, switched with two pill tabs.",
         "images": [
