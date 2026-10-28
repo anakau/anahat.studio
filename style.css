@@ -530,7 +530,7 @@ html.theme-mini #project-detail, html.theme-mini #practice-page { max-width: non
 }
 .mini-jump a.is-current .mini-desc { opacity: 1; transform: none; }
 .mini-desc-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.mini-project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.mini-project-tags { flex: none; display: flex; flex-wrap: wrap; gap: 6px; }
 .mini-num { flex: none; }
 .mini-jump a.is-current .mini-num { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .mini-jump a.is-current { color: var(--ink); }
@@ -591,9 +591,18 @@ html.theme-mini { --radius: 16px; }
 }
 
 /* Practice mini site: one large thumbnail per curated project, then the archive. */
-.mini-project { padding: 8px 0 72px; border-top: 0; }
+/* Each project fills the screen below the logo bar: image, then tags, with
+   the same 20px gap as the side margins; scroll gently snaps to each. */
+html.theme-mini { --bar: 72px; }
+html.theme-mini:has(.mini-project) { scroll-snap-type: y proximity; }
+.mini-project {
+  height: calc(100svh - var(--bar)); padding: 0 0 20px; border-top: 0;
+  display: flex; flex-direction: column; gap: 12px;
+  scroll-snap-align: start; scroll-margin-top: var(--bar);
+}
+.mini-project > a { flex: 1 1 auto; min-height: 0; }
 .mini-project a { display: block; }
-.mini-thumb { border-radius: var(--radius); overflow: hidden; aspect-ratio: 16 / 10; background: #f1f0ec; }
+.mini-thumb { border-radius: var(--radius); overflow: hidden; height: 100%; background: #f1f0ec; }
 .mini-thumb { position: relative; }
 .mini-thumb img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
@@ -610,6 +619,8 @@ html.theme-mini { --radius: 16px; }
 .mini-archive .arc-year { color: var(--muted); text-align: right; }
 .mini-archive a:hover .arc-name { border-bottom: 1px solid currentColor; }
 @media (max-width: 860px) {
+  .mini-project { height: auto; padding-bottom: 56px; }
+  .mini-thumb { height: auto; aspect-ratio: 4 / 3; }
   .mini-archive li { grid-template-columns: 1fr 48px; }
   .mini-archive .arc-tags { display: none; }
 }
