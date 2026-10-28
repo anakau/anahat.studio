@@ -207,17 +207,16 @@
       const intro = (project.intro || [project.summary || project.category]).map(p => `<p>${p}</p>`).join('');
       // Mini site: top bar, title row, "Jump to" beside the cover, then one
       // ruled section per topic with its name in the left column.
-      const sectionOf = b => b.type === 'modebar' || b.type === 'modes' || /^Case: glacier/.test(b.heading || '') ? 'Observe & immerse'
-        : b.heading === 'Design principles' ? 'Principles'
+      // Chapters, in reading order. Sound & motion and Illustration join
+      // once their material is in; empty chapters never show.
+      const CHAPTERS = ['Concept', 'Interface', 'Case studies', 'Sound & motion', 'Illustration', 'Design system', 'In the world'];
+      const sectionOf = b => b.type === 'modebar' || b.heading === 'Design principles' ? 'Concept'
+        : b.type === 'modes' || /^Case: glacier/.test(b.heading || '') ? 'Case studies'
         : b.type === 'system' ? 'Design system'
-        : b.heading === 'Printed edition' ? 'Printed edition' : 'Interface';
-      const groups = [];
-      project.blocks.forEach(b => {
-        const name = sectionOf(b);
-        let g = groups.find(x => x.name === name);
-        if (!g) groups.push(g = { name, blocks: [] });
-        g.blocks.push(b);
-      });
+        : b.heading === 'Printed edition' ? 'In the world'
+        : b.chapter || 'Interface';
+      const groups = CHAPTERS.map(name => ({ name, blocks: project.blocks.filter(b => sectionOf(b) === name) }))
+        .filter(g => g.blocks.length);
       const slugify = t => 's-' + t.toLowerCase().replace(/[^a-z0-9]+/g, '-');
       const sections = [
         { name: 'Overview', html: `
