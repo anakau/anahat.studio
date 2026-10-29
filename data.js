@@ -60,7 +60,7 @@ const PROJECTS = [
       "Systems Change",
       "Civic Infrastructure",
       "Information",
-      "Interface Design",
+      "UX/UI",
       "Art Direction"
     ],
     "favorite": false
@@ -83,7 +83,7 @@ const PROJECTS = [
       "Craft Revival",
       "Product",
       "Vibe Code",
-      "Interface Design"
+      "UX/UI"
     ],
     "favorite": true
   },
@@ -103,7 +103,7 @@ const PROJECTS = [
       "Systems Change",
       "Circular Economy",
       "Art Direction",
-      "Interface Design"
+      "UX/UI"
     ],
     "favorite": false
   },
@@ -112,306 +112,18 @@ const PROJECTS = [
     "category": "A living archive and civic tool for planetary governance, co-developed with the Berggruen Institute",
     "url": "https://governtheplanet.org",
     "external": true,
-    "cover": "images/projects/the-planetary-compendium/cover-map.jpg",
-    "slides": [
-      "images/projects/the-planetary-compendium/cover-map.jpg",
-      "images/projects/the-planetary-compendium/hk-immerse-1.jpg",
-      "images/projects/the-planetary-compendium/print-spread.jpg"
-    ],
-    "coverVideo": {
-      "mp4": "images/projects/the-planetary-compendium/cover-tutorial.mp4?v=2",
-      "webm": "images/projects/the-planetary-compendium/cover-tutorial.webm?v=2",
-      "poster": "images/projects/the-planetary-compendium/cover-tutorial-poster.jpg?v=2"
-    },
+    "cover": "images/projects/the-planetary-compendium/hero.png",
     "images": [
-      "images/projects/the-planetary-compendium/home.jpg",
-      "images/projects/the-planetary-compendium/map.jpg",
-      "images/projects/the-planetary-compendium/cases.jpg",
-      "images/projects/the-planetary-compendium/case-hero.jpg",
-      "images/projects/the-planetary-compendium/case-body.jpg",
-      "images/projects/the-planetary-compendium/connected.jpg",
-      "images/projects/the-planetary-compendium/about.jpg"
+      "images/projects/the-planetary-compendium/hero.png",
+      "images/projects/the-planetary-compendium/gtlogo.svg",
+      "images/projects/the-planetary-compendium/Extractive.png",
+      "images/projects/the-planetary-compendium/Generative.png",
+      "images/projects/the-planetary-compendium/soil-illustration.png",
+      "images/projects/the-planetary-compendium/rela.png",
+      "images/projects/the-planetary-compendium/dolls-new.png"
     ],
-    "year": "2025",
+    "year": "2026",
     "externalLink": null,
-    "intro": ["The Planetary Compendium is an evolving wunderkammer of planetary governance, where lunar treaties, melting Himalayan borders, whale economies, and the rights of rivers share one shifting map.", "Co-developed by the Berggruen Institute and Dark Matter Labs, it brings together historic precedents, emerging experiments, and speculative futures. Planetary thinking is easy to invoke and hard to picture; the Compendium gives it form and texture, as a civic and pedagogical tool in which each case opens a window onto a planetary question.", "Read it at a critical distance in observe mode, or step inside it in immerse mode, where sound, film, and living maps turn the planetary from an abstraction into something you can feel."],
-    "details": [
-      ["Website", "<a href=\"https://governtheplanet.org\" target=\"_blank\" rel=\"noopener\">governtheplanet.org ↗</a>"],
-      ["Year", "2025"],
-      ["Role", "<span class=\"pd-nowrap\">Creative direction</span>, <span class=\"pd-nowrap\">Visual concepts</span>, <span class=\"pd-nowrap\">Storytelling</span>, <span class=\"pd-nowrap\">Interface design</span>, <span class=\"pd-nowrap\">Stakeholder management</span>"],
-      ["Core team", "Arianna Smaron<br>Prateek Shankar"],
-      ["Partners", "Berggruen Institute<br>Dark Matter Labs"]
-    ],
-    "recognition": [
-      ["Awards", "<a href=\"https://archive.aec.at/prix/320414/\" target=\"_blank\" rel=\"noopener\">Honorary Mention, Digital Humanity, Prix Ars Electronica 2026 ↗</a>"],
-      ["Exhibitions & events", "<ul class=\"pd-events\"><li><time>28 October 2026</time><b>Slow Listening: Sounds from the Planetary Compendium</b><span>Listening experience, Medulla, Berlin · <a href=\"https://luma.com/dyr6sdgn\" target=\"_blank\" rel=\"noopener\">Event ↗</a></span></li><li><time>22 November 2025</time><b>Launch of the Planetary Compendium</b><span>Physical exhibition, Unsorted Love, Zurich</span></li></ul>"]
-    ],
-    "detailsHidden": [
-      ["Mediums", "<ul class=\"pd-mediums\"><li>Interactive web platform</li><li>Immersive sound</li><li>Audio interviews</li><li>Animation</li><li>Illustration</li><li>Game design</li><li>Physical exhibition, Zurich</li><li>Printed publication of the case studies</li></ul>"]
-    ],
-    "creditLogos": {
-      "lead": [
-        [
-          "images/projects/the-planetary-compendium/logos/bi.svg",
-          "Berggruen Institute"
-        ],
-        [
-          "images/projects/the-planetary-compendium/logos/dml.svg",
-          "Dark Matter Labs"
-        ]
-      ],
-      "programmes": [
-        [
-          "images/projects/the-planetary-compendium/logos/berggruen-institute-the-planetary.svg",
-          "Berggruen Institute, The Planetary"
-        ],
-        [
-          "images/projects/the-planetary-compendium/logos/planetary-civics.svg",
-          "Planetary Civics"
-        ]
-      ],
-      "partners": [
-        [
-          "images/projects/the-planetary-compendium/logos/living-imaginaries.svg",
-          "Living Imaginaries"
-        ],
-        [
-          "images/projects/the-planetary-compendium/logos/open-lunar-foundation.svg",
-          "Open Lunar Foundation"
-        ],
-        [
-          "images/projects/the-planetary-compendium/logos/climate-cartographics.svg",
-          "Climate Cartographics"
-        ],
-        [
-          "images/projects/the-planetary-compendium/logos/open-cities-lab.svg",
-          "Open Cities Lab"
-        ],
-        [
-          "images/projects/the-planetary-compendium/logos/next-learning.svg",
-          "Next Learning"
-        ],
-        [
-          "images/projects/the-planetary-compendium/logos/politics-for-tomorrow.svg",
-          "Politics for Tomorrow"
-        ],
-        [
-          "images/projects/the-planetary-compendium/logos/interspecies-internet.svg",
-          "Interspecies Internet"
-        ],
-        [
-          "images/projects/the-planetary-compendium/logos/embassy-of-the-north-sea.svg",
-          "Embassy of the North Sea"
-        ],
-        [
-          "images/projects/the-planetary-compendium/logos/tehanu.svg",
-          "Tehanu"
-        ]
-      ]
-    },
-    "blocks": [
-      {
-        "type": "modebar",
-        "heading": "Concept: observe and immerse",
-        "paragraphs": [
-            "The interface reflects our position within planetary systems, not outside them. Instead of dark and light modes, the Compendium has observe and immerse modes.",
-            "In observe mode, readers move through linear content, including audio, and keep a critical distance. In immerse mode, they navigate case studies non-linearly and shift from observer to participant. The toggle holds that understanding the planetary takes both analytical distance and embodied involvement."
-        ],
-        "observe": {
-          "text": "Where you can read, understand, and tangibly view the data and stories, kept as straightforward as possible, with a focus on accessibility, legibility, and clear, precise dissemination of information.",
-          "notes": "Translation · Colours · Audio · Download PDF · Observe only on mobile"
-        },
-        "immerse": {
-          "text": "Where you can step away from the written content and immerse yourself in the experience, placed inside the cosmic dance we are all part of through tools of storytelling and design.",
-          "notes": "Selected cases only · Off on the homepage · Via floating buttons too"
-        }
-      },
-      {
-        "type": "modes",
-        "heading": "Case study: Melting Borders",
-        "text": "The Hindu Kush Himalayas case in both modes. Observe reads as an article: a full-bleed figure, themes, authors, audio, and figures like the 50-year risk profile. The toggle at the top turns the page dark and opens an interactive map of the range, where thematic case files and data layers (dams, conflict, mountain passes, glaciers, rivers) can be revealed and hidden.",
-        "observe": [
-          [
-            "images/projects/the-planetary-compendium/hk-observe-1.jpg",
-            "Observe: the case opens on Fabio Saitto's photograph of an artificial glacier"
-          ],
-          [
-            "images/projects/the-planetary-compendium/hk-observe-2.jpg",
-            "Observe: the 50-year risk profile, designed by Prateek Shankar"
-          ]
-        ],
-        "immerse": [
-          [
-            "images/projects/the-planetary-compendium/hk-immerse-1.jpg",
-            "Immerse: thematic case files and markers across the range"
-          ],
-          [
-            "images/projects/the-planetary-compendium/hk-immerse-2.jpg",
-            "Immerse: glacier and river layers revealed"
-          ]
-        ]
-      },
-      {
-        "type": "text",
-        "heading": "Case: glacier governance in the Hindu Kush Himalayas",
-        "paragraphs": [
-          "The Himalayas cannot be discussed without disputed borders, militarisation, pastoral communities, local ecologies, rivers, history, geopolitical tension, natural disasters, and climate change.",
-          "In observe mode, the case reads as an article with audio for accessibility. In immerse mode, readers explore an interactive visualisation of the range, tracing how data layers connect across these topics. Thematic boards hold shuffleable case files drawn from documents, video interviews, quotes, and illustrations, and interviews with field experts anchor the data in lived knowledge. It is one of three immersive cases we designed."
-        ]
-      },
-      {
-        "type": "text",
-        "heading": "Design principles",
-        "list": [
-          [
-            "Relational, not complete",
-            "Every case sits on an interactive map, linked to others through shared themes by system connectors. The platform is meant to be messy, plural, and relational."
-          ],
-          [
-            "More-than-human agency",
-            "Non-human stakeholders get a voice, through questions like what melting glaciers sound like."
-          ],
-          [
-            "Friction on purpose",
-            "Where most digital products remove friction, the Compendium chooses unfamiliarity, to build the reader's capacity for complexity."
-          ],
-          [
-            "Multisensory",
-            "An opening animation sets the tone, presenting the planetary as a rich landscape shaped by human decisions. Sound design carries each immersive case and marks the shift between modes."
-          ]
-        ]
-      },
-      {
-        "type": "step",
-        "chapter": "Interface",
-        "heading": "Cases",
-        "text": "Every case in one numbered index, opened from the top right; immersive cases carry a tag.",
-        "images": [
-          "images/projects/the-planetary-compendium/cases.jpg"
-        ]
-      },
-      {
-        "type": "step",
-        "chapter": "Interface",
-        "heading": "System connectors",
-        "text": "The homepage is a map. Cases float as image orbs, linked by system connectors to the themes they share; choosing one shows how topics relate across cases. Messy, plural, and relational by design.",
-        "images": [
-          "images/projects/the-planetary-compendium/map.jpg"
-        ]
-      },
-      {
-        "type": "step",
-        "chapter": "Interface",
-        "heading": "Curatorial note",
-        "text": "Each case opens with a curatorial note, set in Geist Mono inside a lavender-edged frame, that frames the case before the essay begins.",
-        "images": [
-          "images/projects/the-planetary-compendium/ui-curatorial.jpg"
-        ]
-      },
-      {
-        "type": "step",
-        "chapter": "Interface",
-        "heading": "Citations",
-        "text": "Citations open in place: the numbered marker beside a sentence reveals the full note in a green-edged panel, with a link down to the footnotes.",
-        "images": [
-          "images/projects/the-planetary-compendium/ui-citation.jpg"
-        ]
-      },
-      {
-        "type": "step",
-        "chapter": "Interface",
-        "heading": "Footnotes",
-        "text": "Footnotes gather at the end in two numbered columns, each with an arrow back to its place in the text.",
-        "images": [
-          "images/projects/the-planetary-compendium/ui-footnotes.jpg"
-        ]
-      },
-      {
-        "type": "step",
-        "chapter": "Interface",
-        "heading": "Connected case studies",
-        "text": "Every case ends with the cases it shares themes with, so readers move on through the archive rather than back to the start.",
-        "images": [
-          "images/projects/the-planetary-compendium/ui-connected.jpg"
-        ]
-      },
-      {
-        "type": "step",
-        "heading": "Printed edition",
-        "plain": true,
-        "text": "Issue 01, November 2025: every case study in print, as Case Studies on Planetary Governance. The cover illustration gathers the archive's subjects into one landscape, from icebreakers and melting peaks to whales and seabed infrastructure. Inside, the web's type system carries over to paper, with Geist Mono abstracts, Diatype reading text, and numbered case openers. The printed Compendium travels with the exhibitions and events.",
-        "images": [
-          "images/projects/the-planetary-compendium/print-cover.png",
-          "images/projects/the-planetary-compendium/print-spread.jpg"
-        ]
-      },
-      {
-        "type": "system",
-        "fonts": [
-          [
-            "ABC Diatype",
-            "Titles and reading text",
-            "images/projects/the-planetary-compendium/type-sans.png"
-          ],
-          [
-            "Ivar Italic",
-            "Authors",
-            "images/projects/the-planetary-compendium/type-serif.png"
-          ],
-          [
-            "Geist Mono",
-            "Buttons, tags, captions",
-            "images/projects/the-planetary-compendium/type-mono.png"
-          ]
-        ],
-        "heading": "Design system",
-        "colours": [
-          [
-            "Lavender",
-            "#B9B3FF",
-            "Buttons, connectors, glow"
-          ],
-          [
-            "Signal green",
-            "#00FF77",
-            "Active state, case number"
-          ],
-          [
-            "Ink",
-            "#0F0F0E",
-            "Text, mark"
-          ],
-          [
-            "Paper",
-            "#FAFAF3",
-            "Reading ground"
-          ],
-          [
-            "White",
-            "#FFFFFF",
-            "Pills, panels"
-          ]
-        ],
-        "cases": [
-          [
-            "images/projects/the-planetary-compendium/case-1.jpg",
-            "Owens Lake: Repair as Planetary Reinvention",
-            [
-              "Terraforming Infrastructures",
-              "More-Than-Human Agency"
-            ]
-          ],
-          [
-            "images/projects/the-planetary-compendium/case-2.jpg",
-            "Reimagining Biodiversity Governance: The North Sea as a Living Marine Democracy",
-            [
-              "More-Than-Human Agency",
-              "Sovereignty"
-            ]
-          ]
-        ]
-      }
-    ],
     "paragraphs": [],
     "sections": [
       {
@@ -482,7 +194,7 @@ const PROJECTS = [
       "More-Than-Human",
       "Art Direction",
       "Information",
-      "Interface Design",
+      "UX/UI",
       "Publication"
     ],
     "favorite": true
@@ -556,7 +268,7 @@ const PROJECTS = [
       "Governance",
       "Systems Change",
       "Civic Infrastructure",
-      "Interface Design",
+      "UX/UI",
       "Vibe Code",
       "Art Direction",
       "Information"
@@ -640,7 +352,7 @@ const PROJECTS = [
       "Circular Economy",
       "Sustainability",
       "Art Direction",
-      "Interface Design"
+      "UX/UI"
     ],
     "favorite": false
   },
@@ -689,7 +401,7 @@ const PROJECTS = [
     "hasFullDocs": false,
     "tags": [
       "Timekeeping Application",
-      "Interface Design",
+      "UX/UI",
       "Product"
     ],
     "favorite": false
@@ -740,7 +452,7 @@ const PROJECTS = [
     "year": "2022",
     "externalLink": null,
     "paragraphs": [
-      "ResearchGate \n2022 - 2023\nResearchGate is a social networking website for scientists, researchers and academics. My role as an in-house Brand Designer was to assist the day-to-day needs of a tech company like infographics, illustrations, icons and interface design like the Top Navigation Bar that is currently in use.",
+      "ResearchGate \n2022 - 2023\nResearchGate is a social networking website for scientists, researchers and academics. My role as an in-house Brand Designer was to assist the day-to-day needs of a tech company like infographics, illustrations, icons and UX/UI design like the Top Navigation Bar that is currently in use.",
       "Our larger goal was to do brand refresh while working under the product team and in conversation with the designs system and UX research team.",
       "I worked under agile work flows with agile team tools like figma, jira and Adobe creative suite."
     ],
@@ -749,7 +461,7 @@ const PROJECTS = [
     "tags": [
       "Knowledge Platform",
       "Brand Identity",
-      "Interface Design"
+      "UX/UI"
     ],
     "favorite": false
   },

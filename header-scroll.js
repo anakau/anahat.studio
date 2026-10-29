@@ -1,8 +1,8 @@
 // Shrinks the header logo down to the nav bar's width as the page scrolls,
 // tied continuously to scroll position (not a two-state snap on direction
 // change) so it reads as smooth in both directions. Only included on
-// Practice/About/Archive/project pages — not the homepage (full-viewport
-// hero, nothing to scroll past).
+// Practice/About/Archive — not the homepage (full-viewport hero, nothing
+// to scroll past) and not project.html (logo stays static size there).
 // Runs on mobile too: full size is computed to match style.css's own
 // rules at each breakpoint (desktop: fixed 90px height; mobile:
 // min(130px, 68vw) width) rather than measured from the DOM, so it stays

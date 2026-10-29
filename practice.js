@@ -33,24 +33,16 @@
 
   const AWARD_ICON = `<svg class="practice-award-icon" width="14" height="14" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="8" r="7"/><path d="M8.21 13.89L7 23L12 20L17 23L15.79 13.88Z"/></svg>`;
 
-  // Thumbnails are off for now while Anahat gets new images — every card
-  // shows the plain "Coming soon" block except the slugs listed here.
-  const SHOW_THUMBS = ['the-planetary-compendium'];
-
-  function thumbHtml(p) {
-    if (SHOW_THUMBS.includes(p.slug) && p.cover && !isDraftHidden(p.slug)) {
-      return `<img class="practice-card-thumb" src="${p.cover}" alt="${p.name}">`;
-    }
-    return `<div class="practice-card-thumb practice-card-thumb--empty">Coming soon</div>`;
-  }
-
+  // Thumbnails are off across the board for now — Anahat's getting new
+  // images, so every card (including ones with a real cover in data.js)
+  // shows the plain "Coming soon" block until those are in.
   function projectCard(p, { award } = {}) {
     const href = projectHref(p);
     const tag = href ? 'a' : 'div';
     const externalAttrs = href && !p.hasFullDocs ? ' target="_blank" rel="noopener"' : '';
     return `
       <${tag} class="practice-card"${href ? ` href="${href}"` : ''}${externalAttrs}>
-        ${thumbHtml(p)}
+        <div class="practice-card-thumb practice-card-thumb--empty">Coming soon</div>
         <div class="practice-card-title">${p.name}${award ? AWARD_ICON : ''}</div>
         ${(p.tags || []).length ? `<div class="practice-card-tags">${tagPills(p)}</div>` : ''}
       </${tag}>
@@ -64,79 +56,6 @@
   function slotCard(slug, award) {
     const p = bySlug(slug);
     return p ? projectCard(p, { award }) : placeholderCard();
-  }
-
-  // Preview: the mini-site version — curated projects on the right, their
-  // titles in the riding nav on the left, and an Archive of everything else.
-  if (window.PREVIEW && typeof initMiniNav === 'function') {
-    renderMini();
-    return;
-  }
-
-  function renderMini() {
-    // Categories (provisional) and the project tags that put a project in
-    // each. A project can sit in several; untagged ones only show in Archive.
-    const CATEGORIES = [
-      ['Art Direction', ['Art Direction']],
-      ['Brand Identity Design', ['Brand Identity']],
-      ['Product Design', ['Product', 'Interface Design']],
-      ['Information Design', ['Information']],
-      ['Publication Design', ['Publication']],
-      ['Packaging Design', ['Packaging']],
-    ];
-    const newest = (a, b) => String(b.year).localeCompare(String(a.year));
-    const groups = CATEGORIES.map(([name, tags]) => ({
-      name, id: 'c-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-      projects: PROJECTS.filter(p => (p.tags || []).some(t => tags.includes(t))).sort(newest),
-    })).filter(g => g.projects.length);
-    const rest = [...PROJECTS].sort(newest);
-    // Up to three images per project, cross-fading on a loop.
-    const thumb = p => {
-      const imgs = (p.slides || (SHOW_THUMBS.includes(p.slug) && p.cover ? [p.cover] : [])).slice(0, 3);
-      if (!imgs.length) return `<span class="mini-thumb-empty">${p.name}</span>`;
-      return imgs.map((src, i) => `<img src="${src}" alt="${i ? '' : p.name}" loading="lazy" class="${i ? '' : 'is-on'}">`).join('');
-    };
-    const link = (p, inner) => { const h = projectHref(p); return h ? `<a href="${h}"${p.hasFullDocs ? '' : ' target="_blank" rel="noopener"'}>${inner}</a>` : inner; };
-    const card = p => `<article class="mini-card">
-      ${link(p, `<div class="mini-thumb">${thumb(p)}</div>`)}
-      <p class="mini-card-meta"><span>${p.name}</span><span>${p.year || ''}</span></p>
-    </article>`;
-    const archiveRows = rest.map(p => `<li>${link(p, `<span class="arc-name">${p.name}</span>`)}<span class="arc-tags">${(p.tags || []).join(', ')}</span><span class="arc-year">${p.year || ''}</span></li>`).join('');
-    document.documentElement.classList.add('theme-mini');
-    el.closest('#practice-page').innerHTML = `
-      <div class="mini">
-        <nav class="mini-bar">
-          <div class="mini-brand">
-            <a class="mini-logo" href="index.html"><img src="images/logo-black-default.svg" alt="Anahat Studio, home"></a>
-            <div class="mini-nav"><a href="practice.html">Practice</a><a href="about.html">About</a><a href="archive.html">Archive</a></div>
-          </div>
-        </nav>
-        <div class="mini-main">
-          <nav class="mini-jump" aria-label="Categories">
-            ${groups.map(g => `<i class="mini-gap"></i><a href="#${g.id}"><span class="mini-title">${g.name}</span><span class="mini-desc"><span class="mini-desc-year">${g.projects.length} project${g.projects.length === 1 ? '' : 's'}</span></span></a>`).join('')}
-            <i class="mini-gap"></i><a href="#p-archive"><span class="mini-title">Archive</span><span class="mini-desc"><span class="mini-desc-year">All ${rest.length} projects</span></span></a>
-          </nav>
-          <div class="mini-content">
-            ${groups.map(g => `<section class="mini-sec mini-cat" id="${g.id}" aria-label="${g.name}">
-              <div class="mini-grid">${g.projects.map(card).join('')}</div>
-            </section>`).join('')}
-            <section class="mini-sec" id="p-archive" aria-label="Archive">
-              <ul class="mini-archive">${archiveRows}</ul>
-            </section>
-          </div>
-        </div>
-      </div>`;
-    initMiniNav(document.getElementById('practice-page'));
-    document.querySelectorAll('.mini-thumb').forEach((box, k) => {
-      const imgs = [...box.querySelectorAll('img')];
-      if (imgs.length < 2) return;
-      let i = 0;
-      setTimeout(() => setInterval(() => {
-        imgs[i].classList.remove('is-on');
-        i = (i + 1) % imgs.length;
-        imgs[i].classList.add('is-on');
-      }, 3500), k * 400);
-    });
   }
 
   el.innerHTML = ROWS.map(row => {

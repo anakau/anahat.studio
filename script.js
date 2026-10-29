@@ -35,7 +35,7 @@ const THEMES = [
 ];
 const MEDIUMS = [
   'Information', 'Art Direction', 'Vibe Code', 'Publication', 'Product', 'Motion',
-  'Interface Design', 'Brand Identity', 'Packaging', 'Mix-Media', 'Processing', 'Experiments',
+  'UX/UI', 'Brand Identity', 'Packaging', 'Mix-Media', 'Processing', 'Experiments',
 ];
 
 // Some themes/mediums show as tag text in the ledger but don't get their own
